@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 15 · Retrospective &amp; Track Decision · Retro 15 ngày</title>
+<meta name="description" content="15 ngày trước bạn còn chưa biết LLM hoạt động thế nào — hôm nay bạn đã có một agent chạy được. Bạn học được gì thật, và giờ muốn đi sâu vào hướng nào?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 15 · Retrospective &amp; Track Decision · Retro 15 ngày">
+<meta property="og:description" content="15 ngày trước bạn còn chưa biết LLM hoạt động thế nào — hôm nay bạn đã có một agent chạy được. Bạn học được gì thật, và giờ muốn đi sâu vào hướng nào?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-15">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-5" data-prev="/ngay/ngay-14" data-next="/ca-khoa">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5 on" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track" aria-current="page">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 15 · Điểm kết · Nhìn lại &amp; chọn track</p>
+  <h1>Retrospective &amp; Track Decision</h1>
+  <blockquote class="q">15 ngày trước bạn còn chưa biết LLM hoạt động thế nào — hôm nay bạn đã có một agent chạy được. Bạn học được gì thật, và giờ muốn đi sâu vào hướng nào?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Đúc kết bài học và điểm vướng thật của 15 ngày, góp vào kho bài học chung; đọc thị trường lao động AI và cách người dùng AI vượt trội làm việc; đối chiếu năng lực với tin tuyển dụng thật; viết quyết định track Phase 2 có căn cứ.</p>
+  <p class="chips"><span class="chip">retrospective</span><span class="chip">4 câu hỏi retro</span><span class="chip">kho bài học chung</span><span class="chip">Frontier Professionals</span><span class="chip">nghiên cứu vai trò</span><span class="chip">ba track Phase 2</span><span class="chip">Track Decision Memo</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>15 ngày là một hành trình khép kín: từ lần gọi API đầu tiên đến agent chạy được, có giám sát và đo lường</li><li>Bài học thật nằm ở kho bài học chung, không ở việc nhớ lại mọi chi tiết</li><li>Ba track đều đang thiếu người: không có lựa chọn đúng sai tuyệt đối, chỉ có lựa chọn hợp với bằng chứng đã thu thập</li><li>Quyết định track hôm nay không vĩnh viễn, có thể điều chỉnh khi bắt đầu đi sâu</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Nhìn lại Phase 1</a><a href="#m2"><span>2</span>Chia sẻ, tổng hợp và bức tranh thị trường</a><a href="#m3"><span>3</span>Chọn track cho Phase 2</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Nhìn lại Phase 1</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Retrospective là buổi nhìn lại có cấu trúc, không phải kể lại mọi chuyện. Mục tiêu là gom trải nghiệm rời rạc thành bài học, vướng mắc, giải pháp và câu hỏi còn mở, những thứ dùng tiếp được.</li><li>Khung 4 câu hỏi: What went well (điều gì chạy tốt) · Lessons learned (bài học quan trọng nhất) · Do differently (lần sau làm khác ở đâu) · Confusing (còn mơ hồ, vướng ở đâu).</li><li>Trả lời riêng trước rồi mới gom chung, để ý kiến của mình không bị cuốn theo người nói trước. Bám vào artifact thật (repo, lab, ghi chú, bản demo) thay vì cảm tính.</li><li>Phase 1 đi qua bốn cột mốc, mỗi cột mốc khép lại bằng một thứ chạy được: nền móng và điều khiển LLM → product hoá agent → tri thức và kiến trúc nhiều phần → vận hành an toàn, đo được.</li><li>Gỡ một điểm vướng bằng chuỗi câu hỏi: ai cũng gặp không, nguyên nhân là gì, ai đã giải được, giải pháp nào đáng thử lại. Đầu ra: bài học, điểm vướng kèm giải pháp, cách làm nên giữ, mẫu cần tránh, câu hỏi mở.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Dùng 4 câu hỏi retro để biến trải nghiệm rời rạc thành bài học, vướng mắc và câu hỏi mở</li><li>Định vị artifact của mình vào đúng cột mốc của Phase 1</li><li>Truy một điểm vướng đến nguyên nhân và giải pháp đáng thử lại</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Chia sẻ, tổng hợp và bức tranh thị trường</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Tổng hợp không kể lại từng chuyện mà đi từ điểm lặp → nguyên tắc → việc nên giữ → track liên quan. Mỗi mục trong kho bài học chung ghi: chủ đề, bài học, bối cảnh, việc nên giữ, việc nên tránh, track liên quan.</li><li>Bốn kịch bản thị trường lao động xét tốc độ tiến bộ của AI và tốc độ thích ứng của con người. Lành mạnh nhất là AI tiến dần, con người sẵn sàng: AI chủ yếu hỗ trợ và tăng lực, chưa thay người hàng loạt.</li><li>Khi con người chậm hơn AI, doanh nghiệp tự động hoá vì nhanh hơn đào tạo lại người; việc mới có xuất hiện nhưng người lao động chưa kịp chuyển sang.</li><li>Frontier Professionals, nhóm nhỏ dùng AI tạo giá trị vượt trội, khác ba điểm: điều phối agent cho việc nhiều bước, thiết kế lại quy trình quanh AI thay vì chèn AI vào quy trình cũ, đặt chuẩn dùng AI cho nhóm.</li><li>Kỷ luật đi kèm: coi output AI là điểm bắt đầu, không phải đáp án cuối, và cố ý giữ vài việc không dùng AI để khỏi mai một tay nghề. Vai trò dời từ tạo câu trả lời sang đánh giá, tinh chỉnh, làm chủ kết quả.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết một mục kho bài học chung đủ bối cảnh, việc nên giữ, việc nên tránh và track liên quan</li><li>Xác định kịch bản thị trường nào đang diễn ra theo dữ liệu hiện tại</li><li>Đối chiếu cách mình dùng AI với ba khác biệt của Frontier Professionals</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Chọn track cho Phase 2</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Ba track Phase 2 (AI Product, Infrastructure, AI Engineering) gắn với tín hiệu đọc từ chính Phase 1: thích viết problem statement nghiêng về track sản phẩm, thích debug agent nghiêng về track kỹ thuật.</li><li>Bốn hướng tiếp cận tuỳ mục tiêu: tìm hoặc chuyển sang một việc AI cụ thể, nâng cấp vai trò hiện tại bằng AI thay vì đổi nghề, dẫn dắt việc đưa AI vào tổ chức đang làm, hoặc tự xây sản phẩm AI của riêng mình.</li><li>Mỗi hướng nghiên cứu một kiểu: đọc tin tuyển dụng thật, quan sát vai trò hiện tại đang bị AI định nghĩa lại thế nào, hoặc tìm sản phẩm AI độc lập đã có người làm thành công.</li><li>Đọc báo cáo thị trường theo 4 câu: nghề, kỹ năng nào tăng nhanh; nghề, kỹ năng nào khan hiếm; năng lực nào đang được định giá lại; và một câu tóm tắt thị trường tương lai thưởng cho năng lực nào.</li><li>Nghiên cứu vai trò hai chiều qua 2–3 tin tuyển dụng thật. Bên ngoài: kỹ năng được đòi nhiều nhất, mức kinh nghiệm. Bên trong: kỹ năng đã có artifact chứng minh, kỹ năng cần đào sâu, việc cho mình năng lượng.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn một trong bốn hướng tiếp cận hợp với mục tiêu của mình</li><li>Rút tín hiệu thị trường cụ thể từ báo cáo gốc, không dừng ở ấn tượng chung</li><li>Kết luận bằng một câu: vai trò mục tiêu nghiêng về track nào và vì sao</li></ul></div>
+  </div>
+</section>
+<section class="block" id="track" aria-labelledby="track-h">
+  <h2 class="block-h" id="track-h">3 track Phase 2</h2>
+  <div class="trk-grid"><article class="trk">
+  <span class="trk-k">CP1</span>
+  <h3>Business (AI Product)</h3>
+  <p>Từ người biết build AI thành người ra quyết định sản phẩm: ý tưởng, chiến lược, ROI, triển khai có trách nhiệm.</p>
+  <p class="trk-lbl">Đi sâu</p><p class="chips"><span class="chip">Problem Statement</span><span class="chip">PRD</span><span class="chip">AI Readiness</span><span class="chip">ROI</span><span class="chip">Risk</span><span class="chip">UX</span><span class="chip">Cost</span></p>
+  <p class="trk-lbl">Role tiêu biểu</p><ul class="roles"><li>AI Product Manager</li><li>Business Analyst (AI)</li><li>Product Designer</li><li>AI Risk Governance</li></ul>
+  <p class="trk-fit">Bạn thích hỏi “nên làm gì, vì sao”, làm việc với người và thuyết phục bằng số.</p>
+  <p class="trk-days"><span>Nối từ</span><a class="dchip cm-1" href="/ngay/ngay-02">D2</a><a class="dchip cm-2" href="/ngay/ngay-05">D5</a><a class="dchip cm-2" href="/ngay/ngay-06">D6</a></p>
+</article><article class="trk">
+  <span class="trk-k">CP2</span>
+  <h3>Infrastructure</h3>
+  <p>Kỹ sư hạ tầng tự dựng và vận hành backend của một hệ AI production.</p>
+  <p class="trk-lbl">Đi sâu</p><p class="chips"><span class="chip">Vector store</span><span class="chip">Data pipeline</span><span class="chip">Docker</span><span class="chip">Cloud deploy</span><span class="chip">Monitoring</span><span class="chip">Tracing</span></p>
+  <p class="trk-lbl">Role tiêu biểu</p><ul class="roles"><li>DevOps Engineer</li><li>Data Engineer</li><li>AI Security Engineer</li><li>ML / MLOps Engineer</li></ul>
+  <p class="trk-fit">Bạn thích hệ thống chạy ổn định, tự động hoá mọi thứ và chịu được on-call.</p>
+  <p class="trk-days"><span>Nối từ</span><a class="dchip cm-3" href="/ngay/ngay-07">D7</a><a class="dchip cm-3" href="/ngay/ngay-10">D10</a><a class="dchip cm-4" href="/ngay/ngay-12">D12</a><a class="dchip cm-4" href="/ngay/ngay-13">D13</a></p>
+</article><article class="trk">
+  <span class="trk-k">CP3</span>
+  <h3>AI Engineering</h3>
+  <p>Đi sâu kỹ thuật: xây agent và hệ LLM ở mức production-grade.</p>
+  <p class="trk-lbl">Đi sâu</p><p class="chips"><span class="chip">LLM API</span><span class="chip">ReAct agent</span><span class="chip">Tool calling</span><span class="chip">RAG</span><span class="chip">Multi-agent</span><span class="chip">Guardrails</span><span class="chip">Eval</span></p>
+  <p class="trk-lbl">Role tiêu biểu</p><ul class="roles"><li>AI Engineer</li><li>AI Evaluation &amp; Quality</li><li>Forward Deployed Engineer</li><li>Data Scientist</li></ul>
+  <p class="trk-fit">Bạn thích build và thử nghiệm, chịu được output không chắc chắn, mê đo lường.</p>
+  <p class="trk-days"><span>Nối từ</span><a class="dchip cm-1" href="/ngay/ngay-01">D1</a><a class="dchip cm-1" href="/ngay/ngay-03">D3</a><a class="dchip cm-1" href="/ngay/ngay-04">D4</a><a class="dchip cm-3" href="/ngay/ngay-08">D8</a><a class="dchip cm-3" href="/ngay/ngay-09">D9</a><a class="dchip cm-4" href="/ngay/ngay-11">D11</a><a class="dchip cm-4" href="/ngay/ngay-14">D14</a></p>
+</article></div>
+  <p class="note">Forward Deployed Engineer và MLOps nằm giữa hai track; full-stack là nền chung cho cả ba.</p>
+  <h3 class="sub-h">Mọi role đều cần 6 kỹ năng nền</h3>
+  <ul class="base"><li><strong>AI fluency có kỷ luật</strong><span>86% người dùng AI hàng đầu coi output là điểm bắt đầu, không phải đáp án.</span></li><li><strong>Proof of work</strong><span>Yêu cầu số 1 trong JD Forward Deployed Engineer: đã ship AI agent lên production.</span></li><li><strong>Tư duy đo lường</strong><span>Định nghĩa “tốt” bằng số trước khi build: eval cho AI, KPI cho business.</span></li><li><strong>Teamwork &amp; tiếng Anh</strong><span>Kỹ năng mềm doanh nghiệp Việt Nam cần nhất: teamwork 52,3%, giao tiếp 49,2%, tiếng Anh 46,2%.</span></li><li><strong>Hiểu domain</strong><span>Đa số JD nêu rõ ngành: ngân hàng, bảo hiểm, ô tô, bán lẻ.</span></li><li><strong>Cloud &amp; DevOps cơ bản</strong><span>Kỹ năng kỹ thuật được tìm nhiều nhất ở Việt Nam: DevOps &amp; CI/CD 53,1%, Cloud 48,4%.</span></li></ul>
+  <p class="src">Số liệu: Microsoft 2026 Work Trend Index (n=20.000), ITviec IT Salary &amp; Recruitment Report 2025–26, tin tuyển dụng LinkedIn tại Việt Nam (9/2026).</p>
+  <div class="msg"><p class="msg-q">Chọn role theo việc bạn muốn làm mỗi ngày, không theo title đang hot.</p><ol><li>Chọn 1–2 role, đọc 10 JD thật trên LinkedIn, ITviec, TopDev</li><li>Làm 1 dự án bám sát yêu cầu của những JD đó</li><li>Kể lại bằng con số: bạn đã đo được gì, cải thiện bao nhiêu</li></ol></div>
+</section>
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Thời gian xây</p>
+  <h2 id="lab-h">Track Decision Memo</h2>
+  <p>Gộp phần nhìn lại bản thân với nghiên cứu thị trường và vai trò thành một quyết định track bằng văn bản, dựa trên bằng chứng thu thập cả ngày thay vì cảm tính.</p>
+  <p class="out"><span>Đầu ra</span>Memo 5 phần: định hướng nghề nghiệp đối chiếu tin tuyển dụng thật, đối chiếu bản thân từ Phase 1, kỹ năng cần phát triển, quyết định track kèm lý do, chuẩn bị cho Phase 2</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Dấu hiệu nào sau 6 tháng sẽ cho bạn biết lựa chọn track hôm nay chưa đúng?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-1" href="/ngay/ngay-02"><strong>Ngày 2 · Đóng khung bài toán</strong><span>thích viết problem statement là tín hiệu nghiêng về track AI Product</span></a><a class="rel cm-1" href="/ngay/ngay-03"><strong>Ngày 3 · ReAct agent</strong><span>thích đọc trace, debug agent là tín hiệu nghiêng về track AI Engineering</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-14" rel="prev"><span>← Ngày 14</span><strong>Evaluation</strong></a><a class="pn-a next" href="/ca-khoa"><span>Cả khoá →</span><strong>15 ngày trên một trang</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{
+  "ngay": 5,
+  "ten": "Thiết kế sản phẩm AI",
+  "ten_ngan": "Uncertainty & Thin SPEC",
+  "cot_moc": 2,
+  "cau_hoi": "Vì sao AI sai không phải là một bug có thể fix dứt điểm?",
+  "muc_tieu": "Test giả thuyết bằng bậc fidelity rẻ nhất trước khi build; viết PRD cho AI feature kèm mục spec riêng cho AI; hiệu chỉnh niềm tin bằng expectation, explainability, control; quyết định AI tự làm tới đâu, đỡ người dùng khi AI sai; phân biệt báo nhầm với bỏ sót.",
+  "tu_khoa": [
+    "leap of faith",
+    "thang fidelity",
+    "MVP",
+    "AI PRD",
+    "hiệu chỉnh niềm tin",
+    "quyền tự chủ",
+    "báo nhầm / bỏ sót",
+    "SPEC nhẹ"
+  ],
+  "bai_hoc": [
+    "AI luôn có lúc sai: thiết kế cho lúc sai — hỏi lại, sửa, undo, chuyển người",
+    "Augmentation không phải bản kém của automation; thường là điểm bắt đầu đúng",
+    "Lỗi nào đắt hơn (precision hay recall) quyết định UX và failure path",
+    "Thin SPEC trước khi build"
+  ],
+  "tu_soi": "Với feature của bạn, báo nhầm hay bỏ sót đắt hơn, và khi AI sai thì người dùng làm gì tiếp?",
+  "module": [
+    {
+      "ten": "Từ giả thuyết đến MVP",
+      "kien_thuc": [
+        "Leap of faith là giả định quan trọng nhất mà ít bằng chứng nhất trong một ý tưởng: test nó trước. AI làm build rẻ đi, nên các khâu trước build (nghiên cứu, spec, thiết kế) cũng phải đổi theo.",
+        "Prototype, Pilot, MVP, POC khác nhau trên hai trục: mức hoàn thiện và phạm vi test (một phần hay toàn bộ sản phẩm). Thang fidelity Sketch → Wireframe → Mockup → Prototype đi từ rẻ đến đắt.",
+        "Mỗi bậc fidelity trả lời một loại câu hỏi: bậc thấp kiểm tra luồng và tính năng, bậc cao kiểm chứng cảm giác “như thật”. Làm bản hoàn thiện chỉ để hỏi về luồng là đặt công sức sai chỗ.",
+        "Hai đòn bẩy giữ MVP rẻ: làm nhiều biến thể (variations) để so trước khi chọn hướng, và làm lát cắt mỏng đầu-cuối (thin slice) thay vì xong từng tầng. MVP là sản phẩm nhỏ dùng được, không phải mảnh dở dang.",
+        "Test nhu cầu trước khi có AI thật: một dịch vụ giao đồ ăn ra mắt bằng trang tĩnh và số điện thoại của người sáng lập; một trợ lý ghi chú cuộc họp có “bot AI” thực chất là người gõ tay hơn 100 cuộc họp."
+      ],
+      "ky_nang": [
+        "Xác định giả định leap of faith cần test trước trong một ý tưởng sản phẩm",
+        "Chọn bậc fidelity khớp với câu hỏi cần trả lời, giữ MVP rẻ bằng variations hoặc thin slice",
+        "Thiết kế cách test nhu cầu người dùng không cần AI thật, trước khi đầu tư build"
+      ]
+    },
+    {
+      "ten": "Viết PRD cho một AI feature",
+      "kien_thuc": [
+        "Đừng cầm búa đi tìm đinh: hiểu người dùng trước, brainstorm từ năng lực thật của AI sau, chọn use case theo giá trị và lợi thế khó sao chép. Problem statement không nhắc chữ AI.",
+        "Goals viết dưới dạng kết quả (outcome), không phải giải pháp; non-goals chặn tính năng phình to. Metrics chia ba tầng: mức dùng, chất lượng, tác động. User flow vẽ trọn đầu-cuối, kể cả các bước không có AI.",
+        "PRD cho AI cần thêm bốn mục: dữ liệu đầu vào và context, đặc tả output của model, cơ chế phản hồi, ngưỡng chấp nhận chất lượng (cao hay thấp tuỳ mức rủi ro của tính năng).",
+        "AI có ba loại lỗi: dao động giữa các lần chạy, trôi theo thời gian, sai ở tầng lập luận; không chắc chắn là mặc định. Nên spec đổi “kết quả mong đợi” thành “tỉ lệ đạt”, “test case” thành “phân bố tình huống”.",
+        "Bề mặt rủi ro phụ thuộc cấu hình: trả lời càng rõ bộ câu hỏi cấu hình, danh sách kịch bản lỗi càng cụ thể. Chỉ đổi một dòng, như khung giờ hoạt động, đã làm ba kịch bản lỗi biến mất hoặc xuất hiện."
+      ],
+      "ky_nang": [
+        "Viết problem statement không nhắc AI, cùng goals, non-goals và metrics ba tầng",
+        "Viết bốn mục spec riêng cho AI, đặt yêu cầu chất lượng bằng tỉ lệ thay vì đúng/sai",
+        "Liệt kê kịch bản lỗi cần test từ cấu hình tính năng thay vì đoán"
+      ]
+    },
+    {
+      "ten": "Đặt đúng kỳ vọng và niềm tin",
+      "kien_thuc": [
+        "Phần mềm chạy theo luật: cùng input luôn ra cùng output, lỗi tìm ra là sửa dứt điểm. AI chạy theo xác suất: cùng input, model, cấu hình vẫn có thể ra kết quả khác; lỗi chỉ giảm được, khó hết hẳn.",
+        "Vì vậy kiểm thử AI không còn là đạt hay không đạt sau một lần chạy. Thiết kế xoay quanh 4 câu hỏi: kỳ vọng đúng chưa, người dùng biết AI làm được gì chưa, AI sai thì phản hồi ra sao, học từ phản hồi thế nào.",
+        "Niềm tin phải khớp năng lực thật: tin quá mức thì người dùng ngừng kiểm tra, tin quá thấp thì bỏ cả tính năng đang chạy tốt. Cả hai đều là thất bại sản phẩm.",
+        "Ba đòn bẩy hiệu chỉnh niềm tin: expectation (nói rõ AI làm được gì), explainability (vì sao ra kết quả này), control (sửa, hoàn tác, duyệt trước khi thực thi). Giao diện không được hứa nhiều hơn năng lực thật.",
+        "Làm rõ năng lực bằng giải thích trực tiếp, nút điều khiển tương ứng, ví dụ input trên giao diện; nói rõ AI làm tốt trong điều kiện nào, nên tránh điều kiện nào. Khi không chắc, AI nên hỏi lại thay vì cố làm."
+      ],
+      "ky_nang": [
+        "Giải thích vì sao kiểm thử tính năng AI không thể chỉ là đạt/không đạt sau một lần chạy",
+        "Dùng expectation, explainability hoặc control để sửa một giao diện đang hứa quá năng lực",
+        "Thiết kế cách làm rõ năng lực AI trên giao diện, nhận ra lúc nên để AI hỏi lại"
+      ]
+    },
+    {
+      "ten": "Quyền tự chủ, phục hồi, và sai kiểu nào tệ hơn",
+      "kien_thuc": [
+        "Quyền tự chủ (im, hỏi lại hay tự làm) tính theo hai yếu tố: AI chắc đến đâu và sai thì trả giá bao nhiêu. Sai đắt như chuyển nhầm tiền: thu hẹp vùng tự làm; sai rẻ, dễ sửa như gợi ý tự hoàn thành: nới rộng.",
+        "Hành động khó đảo ngược (đặt chỗ, thanh toán): AI chuẩn bị, người dùng duyệt rồi mới thực thi; bước duyệt là ma sát tốt. Giải thích tốt luôn gắn với một hành động tiếp theo của người dùng.",
+        "Ngưỡng chấp nhận là quyết định sản phẩm, dựa trên báo nhầm hay bỏ sót gây hại hơn; không có con số đúng cho mọi tính năng. Người dùng không cần thấy con số, chỉ cần thấy hệ thống cư xử khác theo mức tin cậy.",
+        "Báo nhầm và bỏ sót (Ngày 2) gây hại khác nhau: lọc thư rác báo nhầm làm mất email quan trọng, sàng lọc y tế bỏ sót làm lỡ ca cần điều trị. Ưu tiên giảm loại nào tuỳ vào ai gánh hậu quả.",
+        "Khi AI đã sai: còn dùng được thì cho sửa, làm hỏng thứ có giá trị thì cho hoàn tác, không xử lý nổi thì có lối thoát (chuyển người thật, gợi ý bước tiếp). Lúc lỗi cũng là lúc xin phản hồi tốt nhất."
+      ],
+      "ky_nang": [
+        "Chọn mức quyền tự chủ theo độ chắc chắn và cái giá khi sai, không mặc định tự động tối đa",
+        "Thiết kế bước duyệt cho hành động khó đảo ngược và một cơ chế phục hồi khi AI sai",
+        "Chọn loại sai (báo nhầm hay bỏ sót) cần ưu tiên giảm cho một tình huống, kèm lý do"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 5: viết SPEC nhẹ cho một AI feature",
+    "tom_tat": "Chọn một ý tưởng AI feature và viết SPEC nhẹ: problem statement không nhắc AI, goals, non-goals, metrics ba tầng, bốn mục spec riêng cho AI, ít nhất một quyết định quyền tự chủ và một cơ chế phục hồi khi AI sai.",
+    "dau_ra": "SPEC nhẹ đủ cụ thể để bắt đầu build, dùng làm điểm xuất phát cho hackathon Ngày 6"
+  },
+  "lien_quan": [
+    {
+      "ngay": 2,
+      "ghi_chu": "double diamond, báo nhầm/bỏ sót: nay áp vào quyết định sản phẩm"
+    },
+    {
+      "ngay": 6,
+      "ghi_chu": "SPEC nhẹ là điểm xuất phát của hackathon"
+    },
+    {
+      "ngay": 14,
+      "ghi_chu": "báo nhầm/bỏ sót là nền cho đánh giá AI có hệ thống"
+    }
+  ]
+}

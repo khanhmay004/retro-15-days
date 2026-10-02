@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 10 · Data Pipeline &amp; Data Observability · Retro 15 ngày</title>
+<meta name="description" content="Garbage in, garbage out — sửa từ đâu, và bạn biết trước hay đợi người dùng báo?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 10 · Data Pipeline &amp; Data Observability · Retro 15 ngày">
+<meta property="og:description" content="Garbage in, garbage out — sửa từ đâu, và bạn biết trước hay đợi người dùng báo?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-10">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-3" data-prev="/ngay/ngay-09" data-next="/ngay/ngay-11">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3 on" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline" aria-current="page">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 10 · Cột mốc 3 · Tri thức &amp; kiến trúc</p>
+  <h1>Data Pipeline &amp; Data Observability</h1>
+  <blockquote class="q">Garbage in, garbage out — sửa từ đâu, và bạn biết trước hay đợi người dùng báo?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Hiểu vì sao lỗi dữ liệu đắt hơn tưởng; chọn kiến trúc ingest theo loại nguồn; phân biệt dữ liệu hợp lệ với đúng thực tế, viết bộ luật dữ liệu để phán quyết; quan sát pipeline, chẩn đoán đúng thứ tự; quyết định dừng, tách riêng hay ghi lại.</p>
+  <p class="chips"><span class="chip">data cascade</span><span class="chip">ETL / ELT</span><span class="chip">batch / streaming</span><span class="chip">cursor pagination</span><span class="chip">data contract</span><span class="chip">data quality</span><span class="chip">data observability</span><span class="chip">idempotency</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>60–80% công sức thực tế nằm ở phần dữ liệu</li><li>Kiểm tra chất lượng chạy như code; dữ liệu hỏng thì dừng pipeline</li><li>5 pillars: freshness, distribution, volume, schema, lineage</li><li>Agent trả lời chính sách cũ? Soi tầng dữ liệu trước khi sửa prompt</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Data pipeline: nền tảng của mọi AI product</a><a href="#m2"><span>2</span>Ingestion: kéo dữ liệu về mà không mất bản ghi</a><a href="#m3"><span>3</span>Transform và data quality: làm sạch, chuẩn hoá, đo bằng code</a><a href="#m4"><span>4</span>Data Observability</a><a href="#m5"><span>5</span>Từ phát hiện đến chính sách</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Data pipeline: nền tảng của mọi AI product</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Khoảng 60–80% thời gian dự án AI là việc dữ liệu. Data cascade: thay đổi nhỏ ở nguồn (như đổi cách ghi ngày) trôi qua mọi bước không ai báo lỗi, chỉ lộ ra khi agent trả lời sai. Cách thoát: gắn điểm đo sớm.</li><li>Năm triệu chứng chỉ về tầng dữ liệu: agent trả lời đúng nhưng cũ, lẫn hai phiên bản, bịa nghe hợp lý, chỉ sai với một loại nguồn, đột biến sau khi triển khai. Đọc triệu chứng trước khi sửa prompt hay đổi model.</li><li>Lấy mẫu bám hành vi người dùng, không theo dữ liệu nguồn sẵn có: cần một số đo mỗi ngày mà nguồn đo 5 phút một lần thì lấy một điểm cùng khung giờ (có dung sai), không lấy trung bình vì mất dao động.</li><li>ETL transform trước khi nạp, ELT nạp thô rồi transform. Câu hỏi quyết định: có được giữ dữ liệu thô không? Không (log có thông tin cá nhân phải che) thì ETL; chưa chắc cách transform thì ELT, giữ quyền đổi ý.</li><li>Batch chạy theo lịch, rẻ, dễ chạy lại nhưng dữ liệu trễ vài giờ; streaming xử lý ngay, độ trễ mili giây nhưng đắt và khó gỡ lỗi. Câu hỏi quyết định: dữ liệu trễ 6 tiếng thì agent sai tới mức nào?</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Suy ra tầng dữ liệu khả nghi từ một triệu chứng của agent</li><li>Chọn cách lấy mẫu bám hành vi người dùng thay vì dữ liệu nguồn sẵn có</li><li>Chọn ETL hay ELT, batch hay streaming bằng đúng câu hỏi quyết định</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Ingestion: kéo dữ liệu về mà không mất bản ghi</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Mỗi loại nguồn hỏng một kiểu: database timeout, đổi schema; API dính giới hạn tần suất, lệch phân trang; PDF, HTML đọc sai chữ; luồng sự kiện dồn ứ hoặc trùng. Nguồn không ai chịu trách nhiệm sẽ gây sự cố.</li><li>Phân trang offset (“từ dòng N trở đi”) lệch khi có bản ghi chèn vào lúc đang đọc: đọc trùng bản cũ, sót bản mới, không lỗi nào bắn ra. Cursor nhớ đúng mốc đã dừng nên an toàn khi nguồn đang thay đổi.</li><li>Gặp giới hạn tần suất thì chờ tăng cấp số nhân (1, 2, 4 giây), ưu tiên thời gian chờ API đề xuất, thêm jitter (khoảng ngẫu nhiên) để các tiến trình không thử lại cùng lúc. Thử lại vô hạn là tự tấn công nguồn.</li><li>Với tệp, hash nội dung trả lời “tệp có đổi không” để quyết định xử lý lại; phiên bản logic trả lời “đây là bản nào” để agent lọc đúng bản. Chữ đọc từ ảnh scan có điểm tin cậy thấp phải gắn cờ trước khi công bố.</li><li>Hàng đợi phình là triệu chứng: hỏi vì sao bên xử lý chậm. Áp lực ngược (backpressure) báo bên phát chậm lại; bản ghi thử lại vẫn lỗi tách sang hàng chờ bản ghi lỗi để xem lại, không chặn cả hàng.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Dự đoán kết quả phân trang offset và cursor khi có bản ghi chèn giữa</li><li>Thiết kế thử lại có backoff cấp số nhân, jitter và giới hạn số lần</li><li>Chọn cách đo cho một nguồn dữ liệu mới theo kiểu hỏng đặc trưng của nó</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Transform và data quality: làm sạch, chuẩn hoá, đo bằng code</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Mỗi bản ghi rẽ một trong ba hướng: sửa được (cắt khoảng trắng, chuẩn hoá ngày, unicode) thì vào kho; nghi ngờ thì chờ người duyệt; không cứu được (rỗng, trùng khoá chính) thì tách riêng, ghi kèm mã lần chạy.</li><li>Năm kiểu dữ liệu bẩn: giá trị thiếu (rỗng, chữ “chưa có”, số không giả làm thiếu), giá trị bất thường, bản ghi trùng, định dạng lệch nhau, lỗi bảng mã. Mọi đội phải dùng chung một cách ghi “chưa có giá trị”.</li><li>Sáu khía cạnh chất lượng: năm cái máy tự kiểm trên chính bảng (kiểu và khoảng giá trị, tỉ lệ thiếu, trùng lặp, đối chiếu chéo, tuổi bản ghi); cái thứ sáu, đúng với thực tế, cần nguồn đối chiếu bên ngoài.</li><li>Hợp lệ chưa chắc đúng: số tiền dương, đúng kiểu vẫn có thể nhập sai. Data contract (bộ luật dữ liệu) gồm giá trị hợp lệ, quy tắc nghiệp vụ (tiền hoàn có thể âm) và quan trọng nhất: những gì nó không quy định.</li><li>Mỗi phát hiện bất thường được phán quyết theo bộ luật: sai (vi phạm điều viết rõ), đúng (trông lạ nhưng luật giải thích được), hoặc không thể biết (luật không nói; ghi rõ cần hỏi nguồn nào).</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân loại một bản ghi lỗi vào sửa, gắn cờ hay loại, và ghi lại bản ghi bị loại</li><li>Phân biệt lỗi kiểm tra tự động bắt được với lỗi cần nguồn đối chiếu bên ngoài</li><li>Phán quyết một phát hiện bất thường là sai, đúng nhưng trông lạ, hay không thể biết</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Data Observability</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Năm điều cần thấy: freshness (độ mới), volume (khối lượng), distribution (phân phối), schema (cấu trúc), lineage (dòng chảy dữ liệu). Bốn cái đầu chỉ báo có sự cố; lineage nối các điểm đo, chỉ ra bước gây lỗi.</li><li>Sự cố im lặng: bước đồng bộ rạng sáng hỏng mà job vẫn xong, log không báo gì, vì “không có gì mới” trông y hệt “không có gì cần làm”. Agent sai thì kiểm: độ mới → khối lượng → cấu trúc → lineage → model.</li><li>Cam kết độ mới viết theo hệ quả người dùng thấy (chính sách mới vào câu trả lời trong bao lâu từ lúc ký), đo lúc agent đọc được, không phải lúc tệp vào thư mục tạm. Hết nửa hạn báo nhẹ, hết hạn báo khẩn.</li><li>Lệch phân phối chỉ nói phân phối đã đổi, không nói dữ liệu sai: có thể chỉ là hành vi người dùng đổi. Một kiểu biểu đồ tổng hợp duy nhất có thể che một điểm lệch nhỏ về tỉ lệ nhưng lớn về hệ quả.</li><li>Đủ số dòng chưa chắc ổn: tỉ lệ thiếu tăng vọt ở một cột, nội dung ngắn bất thường, ràng buộc giữa các cột vô lý, thời gian vượt hiện tại. Các lỗi này không làm pipeline dừng, chỉ làm agent tệ dần.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Áp đúng thứ tự chẩn đoán tầng dữ liệu khi agent trả lời sai</li><li>Viết cam kết độ mới theo ngôn ngữ nghiệp vụ và chọn đúng điểm đo</li><li>Phân biệt cột bị đánh dấu lệch với cột thực sự hỏng</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Từ phát hiện đến chính sách</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Ba mức xử lý: lỗi làm sai mọi thứ phía sau (trùng khoá chính, bảng mã hỏng) thì dừng pipeline; khoá đúng mà nội dung đáng ngờ thì tách riêng chờ duyệt; lỗi ở trường không bắt buộc thì ghi lại rồi đi tiếp.</li><li>Xếp mức bằng câu hỏi “lỗi lọt qua thì hậu quả tới đâu, có chờ được không”, không phải “nghe đáng sợ cỡ nào”. Mức xử lý ghi trong data contract; khu vực tách riêng không bao giờ cho agent đọc.</li><li>Viết quy tắc kiểm tra thì dễ; khó là biết nó đủ tin để dừng cả hệ thống chưa. Đo trong số dòng bị chặn có bao nhiêu % là lỗi thật, rồi mới xếp quy tắc vào mức dừng, tách hay ghi lại.</li><li>Pipeline sẽ bị chạy lại nên phải idempotent (chạy lại không sinh trùng): cập nhật theo khoá tự nhiên thay vì sinh mã mới, hoặc nạp vào vùng tạm rồi mới chuyển hướng đọc. Thiếu nó, agent lấy cả bản cũ lẫn mới.</li><li>Bản ghi sự cố trả lời 5 câu: người dùng thấy gì, chỉ số nào báo, nguyên nhân gốc ở đâu, đã chặn lan thế nào, đã thêm gì để không tái diễn. Chưa có chỉ số nào báo trước người dùng thì phải thêm chỉ số đo mới.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Xếp một lỗi vào mức dừng, tách riêng hay ghi lại theo hậu quả nếu nó lọt qua</li><li>Viết quy tắc kiểm tra và đo tỉ lệ lỗi thật trong số dòng bị chặn</li><li>Thiết kế bước nạp chạy lại an toàn, không sinh bản ghi trùng</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 10: sửa một pipeline dữ liệu chưa hoàn chỉnh và chứng minh cải thiện</h2>
+  <p>Phân tích dữ liệu thô của một trợ lý nội bộ (bản ghi trùng, thiếu ngày, xung đột phiên bản, sót một nguồn), sửa quy tắc làm sạch và bộ kiểm tra chất lượng đến khi pipeline chạy thông, rồi cố ý làm hỏng dữ liệu để đo ảnh hưởng lên chất lượng truy xuất.</p>
+  <p class="out"><span>Đầu ra</span>Pipeline chạy được, bằng chứng trước và sau bằng số, hồ sơ dữ liệu và quy trình xử lý sự cố</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Nếu dữ liệu của bạn sai hôm nay, bạn biết trước hay sau người dùng?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-4" href="/ngay/ngay-13"><strong>Ngày 13 · Monitoring</strong><span>quan sát agent lúc chạy, tách khỏi quan sát dữ liệu chảy vào</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-09" rel="prev"><span>← Ngày 9</span><strong>Multi-agent &amp; MCP</strong></a><a class="pn-a next" href="/ngay/ngay-11" rel="next"><span>Ngày 11 →</span><strong>Guardrails</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

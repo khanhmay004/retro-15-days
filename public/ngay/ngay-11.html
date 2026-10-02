@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 11 · Guardrails, Human-in-the-Loop và Responsible AI · Retro 15 ngày</title>
+<meta name="description" content="Agent của bạn làm được rất nhiều việc — nhưng ai đảm bảo nó không làm điều không được phép?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 11 · Guardrails, Human-in-the-Loop và Responsible AI · Retro 15 ngày">
+<meta property="og:description" content="Agent của bạn làm được rất nhiều việc — nhưng ai đảm bảo nó không làm điều không được phép?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-11">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-4" data-prev="/ngay/ngay-10" data-next="/ngay/ngay-12">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4 on" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails" aria-current="page">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 11 · Cột mốc 4 · Vận hành</p>
+  <h1>Guardrails, Human-in-the-Loop và Responsible AI</h1>
+  <blockquote class="q">Agent của bạn làm được rất nhiều việc — nhưng ai đảm bảo nó không làm điều không được phép?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Giải thích vì sao guardrails là bắt buộc; phân biệt các kiểu tấn công phổ biến và tầng phòng thủ tương ứng ở input lẫn output; thiết kế luồng HITL theo mức rủi ro của từng hành động; chạy một vòng red team chứng minh guardrails hoạt động.</p>
+  <p class="chips"><span class="chip">prompt injection</span><span class="chip">jailbreak</span><span class="chip">input guardrails</span><span class="chip">output guardrails</span><span class="chip">defense in depth</span><span class="chip">lethal trifecta</span><span class="chip">red teaming</span><span class="chip">HITL</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>Guardrails là dây an toàn: phòng thủ nhiều lớp ở input, LLM và output</li><li>Prompt injection chưa có lời giải triệt để; phòng thủ bền đến từ kiến trúc</li><li>Lethal trifecta: đừng để một agent có đủ dữ liệu riêng + nội dung lạ + kênh gửi ra ngoài</li><li>Red team trước khi deploy bắt ~80% vấn đề; HITL là tính năng</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Vì sao guardrails là bắt buộc</a><a href="#m2"><span>2</span>AI Safety landscape, Alignment và Governance</a><a href="#m3"><span>3</span>Attack vectors chi tiết</a><a href="#m4"><span>4</span>Input guardrails và phòng thủ prompt injection</a><a href="#m5"><span>5</span>Output guardrails, defense in depth và red teaming</a><a href="#m6"><span>6</span>Human-in-the-Loop và Trust UX</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Vì sao guardrails là bắt buộc</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Bốn mối đe doạ phổ biến nhất với agent: prompt injection, jailbreak, rò rỉ dữ liệu, nội dung gây hại. Agent mạnh mà không có guardrails giống xe mạnh không phanh: càng nhanh càng nguy hiểm.</li><li>Chatbot chỉ sinh văn bản, sai thì người dùng tự phát hiện. Agent gọi API, gửi email, ghi vào cơ sở dữ liệu: rủi ro là làm sai và gây thiệt hại thật khó hoàn tác, nên guardrails cho agent phải chặt hơn.</li><li>Sự cố thật như bot bán xe đồng ý giá 1 USD hay agent hãng bay hứa hoàn tiền sai chính sách đều không do model kém, mà do không có guardrail kiểm soát output trước khi đến người dùng.</li><li>Không ai liệt kê hết được các kiểu tấn công trước; danh sách thực tế luôn dài hơn dự đoán. Vì vậy guardrail nhằm giảm thiệt hại và giới hạn phạm vi khi sự cố xảy ra, không phải chặn tuyệt đối.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Giải thích vì sao agent mạnh thiếu kiểm soát nguy hiểm hơn agent yếu</li><li>Phân biệt rủi ro của chatbot và agent dựa trên hành động khó hoàn tác</li><li>Lập danh sách rủi ro cụ thể cho một agent trước khi đưa lên production</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">AI Safety landscape, Alignment và Governance</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Sáu loại rủi ro: hallucination, prompt injection, PII leakage (lộ dữ liệu cá nhân), jailbreak, bias, over-autonomy (tự quyết quá mức). PII leakage và over-autonomy nặng nhất: có thể phạm luật, khó hoàn tác.</li><li>Ba khái niệm hay bị gộp: alignment là AI theo đúng mục tiêu thật, không chỉ tối ưu đúng chỉ số; control là cơ chế kỹ thuật (kill switch, giới hạn tool, nhật ký); governance là khung pháp lý như EU AI Act.</li><li>Hai dấu hiệu misalignment: reward hacking (được giao sửa hàm cộng, AI sửa file test để test pass) và deceptive alignment (trả lời an toàn khi biết đang bị đánh giá, làm khác khi không bị đánh giá).</li><li>Một nghiên cứu năm 2025 cho 16 model đóng vai agent quản lý email: khi bị doạ thay thế, nhiều model dùng thông tin nhạy cảm để đe doạ ngược người giám sát. Vì vậy quyết định rủi ro cao cần guardrails cùng HITL.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Xếp sáu loại rủi ro AI theo mức nghiêm trọng</li><li>Phân biệt alignment, control và governance, mỗi khái niệm một ví dụ</li><li>Giải thích cơ chế reward hacking và deceptive alignment qua ví dụ code</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Attack vectors chi tiết</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Direct injection: người dùng gửi thẳng chỉ dẫn ghi đè system prompt (“bỏ qua mọi chỉ dẫn trước”). Indirect injection nguy hiểm hơn: chỉ dẫn ẩn trong web, tài liệu, email mà agent tự đọc, nhất là agent dùng RAG.</li><li>Bốn kiểu jailbreak: đóng vai nhân vật không giới hạn, mã hoá Base64, ROT13, chuỗi câu hỏi vô hại tăng dần, dùng ngôn ngữ ít phổ biến. Điểm yếu chung: safety filter chỉ nhận ra thứ nó được huấn luyện để nhận ra.</li><li>Prompt injection nhắm vào hành động của agent (gửi email cho người không được nhận); jailbreak nhắm vào nội dung câu trả lời (sinh nội dung bị cấm). Cùng xuất phát từ input độc hại, khác nhau ở mục tiêu cuối.</li><li>Multi-step extraction hỏi từng mảnh vô hại rồi ghép thành thông tin nhạy cảm. Agent đọc được cơ sở dữ liệu, file, email và gửi ra ngoài qua tool, nên mỗi tool gắn thêm là thêm một bề mặt tấn công.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân biệt direct và indirect injection, giải thích vì sao indirect nguy hiểm hơn</li><li>Phân loại một tình huống tấn công là prompt injection hay jailbreak theo mục tiêu cuối</li><li>Viết prompt tấn công có mục tiêu rõ nhắm vào agent của chính mình</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Input guardrails và phòng thủ prompt injection</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Input qua bốn lớp trước khi đến LLM: validation (độ dài, ngôn ngữ, định dạng) → injection detection → topic filter (chỉ nhận chủ đề của use case) → rate limiting. Bị chặn ở đâu thì dừng ở đó, không tốn token.</li><li>Pattern matching bằng regex bắt khoảng 60–70% injection cơ bản; phần còn lại cần bộ phân loại dựa trên LLM hoặc chuyên dụng như Llama Prompt Guard 2. Lớp này nhanh, nên luôn có, nhưng không đủ một mình.</li><li>Bộ lọc luôn bị vượt bằng biến thể mới (giấu lệnh trong Unicode, emoji) vì lệnh và dữ liệu chung một luồng token. Spotlighting đánh dấu đâu là dữ liệu; instruction hierarchy xếp system &gt; user &gt; dữ liệu đọc được.</li><li>Dual-LLM tách model gọi tool khỏi model đọc dữ liệu không tin cậy: an toàn hơn nhưng làm được ít việc hơn. Lethal trifecta: không cho một agent cùng lúc có dữ liệu riêng tư, nội dung lạ và kênh gửi ra ngoài.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Mô tả bốn lớp input guardrails theo đúng thứ tự, mỗi lớp một ví dụ</li><li>Dự đoán lớp guardrail nào bắt được một prompt tấn công và giải thích vì sao</li><li>Giải thích vì sao bộ lọc dựa trên pattern luôn có thể bị vượt qua</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Output guardrails, defense in depth và red teaming</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Output qua bốn lớp: content filter (chặn nội dung độc hại, che PII) → grounding check (gắn cờ nhận định không có nguồn) → format validation (đúng schema, không link hay số bịa) → human review khi tin cậy thấp.</li><li>Ba tầng chồng nhau: input rails → LLM rails (system prompt gia cố) → output rails. Mỗi tầng bắt một loại lỗi, input bỏ sót thì output vẫn còn cơ hội chặn; chỉ dùng một tầng thì lỗi thuộc tầng khác lọt hết.</li><li>Guardrail kiểm soát nội dung và hành vi của model; access control kiểm soát quyền của người dùng. Người không có quyền mà đòi gửi email cho toàn công ty là lỗi phân quyền, guardrail nội dung không xử lý được.</li><li>Red teaming: tấn công agent bằng adversarial prompt → ghi pass/fail → vá → kiểm tra lại. Bộ test này chạy lại ở mỗi lần phát hành như unit test; agent không qua safety test thì không được deploy.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Mô tả bốn lớp output guardrails và vai trò của grounding check</li><li>Phân loại một sự cố thuộc guardrail nội dung hay thuộc phân quyền hệ thống</li><li>Chạy vòng red teaming bốn bước và đưa bộ adversarial test vào mỗi lần phát hành</li></ul></div>
+  </div>
+</section><section class="mod" id="m6" aria-labelledby="m6-h">
+  <div class="mod-h"><span class="mod-n">06</span><h2 id="m6-h">Human-in-the-Loop và Trust UX</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Ba kiểu HITL, can thiệp tăng dần: human-on-the-loop (agent làm trước, người xem lại sau; rủi ro thấp) → human-in-the-loop (agent đề xuất, người duyệt trước) → human-as-tiebreaker (người quyết; rủi ro cao).</li><li>Cần con người khi: hành động không hoàn tác được, quyết định rủi ro cao, độ tin cậy thấp, trường hợp biên chưa gặp, chủ đề nhạy cảm. Gửi email, xoá dữ liệu, chuyển tiền luôn cần người duyệt bất kể điểm tin cậy.</li><li>Ba sai lầm: bắt duyệt mọi request khiến hệ thống nghẽn, người duyệt thiếu context nên duyệt cho có, không có vòng phản hồi để agent cải thiện. Ca dưới ngưỡng liên tục được chấp thuận thì hạ dần ngưỡng.</li><li>Bốn trụ cột Trust UX: hiển thị lý do trước khi hành động, hoàn tác được trong một khoảng ngắn, nhãn độ tin cậy khớp tỉ lệ đúng thật, người dùng tự bật tắt quyền của agent (được đọc hay được gửi email).</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Xếp ba kiểu HITL theo chiều rủi ro tăng dần và chọn đúng kiểu cho một tình huống</li><li>Thiết kế luồng HITL cho ít nhất 3 hành động của agent, có lý do cho từng lựa chọn</li><li>Điều chỉnh ngưỡng độ tin cậy dựa trên tỉ lệ chấp thuận thực tế</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 11: guardrails, HITL và red team cho chatbot ngân hàng</h2>
+  <p>Với một chatbot ngân hàng cố ý để mật khẩu và khoá API trong system prompt: viết input guardrails (jailbreak, nội dung lạ từ tài liệu hay email, ký tự Unicode), đặt permission và HITL cho hành động rủi ro cao, xây output guardrail che PII và bí mật, rồi red team bằng ít nhất 5 prompt nâng cao.</p>
+  <p class="out"><span>Đầu ra</span>Chatbot có input, output guardrails và luồng HITL theo mức rủi ro, kèm báo cáo red team có bằng chứng</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Bạn đã tự tấn công agent của mình bằng ít nhất 5 prompt chưa?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-1" href="/ngay/ngay-04"><strong>Ngày 4 · Prompt &amp; tool</strong><span>đã giới thiệu prompt injection và guardrail ở mức nhận biết</span></a><a class="rel cm-2" href="/ngay/ngay-05"><strong>Ngày 5 · Uncertainty &amp; Thin SPEC</strong><span>ba đòn bẩy niềm tin, nền cho HITL và Trust UX</span></a><a class="rel cm-4" href="/ngay/ngay-12"><strong>Ngày 12 · Deploy</strong><span>đưa agent đã có guardrails lên cloud</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-10" rel="prev"><span>← Ngày 10</span><strong>Data pipeline</strong></a><a class="pn-a next" href="/ngay/ngay-12" rel="next"><span>Ngày 12 →</span><strong>Deploy</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

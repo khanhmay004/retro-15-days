@@ -1,0 +1,130 @@
+{
+  "ngay": 14,
+  "ten": "AI Evaluation & Benchmarking",
+  "ten_ngan": "Evaluation",
+  "cot_moc": 4,
+  "cau_hoi": "Làm sao biết agent của bạn tốt lên hay tệ đi — bằng số, không phải bằng cảm giác?",
+  "muc_tieu": "Hiểu vì sao đánh giá AI khác kiểm thử phần mềm; tính bốn metric RAGAS cùng Hit Rate, MRR; thiết kế golden set đủ lớn, đa dạng; dùng LLM-as-judge có kiểm soát thiên vị; đọc chênh lệch điểm là thật hay nhiễu; đặt cổng đánh giá chặn bản phát hành.",
+  "tu_khoa": [
+    "golden set",
+    "RAGAS",
+    "Hit Rate & MRR",
+    "LLM-as-judge",
+    "khoảng tin cậy",
+    "taxonomy lỗi",
+    "5 Whys",
+    "cổng đánh giá CI/CD"
+  ],
+  "bai_hoc": [
+    "Evaluation là kỷ luật kỹ thuật, không phải cảm giác",
+    "Golden set 50–100 cặp, ≥2 người review; 20 case chỉ để sanity check",
+    "LLM-as-judge phải calibrate với người; RAGAS đo faithfulness, relevancy, recall, precision",
+    "5 Whys: lỗi “sai chính sách hoàn tiền” hoá ra gốc ở data pipeline"
+  ],
+  "tu_soi": "Bạn có con số nào chứng minh bản mới tốt hơn bản cũ không?",
+  "module": [
+    {
+      "ten": "Vì sao cần evaluation, và giới hạn của metric truyền thống",
+      "kien_thuc": [
+        "Phần mềm truyền thống là known-known: cùng input cho cùng output, đúng sai rõ ràng. AI sinh output xác suất, nên evaluation là kỷ luật riêng: giả thuyết → thí nghiệm → đo lường → kết luận bằng số.",
+        "Ba bậc trưởng thành: xem qua vài kết quả rồi kết luận “trông ổn” → phân tích lỗi có hệ thống trên 20–50 kết quả thật → cổng tự động chặn bản phát hành. Luôn bắt đầu từ phân tích lỗi.",
+        "So khớp chuỗi sai cả hai chiều: exact match chấm trượt câu đúng nghĩa chỉ vì lệch một từ; BLEU, ROUGE chấm “nên hoàn tiền” gần giống “không nên hoàn tiền” vì trùng 9/10 từ.",
+        "Embedding similarity bắt được cách diễn đạt khác (“hoàn tiền” ≈ “trả lại tiền”) nhưng mù trước mâu thuẫn: hai câu ngược nghĩa cùng chủ đề vẫn có cosine trên 0,90. Chấm đúng sai cần một lớp dựa trên suy luận."
+      ],
+      "ky_nang": [
+        "Giải thích vì sao AI cần cách đánh giá khác kiểm thử phần mềm truyền thống",
+        "Chỉ ra bẫy phủ định khiến so khớp chuỗi và embedding chấm sai",
+        "Xác định mình đang ở bậc trưởng thành nào và bước tiếp theo"
+      ]
+    },
+    {
+      "ten": "Metrics cho agent và RAG",
+      "kien_thuc": [
+        "Bốn nhóm metric: Task Completion (chấm trạng thái cuối, không chấm từng bước), Answer Quality, RAG-specific, Business (hài lòng, thời gian tiết kiệm, chi phí mỗi lượt). Bắt đầu với 20–50 tác vụ từ lỗi thật.",
+        "RAGAS chấm riêng hai tầng. Truy xuất: context recall (lấy đủ chứng cứ cần thiết chưa), context precision (chunk đúng có nằm trên cùng không). Sinh: faithfulness, answer relevancy (đúng trọng tâm hay lạc đề).",
+        "Faithfulness tách câu trả lời thành các nhận định nhỏ rồi kiểm từng nhận định có suy ra được từ context không. Câu trả lời trôi chảy, đúng chủ đề vẫn có thể relevancy cao mà faithfulness thấp: nó đang bịa.",
+        "Retrieval là trần của generation: bỏ lỡ tài liệu đúng thì generator không cứu được. Hit Rate@k: top-k có tài liệu đúng không; MRR: trung bình 1/hạng của tài liệu đúng đầu tiên. Cả hai không cần model chấm."
+      ],
+      "ky_nang": [
+        "Chọn nhóm metric hợp với tình huống và chấm theo trạng thái cuối",
+        "Đọc bốn điểm RAGAS và chỉ ra khâu cần sửa từ điểm thấp",
+        "Tính tay Hit Rate@k và MRR từ danh sách truy xuất có nhãn"
+      ]
+    },
+    {
+      "ten": "Tự xây benchmark và giới hạn của benchmark công khai",
+      "kien_thuc": [
+        "Golden set là căn cứ đúng sai: cặp hỏi–đáp được chuyên gia xem lại, phủ các use case chính, chia mức dễ, trung bình, khó. Phải đủ lớn: bộ 20 câu cho khoảng tin cậy rộng đến mức chênh 3% chỉ là nhiễu.",
+        "Chủ động đưa vào case biên: câu mơ hồ, ngoài phạm vi, cố tình gây lỗi, trộn ngôn ngữ, context dài. Lấy mẫu theo tỉ lệ thật của use case và độ khó; báo điểm theo lát cắt vì trung bình đẹp có thể che lát hỏng.",
+        "Sinh câu hỏi tổng hợp thì dễ, lọc mới là sản phẩm thật. Model sinh, model kiểm tra, model chấm phải khác nhau, nếu không điểm bị thổi phồng; giữ riêng một phần không công khai để tránh lộ đáp án.",
+        "Benchmark công khai như MMLU, HumanEval đã bão hoà (model hàng đầu đều trên 90%) và bị nhiễm bẩn vì câu hỏi lọt vào dữ liệu huấn luyện. Khi con số thành mục tiêu, nó hết là thước đo tốt (Goodhart)."
+      ],
+      "ky_nang": [
+        "Thiết kế golden set đủ lớn, có mức khó, case biên và lấy mẫu theo tỉ lệ",
+        "Tách model sinh, model kiểm tra, model chấm khi dùng dữ liệu tổng hợp",
+        "Giải thích vì sao benchmark công khai không thay được bộ dữ liệu riêng"
+      ]
+    },
+    {
+      "ten": "LLM-as-judge: rubric, thiên vị và đồng thuận",
+      "kien_thuc": [
+        "Pointwise chấm mỗi câu trả lời một điểm tuyệt đối theo rubric: ổn định, dễ đặt ngưỡng phát hành. Pairwise chọn câu tốt hơn: sát sở thích người hơn, nhưng đổi thứ tự có thể đảo kết quả khoảng 1/3 số lần.",
+        "Ba thiên vị đã được đo: vị trí (ưu tiên câu đứng trước), độ dài (chọn câu dài hơn dù không đúng hơn), cùng họ (ưu tiên output của model cùng nhà phát triển). Judge chưa hiệu chỉnh chỉ là một ý kiến.",
+        "Năm cách khắc phục: đảo thứ tự rồi lấy trung bình; bắt judge lý luận trước khi chấm; chấm riêng từng tiêu chí (độ dài không phải tiêu chí); hiệu chỉnh với người trên tập có nhãn; dùng nhiều judge khác họ.",
+        "Đo đồng thuận judge–người bằng Kappa, không bằng tỉ lệ đồng ý thô, vì Kappa loại phần trùng do may rủi. Nhiều judge rẻ khác họ biểu quyết sát người hơn một judge đơn lẻ; bất đồng mới gọi judge mạnh phân xử."
+      ],
+      "ky_nang": [
+        "Viết rubric có tiêu chí rõ cho từng mức điểm, chọn pointwise hay pairwise theo mục đích",
+        "Chỉ ra thiên vị trong một cặp kết quả chấm và chọn cách khắc phục",
+        "Đọc hệ số Kappa để đánh giá judge có đáng tin không"
+      ]
+    },
+    {
+      "ten": "Đánh giá agent nhiều bước và ý nghĩa thống kê",
+      "kien_thuc": [
+        "Outcome eval hỏi trạng thái cuối có đúng không (vé đã đặt có thật trong cơ sở dữ liệu); trajectory eval hỏi chuỗi bước có hợp lý không (đúng tool, đúng tham số). Ưu tiên outcome; đọc trajectory khi outcome sai.",
+        "Temperature bằng 0 không cho kết quả cố định: 5–12% câu hỏi vẫn đổi câu trả lời giữa các lần chạy. Agent đúng 90% mỗi lần chỉ còn khoảng 57% nếu phải đúng cả 8 lần liên tiếp.",
+        "Bản A đạt 78%, bản B đạt 81% trên cùng 50 câu: khoảng tin cậy 95% của hai bản chồng lấp nhiều, nên chênh 3 điểm là nhiễu, chưa đủ bằng chứng để nói B tốt hơn.",
+        "So theo cặp trên cùng bộ câu hỏi loại được độ khó của từng câu, giảm phương sai. Nhưng muốn chắc một chênh 3% tuyệt đối vẫn cần gần 1.000 câu; với 50 câu, hãy báo khoảng tin cậy và điều chưa kết luận được."
+      ],
+      "ky_nang": [
+        "Chấm outcome trước, đọc trajectory để tìm vì sao sai",
+        "Chạy mỗi cấu hình nhiều lần, báo cả trung bình lẫn độ lệch",
+        "Đọc khoảng tin cậy để biết chênh lệch là thật hay nhiễu, ước lượng thô cỡ mẫu cần thiết"
+      ]
+    },
+    {
+      "ten": "Taxonomy lỗi và cổng đánh giá trong CI/CD",
+      "kien_thuc": [
+        "Taxonomy lỗi dựng từ dưới lên: đọc lỗi thật, gán nhãn mở bằng lời của mình → gom thành danh mục hẹp, viết được thành phép kiểm tra đạt/không đạt → đếm tần suất → dừng khi không còn danh mục mới (bão hoà).",
+        "Lỗi thường dồn vào vài cụm lớn; sửa gốc cụm lớn nhất lợi hơn vá lỗi lẻ. 5 Whys truy về đúng khâu: nạp dữ liệu, chunking, truy xuất hay prompt. Gốc ở nạp dữ liệu mà vá bằng prompt thì prompt chỉ phình to.",
+        "Cổng đánh giá chạy sau mỗi thay đổi code hoặc prompt, so với baseline, xét cả mức chênh lẫn ý nghĩa thống kê theo từng nhóm câu hỏi. Ghim judge và phiên bản rubric, kẻo đổi judge bị nhầm là agent tụt.",
+        "Giảm chi phí chấm: cache phần prompt cố định, chạy lô việc không gấp, judge nhẹ hằng ngày, judge mạnh trước phát hành. Chọn công cụ theo mục đích: RAGAS (metric RAG), DeepEval (kiểu pytest), TruLens (giám sát)."
+      ],
+      "ky_nang": [
+        "Gán nhãn mở và gom lỗi thành danh mục hẹp có thể viết thành phép kiểm tra",
+        "Truy một lỗi về đúng khâu bằng 5 Whys, nhận ra khi nào chỉ đang vá triệu chứng",
+        "Đặt cổng đánh giá vào luồng commit → phát hành với ngưỡng chênh lệch và ý nghĩa thống kê"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 14: hệ thống đánh giá tự động cho agent",
+    "tom_tat": "Xây golden set có nhãn tài liệu đúng, cài năm metric kiểu RAGAS cho câu trả lời và khâu truy xuất, viết rubric LLM-as-judge và tìm thiên vị, rồi dựng cổng phát hành so bản mới với bản cũ trên cùng bộ dữ liệu.",
+    "dau_ra": "Pipeline đánh giá tự động đến quyết định phát hành, kèm báo cáo phân tích lỗi truy nguyên nhân gốc cho ít nhất 3 case tệ nhất"
+  },
+  "lien_quan": [
+    {
+      "ngay": 8,
+      "ghi_chu": "ba trục đo RAG ở mức đọc bảng điểm, nay đi vào công thức RAGAS"
+    },
+    {
+      "ngay": 12,
+      "ghi_chu": "dựng pipeline CI/CD, nơi đặt cổng đánh giá"
+    },
+    {
+      "ngay": 13,
+      "ghi_chu": "đánh giá online trên lưu lượng thật, bổ sung cho cổng offline trước phát hành"
+    }
+  ]
+}

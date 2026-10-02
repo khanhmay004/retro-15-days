@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 1 · AI &amp; LLM Foundation · Retro 15 ngày</title>
+<meta name="description" content="Bạn dùng AI mỗi ngày — nhưng bên trong nó đang làm gì?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 1 · AI &amp; LLM Foundation · Retro 15 ngày">
+<meta property="og:description" content="Bạn dùng AI mỗi ngày — nhưng bên trong nó đang làm gì?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-01">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-1" data-prev="/" data-next="/ngay/ngay-02">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1 on" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API" aria-current="page">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 01 · Cột mốc 1 · Nền móng</p>
+  <h1>AI &amp; LLM Foundation</h1>
+  <blockquote class="q">Bạn dùng AI mỗi ngày — nhưng bên trong nó đang làm gì?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Hiểu LLM sinh văn bản thế nào và vì sao nó vừa hiểu được context vừa có thể sai; biết model được huấn luyện ra sao và giới hạn ở đâu; chọn được model theo việc, ước tính được chi phí, và tự gọi API lần đầu.</p>
+  <p class="chips"><span class="chip">token</span><span class="chip">attention</span><span class="chip">context window</span><span class="chip">temperature</span><span class="chip">RLHF</span><span class="chip">chi phí API</span><span class="chip">streaming</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>LLM là Transformer dự đoán token tiếp theo từ context, nên có lúc bịa (hallucination)</li><li>Chọn model theo ba trục: chất lượng, độ trễ, chi phí</li><li>Output token đắt hơn input 3–5 lần; tiếng Việt tốn token hơn tiếng Anh</li><li>Vibe coding tốt = intent rõ + context đủ + review kỹ</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>AI là gì, và vì sao mất 70 năm</a><a href="#m2"><span>2</span>Cách LLM sinh văn bản và hiểu ngữ cảnh</a><a href="#m3"><span>3</span>Huấn luyện và giới hạn của model</a><a href="#m4"><span>4</span>Từ LLM đến Agent, và bản đồ thị trường</a><a href="#m5"><span>5</span>Chọn model, ước tính chi phí, gọi API</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">AI là gì, và vì sao mất 70 năm</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Các khái niệm lồng nhau: AI ⊃ machine learning ⊃ deep learning ⊃ generative AI ⊃ LLM. Generative AI rộng hơn LLM: Midjourney sinh ảnh nhưng không phải LLM.</li><li>Ba nhóm ứng dụng: discriminative (phân loại, như lọc thư rác), generative (sinh nội dung) và agentic (tự hành động). Chương trình tập trung vào agentic AI.</li><li>AI từng thất bại hai lần (1950–1993) không phải vì ý tưởng sai, mà vì thiếu dữ liệu và năng lực tính toán.</li><li>AI bùng nổ giai đoạn 2012–2022 nhờ ba yếu tố hội tụ: dữ liệu lớn (ImageNet), GPU, và Transformer (2017) thay cho RNN vốn xử lý tuần tự, khó giữ context dài.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Xếp một sản phẩm AI bất kỳ vào đúng tầng khái niệm</li><li>Giải thích Transformer giải quyết hạn chế gì của RNN</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Cách LLM sinh văn bản và hiểu ngữ cảnh</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>LLM chỉ làm một việc: dự đoán token tiếp theo. Đầu ra là phân bố xác suất trên toàn bộ từ vựng; model chọn một token, nối vào, rồi lặp lại. Chatbot là lớp ứng dụng bọc bên ngoài model.</li><li>Token là đơn vị xử lý và cũng là đơn vị tính tiền. Cùng một nội dung, tiếng Việt tốn nhiều token hơn tiếng Anh.</li><li>Context window là lượng thông tin model xử lý trong một lần: 128K token tương đương khoảng 300 trang.</li><li>Attention: mỗi token đánh giá mức liên quan với mọi token trước nó, nên model biết “nó” trong “Lan bỏ quyển sách vào túi vì nó quá dày” là quyển sách. Multi-head attention là nhiều góc nhìn chạy song song.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Mô tả vòng lặp sinh văn bản từng token</li><li>Quy đổi context window ra số trang, ước lượng token cho văn bản tiếng Việt</li><li>Giải thích vì sao attention hiểu context tốt hơn cách chỉ nhìn vài từ gần nhất</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Huấn luyện và giới hạn của model</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Ba giai đoạn huấn luyện: pre-training trên khối văn bản lớn → supervised fine-tuning bằng ví dụ mẫu → RLHF. Reward model học từ xếp hạng của người đánh giá, không phải người sửa từng câu trả lời.</li><li>Ba giới hạn cố hữu: kiến thức dừng ở thời điểm huấn luyện, trả lời tự tin cả khi sai, context có giới hạn. Model còn hay bám tương quan bề mặt và chiều theo người dùng.</li><li>Top-k và top-p giới hạn tập token ứng viên; temperature chỉnh mức ngẫu nhiên khi chọn trong tập đó. Temperature không phải “độ sáng tạo”.</li><li>Đưa thông tin vào context: đặt yêu cầu quan trọng ở đầu hoặc cuối vì phần giữa dễ bị bỏ sót (lost in the middle), giữ context gọn, trích đoạn liên quan thay vì cả tài liệu. Đây là nền của RAG.</li><li>Bốn cách dùng LLM theo mức kiểm soát tăng dần: ứng dụng chat, trợ lý lập trình, API, tự triển khai.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân biệt ba giai đoạn huấn luyện và nói được reward model học từ đâu</li><li>Chỉnh temperature, top-p, top-k theo mục đích và đoán trước tác động</li><li>Sắp xếp thông tin trong prompt dài để model không bỏ sót</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Từ LLM đến Agent, và bản đồ thị trường</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Agent không phải một loại model khác, mà là LLM đặt trong vòng lặp: mục tiêu → lập luận → gọi tool → quan sát → hành động.</li><li>Năm thành phần bọc quanh LLM: context, tools, memory, guardrails, evaluation. Evaluation quyết định phần lớn thành công của sản phẩm.</li><li>Chain-of-thought (cho model lập luận từng bước) làm câu trả lời chính xác hơn.</li><li>Ba xu hướng thị trường: chi phí giảm khoảng 10 lần mỗi năm, model mở và model đóng hội tụ năng lực, trọng tâm dời từ model sang thiết kế hệ thống. Transformer không đổi từ 2017; tiến bộ đến từ cách huấn luyện.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Giải thích agent khác chatbot ở đâu</li><li>Chỉ ra tác vụ hỏng ở đâu khi thiếu từng thành phần context, tools, memory, guardrails</li><li>Tìm một chỗ trong công việc của mình có thể dùng AI</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Chọn model, ước tính chi phí, gọi API</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Chọn model theo ba tầng thay vì theo tên: tầng cao nhất, tầng cân bằng (mặc định), tầng tự triển khai. Benchmark chỉ để tham khảo; thử trên chính dữ liệu của mình mới đáng tin.</li><li>Token đầu ra đắt gấp 3–5 lần token đầu vào. Hội thoại càng dài, mỗi lượt càng đắt vì lịch sử bị gửi lại.</li><li>Một lần gọi API: request gồm model, messages, max_tokens, temperature; response gồm content, finish_reason, usage. Prompt có bốn lớp: system, user, context, định dạng đầu ra.</li><li>Model không nhớ gì giữa hai lần gọi: ứng dụng chat tự giữ lịch sử và gửi lại mỗi lượt. Streaming trả kết quả về từng token.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Ước tính chi phí một lượt gọi và chi phí theo tháng</li><li>Đọc request, response và trường usage của một lần gọi API</li><li>Giải thích vì sao model không “nhớ” giữa hai lần gọi</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 1: gọi API và đo chi phí</h2>
+  <p>Gọi API của ba nhà cung cấp, thử temperature, top_p, max_tokens, so sánh đầu ra giữa các model trên cùng prompt, đo độ trễ và chi phí mỗi lần gọi.</p>
+  <p class="out"><span>Đầu ra</span>Script gọi API chạy được và một ứng dụng chat đơn giản có streaming</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Một lượt chat trong app của bạn tốn bao nhiêu token, và bao nhiêu tiền?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-1" href="/ngay/ngay-03"><strong>Ngày 3 · ReAct agent</strong><span>vòng lặp agent thành ReAct</span></a><a class="rel cm-1" href="/ngay/ngay-04"><strong>Ngày 4 · Prompt &amp; tool</strong><span>áp dụng temperature và lost in the middle khi viết prompt</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/"><span>← Trang chủ</span><strong>Hành trình 15 ngày</strong></a><a class="pn-a next" href="/ngay/ngay-02" rel="next"><span>Ngày 2 →</span><strong>Đóng khung bài toán</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

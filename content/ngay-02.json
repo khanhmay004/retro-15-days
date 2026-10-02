@@ -1,0 +1,123 @@
+{
+  "ngay": 2,
+  "ten": "Xác định bài toán cho AI",
+  "ten_ngan": "Đóng khung bài toán",
+  "cot_moc": 1,
+  "cau_hoi": "Trước khi chọn Rule, Workflow hay Agent — bạn đã chắc mình đang giải đúng bài toán chưa?",
+  "muc_tieu": "Tách bài toán khỏi giải pháp, hỏi trước khi đề xuất công nghệ; định lượng điểm đau; thẩm định AI có đáng làm, automate hay augment, Rule, Workflow hay Agent; định nghĩa đúng, sai và xử lý khi AI sai; viết Problem Statement chín trường rồi quyết định Go, Not Yet hay No-Go.",
+  "tu_khoa": [
+    "Problem Statement",
+    "Double Diamond",
+    "định lượng hoá",
+    "automate / augment",
+    "Rule / Workflow / Agent",
+    "precision / recall",
+    "Go / Not Yet / No-Go"
+  ],
+  "bai_hoc": [
+    "Brief mơ hồ không thay thế được Problem Statement",
+    "Pain point phải lượng hoá: baseline → target → cách đo",
+    "Rule, Workflow hay Agent? Phức tạp không đồng nghĩa hiệu quả",
+    "Go / Not Yet / No-Go quyết định bằng lập luận và số liệu kiểm thử"
+  ],
+  "tu_soi": "Problem Statement của nhóm bạn có baseline bằng con số không?",
+  "module": [
+    {
+      "ten": "Nhìn thấy giải pháp trước khi thấy bài toán",
+      "kien_thuc": [
+        "“Chatbot AI” chỉ là hình hài giải pháp, chưa phải bài toán. Trước khi đề xuất, hỏi: người dùng khó ở công đoạn nào, ai quá tải ở bước nào, quy trình hiện tại ra sao, giải pháp phục vụ ai.",
+        "Double Diamond: kim cương thứ nhất mở rộng khảo sát rồi thu hẹp về bài toán gốc; kim cương thứ hai mở rộng tìm giải pháp rồi thu hẹp để chọn và triển khai.",
+        "Giải pháp xuất sắc cho sai bài toán tốn hơn giải pháp tồi cho đúng bài toán. Khó nhận ra mình sai bài toán vì chi phí chìm, neo vào đích ban đầu và ảo tưởng đã hiểu đúng.",
+        "Bốn kỹ thuật ở kim cương thứ nhất: quan sát, phỏng vấn, khảo sát, phân tích dữ liệu vận hành. Quan sát trực tiếp hay lộ ra điểm nghẽn người trong cuộc không kể, vì nó đã thành phản xạ."
+      ],
+      "ky_nang": [
+        "Đặt ít nhất 2 câu hỏi làm rõ trước khi đề xuất giải pháp",
+        "Tách một yêu cầu mơ hồ thành các bài toán con theo đối tượng phục vụ",
+        "Giải thích bằng ví dụ vì sao sai bài toán tốn hơn sai giải pháp"
+      ]
+    },
+    {
+      "ten": "Problem Statement và định lượng hoá",
+      "kien_thuc": [
+        "Quick Problem Card có sáu trường: bài toán một câu không chứa giải pháp, đối tượng chịu ảnh hưởng, quy trình hiện tại 3–7 bước, nút thắt và tác động, chỉ số thành công, hướng giải pháp chưa chốt.",
+        "Định lượng điểm đau: hiện trạng bằng con số → mục tiêu ở ngưỡng rõ → cách đo và nguồn dữ liệu. “Nâng cao hiệu suất” chưa phải chỉ số; chưa định lượng thì không đánh giá được cải tiến nào.",
+        "Chỉ số đầu ra là kết quả cuối cần tối ưu; chỉ số đầu vào là đòn bẩy tác động lên nó. Bẫy hay gặp: lượt tương tác (đầu vào) tăng nhưng mức hài lòng thật (đầu ra) không đổi."
+      ],
+      "ky_nang": [
+        "Điền đủ sáu trường Problem Card cho một tình huống",
+        "Xác định hiện trạng, mục tiêu và cách đo cho một điểm đau cụ thể",
+        "Phân biệt chỉ số đầu ra với chỉ số đầu vào và chọn đúng loại"
+      ]
+    },
+    {
+      "ten": "AI có thật sự đáng làm?",
+      "kien_thuc": [
+        "Ba bước thẩm định: AI có làm tốt hơn hẳn quy tắc tĩnh không → AI làm thay hay hỗ trợ, ở cấp độ nào → thế nào là câu trả lời “đúng” và ngưỡng thành công đo được.",
+        "AI có lợi thế khi cần cá nhân hoá, dự đoán, hiểu ngôn ngữ tự nhiên, phát hiện cái hiếm; không hơn khi cần kết quả dễ đoán, thông tin ít thay đổi, lỗi quá đắt, cần minh bạch tuyệt đối hoặc vận hành đơn giản.",
+        "Giải pháp AI gồm bốn thành phần: model, context (tri thức chuyên biệt), planning (phân rã tác vụ), tools (nối hệ thống ngoài). Phần lớn chất lượng đến từ ba thành phần ngoài model.",
+        "Automate (AI làm thay) hợp khi việc khó hoặc nhàm và có đáp án đúng được đồng thuận; augment (AI hỗ trợ) hợp khi người dùng muốn tự làm, rủi ro cao hoặc cần trách nhiệm cá nhân. Chọn theo từng tác vụ."
+      ],
+      "ky_nang": [
+        "Đi qua ba bước thẩm định cho một đề xuất AI cụ thể",
+        "Xếp một bài toán vào nhóm AI có lợi thế hay không",
+        "Chọn automate hay augment cho từng tác vụ và nêu lý do"
+      ]
+    },
+    {
+      "ten": "Rule, Workflow hay Agent",
+      "kien_thuc": [
+        "Rule: đầu vào ổn định, logic nếu-thì, cần đúng tuyệt đối. Workflow: đầu vào đa dạng, đầu ra linh hoạt (tóm tắt, phân loại), đo được chất lượng. Agent: nhiều bước, nhiều tool, tình huống đổi liên tục.",
+        "Workflow đi theo lộ trình người thiết kế định trước; Agent để model tự điều phối lộ trình và tool. Chỉ lên cấp khi giá trị tăng thêm vượt chi phí phức tạp tăng thêm.",
+        "Chọn sai cấp đều trả giá: quá đơn giản thì bỏ sót ca cần linh hoạt, quá phức tạp thì tốn chi phí và độ trễ. Logic nếu-thì rành mạch thì quy tắc tĩnh giải triệt để, ít rủi ro hơn AI.",
+        "Thang 5 câu hỏi: tần suất và tác động đủ lớn? logic rành mạch? quy trình cố định? cần tự thích ứng? giá trị vượt chi phí và rủi ro? Mỗi lần trả lời “không” là tránh được một tầng phức tạp."
+      ],
+      "ky_nang": [
+        "Chọn Rule, Workflow hay Agent cho từng dạng yêu cầu và giải thích lý do",
+        "Dùng thang 5 câu hỏi để chọn cấp độ cho một tình huống mới"
+      ]
+    },
+    {
+      "ten": "Định nghĩa đúng/sai và khi AI thất bại",
+      "kien_thuc": [
+        "Reward function là công thức quyết định thế nào là đúng, sai, nên định hình trực tiếp trải nghiệm người dùng. Bốn kết quả: đúng-tích cực, đúng-tiêu cực, false positive (báo nhầm), false negative (bỏ sót).",
+        "Báo nhầm và bỏ sót có chi phí không đối xứng. Precision cao: ít gợi ý, gần như chắc đúng, nhưng bỏ sót nhiều; recall cao: bao gần hết, nhưng báo nhầm nhiều. Không có ngưỡng đúng cho mọi bài toán.",
+        "Tiêu chí thành công theo mẫu nếu-thì: tỷ lệ gợi ý bị người duyệt sửa vượt ngưỡng thì hạ mức tự động hoá. Trước khi chốt, hỏi: có ý nghĩa với mọi người dùng, nhóm nào bị thiệt, còn đúng khi lên quy mô?",
+        "Ba loại lỗi: sai bối cảnh, không trả lời được, lỗi ngầm không ai nhận ra (nguy hiểm nhất). Bốn cách xử lý: làm rõ ý định, minh bạch nguồn, phê duyệt thủ công trước tác vụ rủi ro cao, giới hạn phạm vi tự chủ."
+      ],
+      "ky_nang": [
+        "Chọn ưu tiên precision hay recall cho một tình huống và giải thích đánh đổi",
+        "Viết một tiêu chí thành công theo mẫu nếu-thì",
+        "Xếp một lỗi AI vào đúng loại và chọn cách xử lý phù hợp"
+      ]
+    },
+    {
+      "ten": "Problem Statement hoàn chỉnh và quyết định",
+      "kien_thuc": [
+        "Problem Statement chín trường: sáu trường về bài toán (đối tượng, quy trình, nút thắt, tác động, chỉ số, ranh giới) và ba trường về AI (điểm can thiệp, cấp Rule/Workflow/Agent, rủi ro và điểm người duyệt).",
+        "5 câu hỏi gate: có thật cần xử lý ngôn ngữ hay suy luận, dữ liệu đầu vào đủ context, đã có chỉ số định lượng, hậu quả khi AI sai có kiểm soát được, có cách đơn giản hơn AI không.",
+        "Go khi bài toán rõ, rủi ro kiểm soát được; Not Yet khi có triển vọng nhưng cần thêm dữ liệu hoặc chuẩn hoá quy trình; No-Go khi AI không vượt trội hoặc rủi ro quá cao. Not Yet không phải thất bại.",
+        "Hai Problem Statement chỉ khác ở vài trường then chốt, như chỉ số định lượng hay ranh giới, có thể cho kết luận gate khác hẳn nhau."
+      ],
+      "ky_nang": [
+        "Điền đủ chín trường Problem Statement cho một tình huống",
+        "Áp 5 câu hỏi gate để quyết định Go, Not Yet hay No-Go",
+        "Chỉ ra trường nào của Problem Statement làm kết quả gate thay đổi"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 2: từ bài toán quét được đến quyết định Go, Not Yet hay No-Go",
+    "tom_tat": "Quét ít nhất năm bài toán từ trải nghiệm thật, viết ba Problem Card, cùng nhóm phản biện chéo và chốt một bài toán, vẽ workflow trước và sau cải tiến, rồi viết Problem Statement chín trường và ra quyết định có lý do.",
+    "dau_ra": "Problem Statement chín trường của nhóm kèm quyết định Go, Not Yet hay No-Go, bản quét bài toán và phản tư cá nhân"
+  },
+  "lien_quan": [
+    {
+      "ngay": 3,
+      "ghi_chu": "Agentic Fit chấm chi tiết khi nào bài toán thật sự cần agent"
+    },
+    {
+      "ngay": 5,
+      "ghi_chu": "áp Double Diamond, precision và recall vào quyết định sản phẩm"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 4 · Prompt Engineering &amp; Tool Calling · Retro 15 ngày</title>
+<meta name="description" content="Cùng một model — vì sao prompt của người này cho kết quả xuất sắc, của người kia thì không dùng được, và agent lúc gọi đúng tool lúc gọi sai?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 4 · Prompt Engineering &amp; Tool Calling · Retro 15 ngày">
+<meta property="og:description" content="Cùng một model — vì sao prompt của người này cho kết quả xuất sắc, của người kia thì không dùng được, và agent lúc gọi đúng tool lúc gọi sai?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-04">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-1" data-prev="/ngay/ngay-03" data-next="/ngay/ngay-05">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1 on" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool" aria-current="page">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 04 · Cột mốc 1 · Nền móng</p>
+  <h1>Prompt Engineering &amp; Tool Calling</h1>
+  <blockquote class="q">Cùng một model — vì sao prompt của người này cho kết quả xuất sắc, của người kia thì không dùng được, và agent lúc gọi đúng tool lúc gọi sai?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Viết prompt theo Role, Task, Context, Format; biết khi nào cần few-shot và chain-of-thought; viết system prompt chuẩn production cho agent; khai báo tool schema và nắm vòng tool calling từ model đến tool rồi về model; nhận diện prompt injection và phòng cơ bản; xây một agent hoàn chỉnh.</p>
+  <p class="chips"><span class="chip">system prompt</span><span class="chip">few-shot</span><span class="chip">chain-of-thought</span><span class="chip">thẻ XML</span><span class="chip">lost in the middle</span><span class="chip">prompt injection</span><span class="chip">tool schema</span><span class="chip">tool description</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>System prompt 5 phần: Persona, Rules, Capabilities, Constraints, Output format</li><li>Tool description quyết định model chọn đúng tool và đúng tham số</li><li>Context có 5 “rổ” token; thông tin ở giữa dễ bị quên (Lost in the Middle)</li><li>Prompt safety là bắt buộc cho production, không phải “nice to have”</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Nền tảng viết prompt</a><a href="#m2"><span>2</span>Kỹ thuật prompt nâng cao</a><a href="#m3"><span>3</span>System prompt production-grade</a><a href="#m4"><span>4</span>Quản lý context</a><a href="#m5"><span>5</span>An toàn và đánh giá prompt</a><a href="#m6"><span>6</span>Tool calling và thiết kế tool</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Nền tảng viết prompt</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Prompt tốt tạo hành vi ổn định, lặp lại được, không phải nghe hay. Khung bốn phần: Role, Task, Context, Format. Bắt đầu từ Task (việc cần làm) và Format (đầu ra); chỉ thêm Role, Context khi thật cần.</li><li>Ba loại prompt: instruction (một tác vụ), conversation (giữ mạch nhiều lượt), system prompt (policy và ràng buộc cho cả phiên). Nói rõ nên làm gì thay thế hiệu quả hơn chỉ nói “đừng”.</li><li>Temperature (Ngày 1) làm phân bố xác suất phẳng hay nhọn hơn trước khi chọn token; ở 0, model luôn lấy token cao nhất nên top-p, top-k vô tác dụng. Gần 0 cho tác vụ cần nhất quán, cao hơn cho brainstorm.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết prompt đủ Role, Task, Context, Format và tự tìm trường hợp biên còn sót</li><li>Viết lại một câu “đừng” thành hướng dẫn có hành vi thay thế</li><li>Chọn temperature, top-p phù hợp cho một tác vụ cụ thể</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Kỹ thuật prompt nâng cao</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Few-shot đưa vài ví dụ mẫu vào prompt để model theo khuôn; 3–5 ví dụ đa dạng thường đủ, ví dụ một chiều gây thiên lệch. Dễ sai khi lẫn input với output, hoặc ví dụ đúng định dạng nhưng khác loại tình huống.</li><li>Chain-of-thought yêu cầu model trình bày từng bước trước khi trả lời, giúp bài toán nhiều bước chính xác hơn. Model suy luận hiện nay tự làm một phần việc này, nên với tác vụ đơn giản có thể thừa.</li><li>Mô tả đích đến, không mô tả lộ trình: lộ trình có thể kéo model vào hướng giải quen thuộc thay vì hướng tốt nhất. Thinking budget là số token cho suy luận nội bộ, không phải bộ tham số (parameters) của model.</li><li>Bọc từng phần prompt (hướng dẫn, dữ liệu người dùng, tài liệu) trong thẻ như XML để model phân biệt đâu là chỉ dẫn, đâu là nội dung cần xử lý. Model nhận diện cấu trúc thẻ tốt vì gặp nhiều khi huấn luyện.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn ví dụ few-shot đúng loại tình huống và tách rõ input, output</li><li>Quyết định khi nào cần yêu cầu model lập luận từng bước</li><li>Viết prompt có thẻ cấu trúc tách chỉ dẫn khỏi dữ liệu</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">System prompt production-grade</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>System prompt đầy đủ có năm phần: persona, rules, capabilities, constraints, output contract (định dạng đầu ra cam kết). Vụ chatbot hứa hoàn tiền sai chính sách cho thấy constraints là bắt buộc.</li><li>Ba lỗi phổ biến: mơ hồ (đòi “thông minh hơn” mà không nói hành vi cụ thể), mâu thuẫn (vừa đòi ngắn gọn vừa đòi giải thích từng bước), quá tải (quá nhiều quy tắc tự triệt tiêu nhau).</li><li>Test system prompt bằng nhiều lượt hỏi khác nhau, không chỉ một lần chạy: độ ổn định qua nhiều lần thử mới đáng tin, một kết quả đẹp thì chưa.</li><li>Gặp câu không biết hoặc ngoài phạm vi, agent từ chối có ích: nói rõ không có thông tin, gợi ý bước tiếp, hoặc chuyển người phụ trách. Việc có hậu quả thật như xác nhận giao dịch tài chính phải qua con người.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết system prompt đủ năm phần cho một agent cụ thể</li><li>Tìm lỗi mơ hồ, mâu thuẫn, quá tải trong một system prompt có sẵn</li><li>Viết điều khoản từ chối và điều kiện chuyển cho người</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Quản lý context</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Trong một lần gọi, chỉ system prompt là cố định; lịch sử hội thoại, dữ liệu đưa vào, danh sách tool và đầu ra thay đổi theo từng lượt, và tất cả cùng chiếm chỗ trong context window.</li><li>Lost in the middle (Ngày 1) áp vào prompt dài: thông tin ở giữa dễ bị bỏ sót hơn ở đầu hoặc cuối, nên đặt yêu cầu quan trọng ở hai đầu. Phiên dài bắt đầu trả lời kém thì nên mở phiên mới.</li><li>Chatbot “nhớ” vì ứng dụng gửi lại lịch sử hoặc bản tóm tắt mỗi lượt. Hội thoại dài thì nén phần cũ thành tóm tắt để context không phình và đỡ tốn; nén tốt là bỏ đúng phần thừa, không cắt ngẫu nhiên.</li><li>Memory injection: nếu hệ thống tự lưu chi tiết cá nhân người dùng kể trong lúc trò chuyện, chi tiết đó có thể xuất hiện lại không đúng lúc ở một lượt hội thoại khác.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Đặt yêu cầu quan trọng đúng chỗ trong một prompt dài</li><li>Giải thích chatbot “nhớ” bằng cách nào và nhận diện rủi ro memory injection</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">An toàn và đánh giá prompt</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Prompt injection: chỉ dẫn giả lẫn trong nội dung agent xử lý khiến nó làm theo. Trực tiếp: người dùng bảo model bỏ qua chỉ dẫn. Gián tiếp, nguy hiểm hơn: giấu trong trang web, tài liệu, email agent đọc.</li><li>Không lớp nào chặn hết injection nên xếp chồng nhiều lớp: tách nội dung tin cậy và chưa tin cậy bằng thẻ, cấp quyền tool tối thiểu, coi mọi nội dung không do người vận hành viết là chưa đáng tin.</li><li>Vượt được system prompt hay không tuỳ cả cách viết lẫn model; không có gì tuyệt đối an toàn hay tuyệt đối bị phá. Hệ thống càng nhanh, càng tự động thì càng cần kiểm soát tốt, như xe nhanh cần phanh tốt.</li><li>Prompt tốt hôm nay có thể lệch khi model, dữ liệu hay prompt đổi. Đánh giá bằng bộ câu test cố định qua các phiên bản (độ đúng, độ ổn định, an toàn); lưu từng phiên bản prompt kèm kết quả.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân biệt injection trực tiếp và gián tiếp, nhận ra chỉ dẫn giả trong nội dung agent đọc</li><li>Áp ít nhất hai lớp phòng thủ cơ bản cho một agent cụ thể</li><li>Thiết kế bộ câu test để so sánh hai phiên bản prompt</li></ul></div>
+  </div>
+</section><section class="mod" id="m6" aria-labelledby="m6-h">
+  <div class="mod-h"><span class="mod-n">06</span><h2 id="m6-h">Tool calling và thiết kế tool</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Model không tự chạy tool: nó trả về yêu cầu có cấu trúc (tên tool, tham số), ứng dụng thực thi rồi gửi kết quả lại cho model. tool_choice cho phép bắt buộc, tuỳ model hoặc tắt gọi tool; câu chào không cần tool.</li><li>Model chọn tool theo tên và description, không theo code bên trong, nên description là một phần của prompt. Mô tả tốt nêu: làm gì, khi nào dùng, khi nào không; tránh hai tool chồng phạm vi.</li><li>Tool lỗi (dịch vụ không phản hồi, sai định dạng, vượt giới hạn lượt gọi) thì trả lỗi rõ để model tự sửa: “không tìm thấy thành phố” tốt hơn “gặp lỗi”. Tool chính không phản hồi thì cần phương án dự phòng.</li><li>Tool tốt trả kết quả nhất quán về định dạng. Granularity (độ chi tiết) vừa phải: quá nhỏ thì gọi nhiều lần cho một việc, quá to thì khó chọn đúng thao tác. Trả về gọn, có cấu trúc, không đổ dữ liệu thô.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Mô tả vai trò của model và của ứng dụng ở từng bước tool calling</li><li>Viết tool schema có description đủ ba phần và phân biệt tham số bắt buộc, tuỳ chọn</li><li>Thiết kế thông báo lỗi giúp model tự sửa và chọn granularity hợp lý cho tool</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 4: agent đầu tiên với system prompt, hai tool và 5 câu test</h2>
+  <p>Viết system prompt production-grade, khai báo hai tool (một gọi API bên ngoài, một truy vấn dữ liệu có sẵn) rồi nối vào vòng lặp agent; 5 câu test kiểm tra agent biết khi nào trả lời thẳng, khi nào gọi tool, khi nào từ chối.</p>
+  <p class="out"><span>Đầu ra</span>Agent chạy được với system prompt, hai tool, 5 câu test và ghi chú phân loại lỗi: do prompt, tool schema hay luồng điều khiển</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Tool description nào của bạn từng khiến agent gọi sai tool?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-1" href="/ngay/ngay-01"><strong>Ngày 1 · Gọi LLM API</strong><span>temperature, top-p và lost in the middle được giới thiệu lần đầu</span></a><a class="rel cm-1" href="/ngay/ngay-03"><strong>Ngày 3 · ReAct agent</strong><span>vòng lặp ReAct mà bước tool calling nằm bên trong</span></a><a class="rel cm-4" href="/ngay/ngay-11"><strong>Ngày 11 · Guardrails</strong><span>đi sâu các kiểu tấn công, tầng phòng thủ và HITL</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-03" rel="prev"><span>← Ngày 3</span><strong>ReAct agent</strong></a><a class="pn-a next" href="/ngay/ngay-05" rel="next"><span>Ngày 5 →</span><strong>Uncertainty &amp; Thin SPEC</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

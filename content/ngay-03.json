@@ -1,0 +1,129 @@
+{
+  "ngay": 3,
+  "ten": "Từ chatbot đến agentic agent",
+  "ten_ngan": "ReAct agent",
+  "cot_moc": 1,
+  "cau_hoi": "Cái gì biến chatbot thành agent?",
+  "muc_tieu": "Phân biệt bốn mức hệ thống AI, từ luật cố định đến agent tự chủ; dùng Agentic Fit để quyết định có cần agent; giải thích vòng lặp ReAct, phân biệt nó với function calling; nâng cấp một chatbot thành ReAct agent có tool, có trace và so sánh hai hệ thống.",
+  "tu_khoa": [
+    "Agentic Fit",
+    "ReAct",
+    "trace",
+    "tool",
+    "MCP",
+    "function calling",
+    "vòng lặp chịu lỗi"
+  ],
+  "bai_hoc": [
+    "Agent = LLM + reasoning + tools + memory, không phải “chatbot thông minh hơn”",
+    "ReAct: Thought → Action → Observation, debug bằng cách đọc trace",
+    "Chấm Agentic Fit: 0–5 điểm chatbot là đủ, từ 11 điểm mới đáng thử agent",
+    "Agent đắt hơn ~4,5× và chậm hơn ~4× chatbot cho cùng câu hỏi"
+  ],
+  "tu_soi": "Lần gần nhất agent của bạn sai, bạn đọc trace hay chỉ nhìn câu trả lời cuối?",
+  "module": [
+    {
+      "ten": "Bốn mức hệ thống AI",
+      "kien_thuc": [
+        "LLM một mình chỉ sinh chữ: không tự tra cứu, không lấy được dữ liệu mới, không hành động ngoài hội thoại. Gắn tool (tra cứu, gọi dịch vụ, thao tác ứng dụng) mới cho nó lấy dữ liệu thật và hành động.",
+        "Bốn mức theo độ tự chủ: bot theo luật (dễ đoán, không thích nghi) → chatbot dùng LLM (hỏi đáp một lượt) → agent phản ứng (dùng tool, chỉnh theo quan sát) → agent tự chủ (giữ mục tiêu qua nhiều quyết định).",
+        "Dùng LLM chưa chắc là agent: agent chỉ xuất hiện khi hệ thống phải quyết định, hành động, quan sát kết quả rồi lặp lại. Sản phẩm cùng gắn nhãn AI có thể ở những mức rất khác nhau.",
+        "Hỏi “vé Hà Nội đi TP.HCM dưới 2 triệu, gợi ý trang phục nếu mưa”: bot trả menu cố định, chatbot viết mượt nhưng giá vé từ dữ liệu cũ, agent gọi từng tool rồi tổng hợp kết quả có nguồn."
+      ],
+      "ky_nang": [
+        "Giải thích vì sao LLM đơn lẻ không tự hành động được và tool nào biến nó thành agent",
+        "Xếp một sản phẩm AI vào đúng một trong bốn mức",
+        "Chỉ ra phần nào của câu trả lời có nguồn, phần nào là suy đoán"
+      ]
+    },
+    {
+      "ten": "Agentic Fit: khi nào bài toán cần agent",
+      "kien_thuc": [
+        "Bốn tiêu chí Agentic Fit: multi-step reasoning (nhiều bước phụ thuộc nhau), tool interaction (gọi tool ngoài), dynamic decision (bước sau tuỳ kết quả vừa thấy), long horizon (giữ mục tiêu qua nhiều vòng).",
+        "Chấm 1–5 cho từng nhóm reasoning, tool use, dynamic decision rồi cộng: tổng thấp thì chatbot là đủ, trung bình thì chatbot kèm vài tool cố định, cao thì agent mới đáng thử.",
+        "Ba lầm tưởng: gọi LLM là có agent (gọi một lần chỉ là chatbot); agent luôn tốt hơn (với bài đơn giản là lãng phí); càng nhiều tool càng mạnh (thực ra càng dễ chọn nhầm, mô tả rõ quan trọng hơn số lượng).",
+        "Giữa chatbot và agent còn ba mức: chuỗi bước cố định, định tuyến theo loại câu hỏi, điều phối (một tầng lập kế hoạch chia việc cho nhiều tầng thực thi). Bắt đầu từ cấu trúc đơn giản nhất đủ dùng."
+      ],
+      "ky_nang": [
+        "Chấm Agentic Fit cho một bài toán thật và đọc đúng gợi ý theo tổng điểm",
+        "Bác bỏ từng lầm tưởng về agent bằng một ví dụ phản chứng",
+        "Xếp một bài toán vào đúng mức trong năm mức kiến trúc"
+      ]
+    },
+    {
+      "ten": "Bên trong một agent",
+      "kien_thuc": [
+        "Agent gồm bốn khối: nhận thức (nhận input người dùng và kết quả tool), suy luận (LLM chọn bước tiếp), hành động (gọi tool hoặc trả lời), trí nhớ (giữ mục tiêu, dữ kiện, kết quả trung gian).",
+        "Bốn khối cũng là bốn nguồn chi phí khi vận hành: lượng token xử lý, dung lượng lưu trữ, số lần gọi tool và độ trễ.",
+        "Tool là bất kỳ khả năng nào agent gọi được; API là giao thức để hai phần mềm trao đổi, có từ trước agent; MCP là chuẩn mô tả tool để model dùng được ngay. Gọi tool không bắt buộc phải có MCP.",
+        "Mô tả tool tốt có năm phần: tên dạng động từ + danh từ, một câu nói làm gì và khi nào dùng, tham số kèm kiểu và ràng buộc, định dạng kết quả, các kiểu lỗi. Thiếu phần nào, agent phải đoán."
+      ],
+      "ky_nang": [
+        "Gọi tên bốn khối của agent và vai trò từng khối",
+        "Phân biệt tool, API và MCP",
+        "Viết mô tả tool đủ năm phần"
+      ]
+    },
+    {
+      "ten": "ReAct: vòng lặp biến LLM thành agent",
+      "kien_thuc": [
+        "ReAct lặp ba bước đến khi đủ thông tin hoặc gặp điều kiện dừng: Thought (còn thiếu gì) → Action (gọi tool kèm tham số) → Observation (đọc kết quả). Agent là một vòng lặp, không phải một bước.",
+        "Trace ghi từng bước nghĩ, gọi tool, quan sát, cho biết agent dựa vào dữ liệu nào. Lỗi hay ẩn trong trace trông hợp lý: gọi tool sai thứ tự, sai tham số, câu trả lời cuối lệch kết quả đã quan sát.",
+        "Tool lỗi (hết thời gian chờ, trả rỗng, sai định dạng): thử lại một lần, vẫn lỗi thì báo người dùng và đề xuất phương án khác. Không bịa kết quả, không lặp vô hạn.",
+        "ReAct viết lý do ra chữ nên dễ debug nhưng dễ vỡ khi định dạng lệch; function calling trả lệnh gọi có cấu trúc, ổn định hơn nhưng có thể ẩn lý do. Production thường gọi có cấu trúc kèm yêu cầu viết lý do."
+      ],
+      "ky_nang": [
+        "Mô tả ba bước của vòng lặp ReAct và vì sao agent phải lặp",
+        "Đọc một trace ReAct và tìm lỗi thứ tự, tham số, số liệu bịa",
+        "Chọn ReAct hay function calling cho một tình huống cụ thể"
+      ]
+    },
+    {
+      "ten": "Xây và vận hành agent",
+      "kien_thuc": [
+        "Vòng lặp agent tối thiểu: danh sách tin nhắn tích luỹ → gọi model kèm danh sách tool → trả lời cuối thì dừng, còn gọi tool thì chạy tool, ghi kết quả vào tin nhắn rồi lặp, có giới hạn số vòng.",
+        "Ba lớp chịu lỗi: bắt lỗi khi gọi tool thay vì để chương trình dừng đột ngột, phát hiện lệnh gọi trùng lặp để không lặp vô hạn, và phương án dừng an toàn khi chạm số vòng tối đa.",
+        "Agent gọi model nhiều lượt cộng lượt gọi tool nên tốn và chậm hơn chatbot nhiều. Câu hỏi đúng: độ chính xác nhờ dữ liệu thật có đáng chi phí không; khi chatbot hay bịa, trả lời sai có khi đắt hơn.",
+        "Thêm tool là thêm bề mặt tấn công: trang web, tài liệu tool trả về có thể giấu chỉ dẫn độc hại. Phòng vệ cơ bản: lọc chỉ dẫn khả nghi, danh sách tool cho phép, người xác nhận trước hành động không thể hoàn tác."
+      ],
+      "ky_nang": [
+        "Chỉ ra từng phần của một vòng lặp agent tối thiểu làm gì",
+        "Dự đoán chỗ vòng lặp tối thiểu sẽ vỡ và thêm lớp chịu lỗi tương ứng",
+        "Cân chi phí với độ chính xác trước khi chọn agent thay chatbot"
+      ]
+    },
+    {
+      "ten": "Demo, debug, và khi nào dùng gì",
+      "kien_thuc": [
+        "Lắp agent tối thiểu: định nghĩa tool → system prompt kèm điều kiện kết luận → chạy vòng lặp, đọc trace → cố tình gây lỗi xem agent phản ứng → sửa prompt hoặc mô tả tool. Debug quan trọng ngang viết agent.",
+        "Agent sai thì đọc trace trước khi sửa. Chấm trace theo 5 câu: lý do mỗi bước có rõ, chọn đúng tool, tham số hợp lệ, dừng đúng lúc, câu trả lời cuối khớp dữ liệu đã quan sát.",
+        "Bốn chỗ hay phải sửa: mô tả tool mơ hồ, system prompt thiếu điều kiện dừng, thiếu cơ chế an toàn cho thử lại và lặp vô hạn, đánh giá chỉ chấm câu trả lời cuối mà bỏ qua trace.",
+        "Trợ lý chat cơ bản là chatbot; trợ lý duyệt web, chạy code là dạng lai; trợ lý lập trình tự chạy nhiều bước là agent phản ứng. Thực dụng nhất là lai: câu đơn giản đi đường chatbot, câu khó mới mở vòng lặp."
+      ],
+      "ky_nang": [
+        "Lắp một agent tối thiểu từ định nghĩa tool đến khi chạy được",
+        "Chấm một trace theo 5 câu hỏi và chỉ ra chỗ cần sửa",
+        "Phân loại một sản phẩm AI và giải thích vì sao thiết kế lai thường thực dụng nhất"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 3: chatbot cơ bản đến ReAct agent",
+    "tom_tat": "Xây một chatbot chỉ dùng một lời gọi model, nâng cấp thành ReAct agent có 1–2 tool, rồi chạy cùng 5 tình huống kiểm thử trên cả hai: có tình huống chatbot đủ tốt, tình huống agent vượt trội và một tình huống biên.",
+    "dau_ra": "Chatbot và ReAct agent chạy được, 5 tình huống kiểm thử, một trace đầy đủ và flowchart"
+  },
+  "lien_quan": [
+    {
+      "ngay": 4,
+      "ghi_chu": "đi sâu bước quyết định gọi tool nào và viết tool schema"
+    },
+    {
+      "ngay": 9,
+      "ghi_chu": "MCP: kiến trúc và bảo mật"
+    },
+    {
+      "ngay": 11,
+      "ghi_chu": "tấn công qua kết quả tool, các tầng phòng thủ và HITL"
+    }
+  ]
+}

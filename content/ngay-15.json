@@ -1,0 +1,86 @@
+{
+  "ngay": 15,
+  "ten": "Retrospective & Track Decision",
+  "ten_ngan": "Retro & chọn track",
+  "cot_moc": 5,
+  "cau_hoi": "15 ngày trước bạn còn chưa biết LLM hoạt động thế nào — hôm nay bạn đã có một agent chạy được. Bạn học được gì thật, và giờ muốn đi sâu vào hướng nào?",
+  "muc_tieu": "Đúc kết bài học và điểm vướng thật của 15 ngày, góp vào kho bài học chung; đọc thị trường lao động AI và cách người dùng AI vượt trội làm việc; đối chiếu năng lực với tin tuyển dụng thật; viết quyết định track Phase 2 có căn cứ.",
+  "tu_khoa": [
+    "retrospective",
+    "4 câu hỏi retro",
+    "kho bài học chung",
+    "Frontier Professionals",
+    "nghiên cứu vai trò",
+    "ba track Phase 2",
+    "Track Decision Memo"
+  ],
+  "bai_hoc": [
+    "15 ngày là một hành trình khép kín: từ lần gọi API đầu tiên đến agent chạy được, có giám sát và đo lường",
+    "Bài học thật nằm ở kho bài học chung, không ở việc nhớ lại mọi chi tiết",
+    "Ba track đều đang thiếu người: không có lựa chọn đúng sai tuyệt đối, chỉ có lựa chọn hợp với bằng chứng đã thu thập",
+    "Quyết định track hôm nay không vĩnh viễn, có thể điều chỉnh khi bắt đầu đi sâu"
+  ],
+  "tu_soi": "Dấu hiệu nào sau 6 tháng sẽ cho bạn biết lựa chọn track hôm nay chưa đúng?",
+  "module": [
+    {
+      "ten": "Nhìn lại Phase 1",
+      "kien_thuc": [
+        "Retrospective là buổi nhìn lại có cấu trúc, không phải kể lại mọi chuyện. Mục tiêu là gom trải nghiệm rời rạc thành bài học, vướng mắc, giải pháp và câu hỏi còn mở, những thứ dùng tiếp được.",
+        "Khung 4 câu hỏi: What went well (điều gì chạy tốt) · Lessons learned (bài học quan trọng nhất) · Do differently (lần sau làm khác ở đâu) · Confusing (còn mơ hồ, vướng ở đâu).",
+        "Trả lời riêng trước rồi mới gom chung, để ý kiến của mình không bị cuốn theo người nói trước. Bám vào artifact thật (repo, lab, ghi chú, bản demo) thay vì cảm tính.",
+        "Phase 1 đi qua bốn cột mốc, mỗi cột mốc khép lại bằng một thứ chạy được: nền móng và điều khiển LLM → product hoá agent → tri thức và kiến trúc nhiều phần → vận hành an toàn, đo được.",
+        "Gỡ một điểm vướng bằng chuỗi câu hỏi: ai cũng gặp không, nguyên nhân là gì, ai đã giải được, giải pháp nào đáng thử lại. Đầu ra: bài học, điểm vướng kèm giải pháp, cách làm nên giữ, mẫu cần tránh, câu hỏi mở."
+      ],
+      "ky_nang": [
+        "Dùng 4 câu hỏi retro để biến trải nghiệm rời rạc thành bài học, vướng mắc và câu hỏi mở",
+        "Định vị artifact của mình vào đúng cột mốc của Phase 1",
+        "Truy một điểm vướng đến nguyên nhân và giải pháp đáng thử lại"
+      ]
+    },
+    {
+      "ten": "Chia sẻ, tổng hợp và bức tranh thị trường",
+      "kien_thuc": [
+        "Tổng hợp không kể lại từng chuyện mà đi từ điểm lặp → nguyên tắc → việc nên giữ → track liên quan. Mỗi mục trong kho bài học chung ghi: chủ đề, bài học, bối cảnh, việc nên giữ, việc nên tránh, track liên quan.",
+        "Bốn kịch bản thị trường lao động xét tốc độ tiến bộ của AI và tốc độ thích ứng của con người. Lành mạnh nhất là AI tiến dần, con người sẵn sàng: AI chủ yếu hỗ trợ và tăng lực, chưa thay người hàng loạt.",
+        "Khi con người chậm hơn AI, doanh nghiệp tự động hoá vì nhanh hơn đào tạo lại người; việc mới có xuất hiện nhưng người lao động chưa kịp chuyển sang.",
+        "Frontier Professionals, nhóm nhỏ dùng AI tạo giá trị vượt trội, khác ba điểm: điều phối agent cho việc nhiều bước, thiết kế lại quy trình quanh AI thay vì chèn AI vào quy trình cũ, đặt chuẩn dùng AI cho nhóm.",
+        "Kỷ luật đi kèm: coi output AI là điểm bắt đầu, không phải đáp án cuối, và cố ý giữ vài việc không dùng AI để khỏi mai một tay nghề. Vai trò dời từ tạo câu trả lời sang đánh giá, tinh chỉnh, làm chủ kết quả."
+      ],
+      "ky_nang": [
+        "Viết một mục kho bài học chung đủ bối cảnh, việc nên giữ, việc nên tránh và track liên quan",
+        "Xác định kịch bản thị trường nào đang diễn ra theo dữ liệu hiện tại",
+        "Đối chiếu cách mình dùng AI với ba khác biệt của Frontier Professionals"
+      ]
+    },
+    {
+      "ten": "Chọn track cho Phase 2",
+      "kien_thuc": [
+        "Ba track Phase 2 (AI Product, Infrastructure, AI Engineering) gắn với tín hiệu đọc từ chính Phase 1: thích viết problem statement nghiêng về track sản phẩm, thích debug agent nghiêng về track kỹ thuật.",
+        "Bốn hướng tiếp cận tuỳ mục tiêu: tìm hoặc chuyển sang một việc AI cụ thể, nâng cấp vai trò hiện tại bằng AI thay vì đổi nghề, dẫn dắt việc đưa AI vào tổ chức đang làm, hoặc tự xây sản phẩm AI của riêng mình.",
+        "Mỗi hướng nghiên cứu một kiểu: đọc tin tuyển dụng thật, quan sát vai trò hiện tại đang bị AI định nghĩa lại thế nào, hoặc tìm sản phẩm AI độc lập đã có người làm thành công.",
+        "Đọc báo cáo thị trường theo 4 câu: nghề, kỹ năng nào tăng nhanh; nghề, kỹ năng nào khan hiếm; năng lực nào đang được định giá lại; và một câu tóm tắt thị trường tương lai thưởng cho năng lực nào.",
+        "Nghiên cứu vai trò hai chiều qua 2–3 tin tuyển dụng thật. Bên ngoài: kỹ năng được đòi nhiều nhất, mức kinh nghiệm. Bên trong: kỹ năng đã có artifact chứng minh, kỹ năng cần đào sâu, việc cho mình năng lượng."
+      ],
+      "ky_nang": [
+        "Chọn một trong bốn hướng tiếp cận hợp với mục tiêu của mình",
+        "Rút tín hiệu thị trường cụ thể từ báo cáo gốc, không dừng ở ấn tượng chung",
+        "Kết luận bằng một câu: vai trò mục tiêu nghiêng về track nào và vì sao"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Track Decision Memo",
+    "tom_tat": "Gộp phần nhìn lại bản thân với nghiên cứu thị trường và vai trò thành một quyết định track bằng văn bản, dựa trên bằng chứng thu thập cả ngày thay vì cảm tính.",
+    "dau_ra": "Memo 5 phần: định hướng nghề nghiệp đối chiếu tin tuyển dụng thật, đối chiếu bản thân từ Phase 1, kỹ năng cần phát triển, quyết định track kèm lý do, chuẩn bị cho Phase 2"
+  },
+  "lien_quan": [
+    {
+      "ngay": 2,
+      "ghi_chu": "thích viết problem statement là tín hiệu nghiêng về track AI Product"
+    },
+    {
+      "ngay": 3,
+      "ghi_chu": "thích đọc trace, debug agent là tín hiệu nghiêng về track AI Engineering"
+    }
+  ]
+}

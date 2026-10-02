@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 9 · Multi-agent và kết nối hệ thống · Retro 15 ngày</title>
+<meta name="description" content="Một agent giỏi đến đâu cũng có lúc quá tải — chia việc và nối hệ thống thế nào để vẫn kiểm soát được?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 9 · Multi-agent và kết nối hệ thống · Retro 15 ngày">
+<meta property="og:description" content="Một agent giỏi đến đâu cũng có lúc quá tải — chia việc và nối hệ thống thế nào để vẫn kiểm soát được?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-09">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-3" data-prev="/ngay/ngay-08" data-next="/ngay/ngay-10">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3 on" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP" aria-current="page">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 09 · Cột mốc 3 · Tri thức &amp; kiến trúc</p>
+  <h1>Multi-agent và kết nối hệ thống</h1>
+  <blockquote class="q">Một agent giỏi đến đâu cũng có lúc quá tải — chia việc và nối hệ thống thế nào để vẫn kiểm soát được?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Nhận biết lúc một agent quá tải và khi nào nên tách; chọn pattern multi-agent theo loại bài toán; thiết kế hệ supervisor-worker có phiếu giao việc và trạng thái chung; phân biệt MCP (nối tool) với A2A (giao việc cho agent khác); đọc trace để tìm agent đã sai.</p>
+  <p class="chips"><span class="chip">multi-agent</span><span class="chip">supervisor-worker</span><span class="chip">phiếu giao việc</span><span class="chip">MCP</span><span class="chip">A2A</span><span class="chip">agent card</span><span class="chip">LangGraph</span><span class="chip">trace</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>Chỉ dùng multi-agent khi một agent quá tải, không phải vì “ngầu”</li><li>Supervisor-worker là pattern thực dụng nhất để bắt đầu</li><li>MCP nối agent với tool; A2A nối agent với agent</li><li>Trace tốt là điều kiện tiên quyết để debug và cải thiện</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Khi một agent không còn đủ</a><a href="#m2"><span>2</span>Bốn pattern chia hệ thống nhiều agent</a><a href="#m3"><span>3</span>Supervisor-Worker sâu</a><a href="#m4"><span>4</span>MCP – chuẩn kết nối tool</a><a href="#m5"><span>5</span>A2A – giao tiếp agent với agent</a><a href="#m6"><span>6</span>Orchestration, trace và độ tin cậy</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Khi một agent không còn đủ</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Một agent ôm mọi vai trong một lượt suy luận gặp bốn giới hạn: context có hạn nên quên thông tin, nhiều vai nên prompt dài mà không vai nào giỏi, việc độc lập phải xếp hàng, hiểu sai từ đầu kéo lệch cả luồng.</li><li>Context window lớn hơn không giải quyết triệt để: không kích thước nào đủ cho mọi bài toán, vấn đề nằm ở cách tổ chức công việc. Dấu hiệu quá tải: thiếu thông tin ở giữa tài liệu, lặp lại bước đã làm.</li><li>Thêm agent là một đánh đổi, không phải nâng cấp miễn phí. Nên tách khi có nhiều vai khác hẳn nhau, có việc chạy độc lập được, cần khoanh vùng lỗi, cần mở rộng dần, hoặc context một agent không đủ.</li><li>Giữ một agent khi dữ liệu đơn giản, cùng context, hoặc quy trình tuyến tính. Đừng hỏi agent đủ thông minh chưa; hỏi: có mấy loại trách nhiệm, ai cần biết gì, lỗi khoanh vùng ở đâu, chỗ nào cần người duyệt.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Nhận diện dấu hiệu quá tải context trong log chạy của một agent</li><li>Quyết định một tình huống nên tách nhiều agent hay giữ một agent, kèm lý do</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Bốn pattern chia hệ thống nhiều agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Supervisor-worker: một agent điều phối chia việc cho các agent chuyên biệt, dễ kiểm soát và truy vết; 2–3 worker đã đủ thấy giá trị. Cảnh báo: supervisor ôm quá nhiều việc sẽ thành nút thắt.</li><li>Pipeline: agent này làm xong mới chuyển cho agent sau, ổn định và dễ kiểm tra từng bước, nhưng kém linh hoạt khi luồng xử lý cần đổi động.</li><li>Debate: nhiều agent cùng giải rồi tổng hợp hoặc bỏ phiếu để giảm điểm mù. Hierarchical: nhiều tầng supervisor lồng nhau để mở rộng quy mô lớn. Chọn pattern theo loại phức tạp, không theo tên nghe hay.</li><li>Agent chấm agent dễ thiên vị câu trả lời cùng phong cách với model sinh ra nó: dùng model khác nhau cho vai trả lời và vai chấm, kèm tiêu chí rõ. Rủi ro lớn nhất của debate nằm ở khâu tổng hợp kết luận.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn pattern cho một tình huống và giải thích vì sao ba pattern kia kém hợp hơn</li><li>Giảm thiên vị khi dùng một agent chấm điểm agent khác</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Supervisor-Worker sâu</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Supervisor phân tích yêu cầu, chọn worker, theo dõi để thử lại, tổng hợp; không cần là model mạnh nhất, quá “thông minh” thì tự trả lời thay vì giao việc. Worker giữ một năng lực hẹp, test riêng được.</li><li>Bốn lỗi hay gặp: supervisor ôm việc của worker, worker liên tục hỏi ngược, truyền thông tin qua biến toàn cục, worker lỗi mà im lặng. Phần việc tách được chưa chắc đáng thành worker; có khi chỉ nên là tool.</li><li>Phiếu giao việc chỉ ghi “tìm chính sách liên quan” dễ khiến worker lấy nhầm dữ liệu cũ. Phiếu đủ rõ có nhiệm vụ, bối cảnh (diện áp dụng, quy định đang hiệu lực) và định dạng đầu ra, đúng phần worker cần.</li><li>Trạng thái chung tối thiểu có sáu trường: nhiệm vụ gốc, kế hoạch phân việc, kết quả từng worker, trạng thái xử lý, câu trả lời cuối, trace có mốc thời gian. Quy định rõ ai được đọc, ai được ghi để tránh ghi đè.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết phiếu giao việc đủ nhiệm vụ, bối cảnh và định dạng đầu ra cho một worker</li><li>Nhận diện bốn lỗi thiết kế và quyết định một phần việc nên là worker hay tool</li><li>Thiết kế trạng thái chung sáu trường, có trace ghi nội dung vào ra thật</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">MCP – chuẩn kết nối tool</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Không có chuẩn chung, mỗi tool cần tích hợp riêng và phải viết lại khi tool đổi API. MCP là chuẩn giao tiếp chung: đổi phía cung cấp chỉ sửa ở MCP server, đổi phía agent không ảnh hưởng tool.</li><li>Agent nối tới MCP server qua MCP client. Server công bố ba loại năng lực: tool (thao tác thực thi được), resource (dữ liệu chỉ đọc như schema, giúp agent truy vấn chính xác hơn), prompt (cách gọi đã chuẩn hoá).</li><li>Agent khám phá tool lúc chạy: kết nối → lấy danh sách tool → đọc mô tả và schema → chọn tool → gọi đúng tham số → nhận kết quả. Schema khai báo rõ giúp server tự chặn tham số sai kiểu, kể cả khi agent có lỗi.</li><li>MCP server là chốt chặn bảo mật: chỉ công bố tool cần thiết, bắt người duyệt thao tác sửa dữ liệu nhạy cảm, chạy cô lập thao tác rủi ro cao, và chặn chỉ dẫn ẩn trong kết quả tool trước khi tới agent.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân biệt tool, resource và prompt của một MCP server</li><li>Gọi một tool qua MCP và giải thích vì sao schema chặn lỗi từ sớm</li><li>Đặt lớp phòng thủ ở MCP server thay vì chỉ dựa vào prompt</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">A2A – giao tiếp agent với agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>MCP trả lời “lấy năng lực từ đâu”: bên nhận là tool, chỉ thực thi đúng lệnh. A2A trả lời “giao việc cho ai”: bên nhận là agent khác, tự quyết cách làm, có thể từ chối, chạy lâu. A2A không phải một loại tool.</li><li>Agent công bố năng lực qua agent card (định danh, kỹ năng, điểm kết nối) để agent khác biết gọi ai. Phiếu giao việc ba phần như với worker: thiếu bối cảnh thì bên nhận phải hỏi lại, thừa thì chậm, khó bảo trì.</li><li>Đồng bộ: bên gọi dừng chờ kết quả, dễ hiểu, dễ debug nhưng kéo dài cả luồng. Không đồng bộ: bên gọi làm tiếp, bên nhận báo lại khi xong, chạy song song được nhưng phải quản trạng thái và thời hạn chờ chặt hơn.</li><li>A2A còn mới; phần lớn hệ multi-agent vẫn giao tiếp trong cùng một tiến trình. A2A cần khi các agent chạy ở môi trường, tổ chức hoặc công nghệ nền khác nhau.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân biệt MCP với A2A: bên nhận có tự quyết, có từ chối được, có chạy lâu không</li><li>Xác định khi nào thật sự cần A2A, khi nào giao tiếp nội bộ trong hệ là đủ</li><li>Chọn cách chờ đồng bộ hay không đồng bộ cho một tình huống cụ thể</li></ul></div>
+  </div>
+</section><section class="mod" id="m6" aria-labelledby="m6-h">
+  <div class="mod-h"><span class="mod-n">06</span><h2 id="m6-h">Orchestration, trace và độ tin cậy</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Không có framework, định tuyến nằm trong một prompt dài, thêm nhánh là sửa cả prompt. LangGraph biểu diễn luồng bằng node (một bước), edge (đường đi, có thể có điều kiện) và state (dữ liệu truyền qua các bước).</li><li>Một StateGraph gồm ba phần: khai báo state, hàm quyết định bước tiếp theo dựa trên state, và phần ghép node với edge có điều kiện. Đọc nó là biết định tuyến dựa vào trường dữ liệu nào.</li><li>Lỗi điển hình trong trace: worker trả kết quả rỗng nhưng ghi “thành công”, agent tổng hợp dựng câu trả lời nghe hợp lý từ đó. Worker không tìm thấy phải báo rõ “không tìm thấy”.</li><li>Mỗi agent tốn ít nhất một lượt gọi model, token có thể tăng nhiều lần; đổi lại dễ debug, dễ thêm worker. Hỏng có kiểm soát: có thời hạn chờ, giới hạn thử lại, thiếu tự tin thì trả phần đã có, báo rõ phần thiếu.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Đọc một định nghĩa luồng LangGraph và chỉ ra chỗ quyết định bước tiếp theo</li><li>Đọc trace để xác định lỗi ở bước định tuyến, xử lý hay tổng hợp</li><li>Thiết kế hỏng có kiểm soát: thời hạn chờ, giới hạn thử lại, báo rõ phần thiếu</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 9: supervisor và nhiều worker có MCP và trace</h2>
+  <p>Tách hệ truy xuất và trả lời của Ngày 8 thành một supervisor và 2–3 worker (truy xuất, gọi tool, tổng hợp); thiết kế trạng thái chung, nối một worker với năng lực bên ngoài qua MCP, viết phiếu giao việc và ghi trace cho toàn luồng.</p>
+  <p class="out"><span>Đầu ra</span>Hệ supervisor-worker chạy được, có kết nối MCP, kèm một bản trace mẫu</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Bài của bạn có thật sự cần multi-agent không, hay một agent là đủ?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-3" href="/ngay/ngay-08"><strong>Ngày 8 · RAG</strong><span>hệ RAG của Lab 8 là điểm xuất phát của Lab 9</span></a><a class="rel cm-4" href="/ngay/ngay-11"><strong>Ngày 11 · Guardrails</strong><span>chỉ dẫn ẩn trong kết quả tool: prompt injection và HITL đi sâu</span></a><a class="rel cm-4" href="/ngay/ngay-13"><strong>Ngày 13 · Monitoring</strong><span>trace đi tiếp thành ba trụ metrics, logs, traces cho agent</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-08" rel="prev"><span>← Ngày 8</span><strong>RAG</strong></a><a class="pn-a next" href="/ngay/ngay-10" rel="next"><span>Ngày 10 →</span><strong>Data pipeline</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "ngay": 6,
+  "ten": "AI Product Hackathon",
+  "ten_ngan": "Hackathon: build, test, show",
+  "cot_moc": 2,
+  "cau_hoi": "SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục — nhóm bạn chứng minh được đến đâu?",
+  "muc_tieu": "Đi trọn một vòng từ nỗi đau có bằng chứng đến prototype có AI chạy thật trong ít nhất một luồng; đo bằng golden set, kiểm chứng với người dùng thật, trình bày dưới phản biện của nhóm khác. Chuỗi bằng chứng quan trọng hơn độ hoành tráng.",
+  "tu_khoa": [
+    "bằng chứng nỗi đau",
+    "Product Canvas",
+    "AI Spec",
+    "lát cắt mỏng",
+    "golden set",
+    "kiểm chứng người dùng",
+    "error path"
+  ],
+  "bai_hoc": [
+    "SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục",
+    "Bằng chứng gồm hai phần: golden set nhỏ có đáp án và phản hồi của người dùng thật",
+    "Demo phải có cả happy path lẫn error path"
+  ],
+  "tu_soi": "Demo hackathon của nhóm bạn có cho thấy ít nhất 1 error path không?",
+  "module": [
+    {
+      "ten": "Đề bài và luật chơi",
+      "kien_thuc": [
+        "Năm tiêu chí tối thiểu để một sản phẩm AI được nghiệm thu: có bằng chứng nỗi đau, lát cắt thiết kế rõ, kịch bản rủi ro, kiểm thử đo được, prototype chạy thật với AI trong ít nhất một luồng.",
+        "Bảy khối chấm, mỗi khối trỏ về một file cụ thể trong repo: bằng chứng và tác động, lát cắt thiết kế, chỗ khó và kịch bản rủi ro, kiểm thử, prototype chạy được, kiểm chứng với người dùng, quy trình và repo.",
+        "Ba nguyên tắc chấm: điểm theo chuỗi quyết định, không theo độ hoành tráng; kết quả đo trung thực được tính đủ điểm kể cả khi không đạt mục tiêu; số liệu chỉnh sửa không được tính.",
+        "Repo cấu trúc cố định: README (thành viên, phân công), file spec theo template, codebase ghi rõ phần mock, thư mục eval (golden set, kết quả), thư mục validation (feedback log), reflection từng người."
+      ],
+      "ky_nang": [
+        "Đọc rubric ngay từ đầu để biết mỗi điểm đến từ file nào",
+        "Đối chiếu sản phẩm với năm tiêu chí nghiệm thu tối thiểu trước khi nộp",
+        "Dựng đúng cấu trúc repo ngay từ đầu để không mất điểm quy trình"
+      ]
+    },
+    {
+      "ten": "Năm giai đoạn",
+      "kien_thuc": [
+        "Khám phá: bắt đầu từ bằng chứng, không từ ý tưởng. Đọc chatlog đã ẩn danh, transcript, khảo sát để tìm nỗi đau lặp lại; câu nỗi đau có người, bối cảnh, tần suất, gom trên Product Canvas một trang.",
+        "AI Spec gồm bảy phần: bằng chứng và tác động, người dùng và bối cảnh, lát cắt chọn làm, thiết kế luồng, chỗ khó và rủi ro, kịch bản khi AI sai, kế hoạch kiểm thử. Mỗi phần là giả thuyết phải kiểm chứng được.",
+        "Build một lát cắt mỏng end-to-end có AI chạy thật trong ít nhất một luồng, phần mock ghi rõ là mock. Làm thứ bấm được trước để có phản hồi, rồi mới lắp AI: một luồng chạy trọn hơn ba luồng dở dang.",
+        "Đo và kiểm chứng: chạy prototype trên golden set 10–20 ca có đáp án mong đợi, ghi lại đúng sai; rồi cho người dùng thật dùng thử và ghi feedback log. Đây là chỗ tách tư duy sản phẩm khỏi một demo đẹp.",
+        "Demo 6 phần: nỗi đau và bằng chứng, lát cắt đã chọn, luồng end-to-end, kết quả đo, điều học được, việc tiếp theo. Luồng demo phải có cả happy case lẫn error case: AI sai thì sản phẩm đỡ thế nào."
+      ],
+      "ky_nang": [
+        "Viết câu nỗi đau từ dữ liệu thật thay vì suy đoán, trình bày trên một Product Canvas",
+        "Viết AI Spec theo bảy phần, phần nào cũng đủ cụ thể để kiểm chứng",
+        "Dựng golden set nhỏ, chạy đo và tổ chức một vòng dùng thử với người ngoài nhóm"
+      ]
+    },
+    {
+      "ten": "Sáu mốc kiểm tra",
+      "kien_thuc": [
+        "Sáu mốc, mỗi mốc phải show một thứ cụ thể được xác minh: Canvas → thứ bấm được → AI chạy thật kèm số đo đầu → chốt phạm vi và spec → kiểm chứng người dùng, dry run → demo.",
+        "Mốc đầu xác minh nỗi đau có nguồn thật trước khi đầu tư build. Mốc thứ hai chỉ cần mockup hoặc prototype bấm được, chưa cần AI, để sớm có thứ hữu hình cho mọi người cùng nhìn và góp ý.",
+        "Mốc khó nhất là AI chạy thật trong ít nhất một luồng kèm số đo lượt đầu trên golden set: nhiều nhóm đến đây mới thấy lát cắt quá rộng.",
+        "Sau khi chốt phạm vi demo và nộp spec thì không mở rộng thêm; spec được đánh giá theo bản đã nộp. Trước demo cần có feedback log thật và ít nhất một lần dry run."
+      ],
+      "ky_nang": [
+        "Chia việc build thành các mốc, mỗi mốc có một thứ cụ thể để show và xác minh",
+        "Chốt phạm vi sẽ demo và giữ nguyên, không mở rộng thêm",
+        "Trình bày bằng bằng chứng thay vì lời hứa, trả lời được phản biện"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Build: từ canvas đến demo",
+    "tom_tat": "Theo nhóm, trong một ngày rưỡi, đi trọn vòng khám phá → viết spec → build lát cắt → đo → kiểm chứng → chuẩn bị demo, trên dữ liệu thật đã ẩn danh và template có sẵn.",
+    "dau_ra": "Repo nhóm gồm Product Canvas, AI Spec, prototype có AI chạy thật, kết quả golden set, feedback log và bản demo"
+  },
+  "lien_quan": [
+    {
+      "ngay": 5,
+      "ghi_chu": "SPEC nhẹ viết ở Ngày 5 là điểm xuất phát"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "ten": "Retro 15 ngày",
+  "chuong_trinh": "AI Thực Chiến · Phase 1",
+  "khau_hieu": "Từ một lời gọi API đến một dịch vụ chạy thật",
+  "gioi_thieu": "Kiến thức, kỹ năng và bài học chính của 15 ngày Phase 1, gom theo 4 cột mốc. Mỗi cột mốc khép lại bằng một thứ chạy được.",
+  "url": "https://retro-15-days.vercel.app",
+  "cot_moc": [
+    {
+      "so": 1,
+      "ten": "Nền móng",
+      "mo_ta": "Điều khiển LLM & đóng khung bài toán",
+      "tu": 1,
+      "den": 4,
+      "dau_ra": "Agent biết hành động & debug theo lớp"
+    },
+    {
+      "so": 2,
+      "ten": "Product hoá",
+      "mo_ta": "Biến agent thành sản phẩm",
+      "tu": 5,
+      "den": 6,
+      "dau_ra": "Sản phẩm có người dùng, bảo vệ được"
+    },
+    {
+      "so": 3,
+      "ten": "Tri thức & kiến trúc",
+      "mo_ta": "Một agent thành hệ nhiều phần",
+      "tu": 7,
+      "den": 10,
+      "dau_ra": "Hệ nhiều phần, tri thức & dữ liệu tin được"
+    },
+    {
+      "so": 4,
+      "ten": "Vận hành",
+      "mo_ta": "An toàn · deploy · quan sát · đánh giá",
+      "tu": 11,
+      "den": 14,
+      "dau_ra": "Dịch vụ an toàn, deploy & đo được"
+    },
+    {
+      "so": 5,
+      "ten": "Nhìn lại & chọn track",
+      "mo_ta": "Đúc kết bài học, chọn hướng cho Phase 2",
+      "tu": 15,
+      "den": 15,
+      "dau_ra": "Kho bài học chung & Track Decision Memo"
+    }
+  ],
+  "track": [
+    {
+      "ma": "CP1",
+      "ten": "Business (AI Product)",
+      "mo_ta": "Từ người biết build AI thành người ra quyết định sản phẩm: ý tưởng, chiến lược, ROI, triển khai có trách nhiệm.",
+      "di_sau": [
+        "Problem Statement",
+        "PRD",
+        "AI Readiness",
+        "ROI",
+        "Risk",
+        "UX",
+        "Cost"
+      ],
+      "role": [
+        "AI Product Manager",
+        "Business Analyst (AI)",
+        "Product Designer",
+        "AI Risk Governance"
+      ],
+      "hop_neu": "Bạn thích hỏi “nên làm gì, vì sao”, làm việc với người và thuyết phục bằng số.",
+      "ngay": [
+        2,
+        5,
+        6
+      ]
+    },
+    {
+      "ma": "CP2",
+      "ten": "Infrastructure",
+      "mo_ta": "Kỹ sư hạ tầng tự dựng và vận hành backend của một hệ AI production.",
+      "di_sau": [
+        "Vector store",
+        "Data pipeline",
+        "Docker",
+        "Cloud deploy",
+        "Monitoring",
+        "Tracing"
+      ],
+      "role": [
+        "DevOps Engineer",
+        "Data Engineer",
+        "AI Security Engineer",
+        "ML / MLOps Engineer"
+      ],
+      "hop_neu": "Bạn thích hệ thống chạy ổn định, tự động hoá mọi thứ và chịu được on-call.",
+      "ngay": [
+        7,
+        10,
+        12,
+        13
+      ]
+    },
+    {
+      "ma": "CP3",
+      "ten": "AI Engineering",
+      "mo_ta": "Đi sâu kỹ thuật: xây agent và hệ LLM ở mức production-grade.",
+      "di_sau": [
+        "LLM API",
+        "ReAct agent",
+        "Tool calling",
+        "RAG",
+        "Multi-agent",
+        "Guardrails",
+        "Eval"
+      ],
+      "role": [
+        "AI Engineer",
+        "AI Evaluation & Quality",
+        "Forward Deployed Engineer",
+        "Data Scientist"
+      ],
+      "hop_neu": "Bạn thích build và thử nghiệm, chịu được output không chắc chắn, mê đo lường.",
+      "ngay": [
+        1,
+        3,
+        4,
+        8,
+        9,
+        11,
+        14
+      ]
+    }
+  ],
+  "track_ghi_chu": "Forward Deployed Engineer và MLOps nằm giữa hai track; full-stack là nền chung cho cả ba.",
+  "ky_nang_nen": [
+    {
+      "ten": "AI fluency có kỷ luật",
+      "y": "86% người dùng AI hàng đầu coi output là điểm bắt đầu, không phải đáp án."
+    },
+    {
+      "ten": "Proof of work",
+      "y": "Yêu cầu số 1 trong JD Forward Deployed Engineer: đã ship AI agent lên production."
+    },
+    {
+      "ten": "Tư duy đo lường",
+      "y": "Định nghĩa “tốt” bằng số trước khi build: eval cho AI, KPI cho business."
+    },
+    {
+      "ten": "Teamwork & tiếng Anh",
+      "y": "Kỹ năng mềm doanh nghiệp Việt Nam cần nhất: teamwork 52,3%, giao tiếp 49,2%, tiếng Anh 46,2%."
+    },
+    {
+      "ten": "Hiểu domain",
+      "y": "Đa số JD nêu rõ ngành: ngân hàng, bảo hiểm, ô tô, bán lẻ."
+    },
+    {
+      "ten": "Cloud & DevOps cơ bản",
+      "y": "Kỹ năng kỹ thuật được tìm nhiều nhất ở Việt Nam: DevOps & CI/CD 53,1%, Cloud 48,4%."
+    }
+  ],
+  "ky_nang_nen_nguon": "Số liệu: Microsoft 2026 Work Trend Index (n=20.000), ITviec IT Salary & Recruitment Report 2025–26, tin tuyển dụng LinkedIn tại Việt Nam (9/2026).",
+  "thong_diep": {
+    "cau": "Chọn role theo việc bạn muốn làm mỗi ngày, không theo title đang hot.",
+    "buoc": [
+      "Chọn 1–2 role, đọc 10 JD thật trên LinkedIn, ITviec, TopDev",
+      "Làm 1 dự án bám sát yêu cầu của những JD đó",
+      "Kể lại bằng con số: bạn đã đo được gì, cải thiện bao nhiêu"
+    ]
+  }
+}

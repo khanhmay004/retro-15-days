@@ -1,0 +1,130 @@
+{
+  "ngay": 11,
+  "ten": "Guardrails, Human-in-the-Loop và Responsible AI",
+  "ten_ngan": "Guardrails",
+  "cot_moc": 4,
+  "cau_hoi": "Agent của bạn làm được rất nhiều việc — nhưng ai đảm bảo nó không làm điều không được phép?",
+  "muc_tieu": "Giải thích vì sao guardrails là bắt buộc; phân biệt các kiểu tấn công phổ biến và tầng phòng thủ tương ứng ở input lẫn output; thiết kế luồng HITL theo mức rủi ro của từng hành động; chạy một vòng red team chứng minh guardrails hoạt động.",
+  "tu_khoa": [
+    "prompt injection",
+    "jailbreak",
+    "input guardrails",
+    "output guardrails",
+    "defense in depth",
+    "lethal trifecta",
+    "red teaming",
+    "HITL"
+  ],
+  "bai_hoc": [
+    "Guardrails là dây an toàn: phòng thủ nhiều lớp ở input, LLM và output",
+    "Prompt injection chưa có lời giải triệt để; phòng thủ bền đến từ kiến trúc",
+    "Lethal trifecta: đừng để một agent có đủ dữ liệu riêng + nội dung lạ + kênh gửi ra ngoài",
+    "Red team trước khi deploy bắt ~80% vấn đề; HITL là tính năng"
+  ],
+  "tu_soi": "Bạn đã tự tấn công agent của mình bằng ít nhất 5 prompt chưa?",
+  "module": [
+    {
+      "ten": "Vì sao guardrails là bắt buộc",
+      "kien_thuc": [
+        "Bốn mối đe doạ phổ biến nhất với agent: prompt injection, jailbreak, rò rỉ dữ liệu, nội dung gây hại. Agent mạnh mà không có guardrails giống xe mạnh không phanh: càng nhanh càng nguy hiểm.",
+        "Chatbot chỉ sinh văn bản, sai thì người dùng tự phát hiện. Agent gọi API, gửi email, ghi vào cơ sở dữ liệu: rủi ro là làm sai và gây thiệt hại thật khó hoàn tác, nên guardrails cho agent phải chặt hơn.",
+        "Sự cố thật như bot bán xe đồng ý giá 1 USD hay agent hãng bay hứa hoàn tiền sai chính sách đều không do model kém, mà do không có guardrail kiểm soát output trước khi đến người dùng.",
+        "Không ai liệt kê hết được các kiểu tấn công trước; danh sách thực tế luôn dài hơn dự đoán. Vì vậy guardrail nhằm giảm thiệt hại và giới hạn phạm vi khi sự cố xảy ra, không phải chặn tuyệt đối."
+      ],
+      "ky_nang": [
+        "Giải thích vì sao agent mạnh thiếu kiểm soát nguy hiểm hơn agent yếu",
+        "Phân biệt rủi ro của chatbot và agent dựa trên hành động khó hoàn tác",
+        "Lập danh sách rủi ro cụ thể cho một agent trước khi đưa lên production"
+      ]
+    },
+    {
+      "ten": "AI Safety landscape, Alignment và Governance",
+      "kien_thuc": [
+        "Sáu loại rủi ro: hallucination, prompt injection, PII leakage (lộ dữ liệu cá nhân), jailbreak, bias, over-autonomy (tự quyết quá mức). PII leakage và over-autonomy nặng nhất: có thể phạm luật, khó hoàn tác.",
+        "Ba khái niệm hay bị gộp: alignment là AI theo đúng mục tiêu thật, không chỉ tối ưu đúng chỉ số; control là cơ chế kỹ thuật (kill switch, giới hạn tool, nhật ký); governance là khung pháp lý như EU AI Act.",
+        "Hai dấu hiệu misalignment: reward hacking (được giao sửa hàm cộng, AI sửa file test để test pass) và deceptive alignment (trả lời an toàn khi biết đang bị đánh giá, làm khác khi không bị đánh giá).",
+        "Một nghiên cứu năm 2025 cho 16 model đóng vai agent quản lý email: khi bị doạ thay thế, nhiều model dùng thông tin nhạy cảm để đe doạ ngược người giám sát. Vì vậy quyết định rủi ro cao cần guardrails cùng HITL."
+      ],
+      "ky_nang": [
+        "Xếp sáu loại rủi ro AI theo mức nghiêm trọng",
+        "Phân biệt alignment, control và governance, mỗi khái niệm một ví dụ",
+        "Giải thích cơ chế reward hacking và deceptive alignment qua ví dụ code"
+      ]
+    },
+    {
+      "ten": "Attack vectors chi tiết",
+      "kien_thuc": [
+        "Direct injection: người dùng gửi thẳng chỉ dẫn ghi đè system prompt (“bỏ qua mọi chỉ dẫn trước”). Indirect injection nguy hiểm hơn: chỉ dẫn ẩn trong web, tài liệu, email mà agent tự đọc, nhất là agent dùng RAG.",
+        "Bốn kiểu jailbreak: đóng vai nhân vật không giới hạn, mã hoá Base64, ROT13, chuỗi câu hỏi vô hại tăng dần, dùng ngôn ngữ ít phổ biến. Điểm yếu chung: safety filter chỉ nhận ra thứ nó được huấn luyện để nhận ra.",
+        "Prompt injection nhắm vào hành động của agent (gửi email cho người không được nhận); jailbreak nhắm vào nội dung câu trả lời (sinh nội dung bị cấm). Cùng xuất phát từ input độc hại, khác nhau ở mục tiêu cuối.",
+        "Multi-step extraction hỏi từng mảnh vô hại rồi ghép thành thông tin nhạy cảm. Agent đọc được cơ sở dữ liệu, file, email và gửi ra ngoài qua tool, nên mỗi tool gắn thêm là thêm một bề mặt tấn công."
+      ],
+      "ky_nang": [
+        "Phân biệt direct và indirect injection, giải thích vì sao indirect nguy hiểm hơn",
+        "Phân loại một tình huống tấn công là prompt injection hay jailbreak theo mục tiêu cuối",
+        "Viết prompt tấn công có mục tiêu rõ nhắm vào agent của chính mình"
+      ]
+    },
+    {
+      "ten": "Input guardrails và phòng thủ prompt injection",
+      "kien_thuc": [
+        "Input qua bốn lớp trước khi đến LLM: validation (độ dài, ngôn ngữ, định dạng) → injection detection → topic filter (chỉ nhận chủ đề của use case) → rate limiting. Bị chặn ở đâu thì dừng ở đó, không tốn token.",
+        "Pattern matching bằng regex bắt khoảng 60–70% injection cơ bản; phần còn lại cần bộ phân loại dựa trên LLM hoặc chuyên dụng như Llama Prompt Guard 2. Lớp này nhanh, nên luôn có, nhưng không đủ một mình.",
+        "Bộ lọc luôn bị vượt bằng biến thể mới (giấu lệnh trong Unicode, emoji) vì lệnh và dữ liệu chung một luồng token. Spotlighting đánh dấu đâu là dữ liệu; instruction hierarchy xếp system > user > dữ liệu đọc được.",
+        "Dual-LLM tách model gọi tool khỏi model đọc dữ liệu không tin cậy: an toàn hơn nhưng làm được ít việc hơn. Lethal trifecta: không cho một agent cùng lúc có dữ liệu riêng tư, nội dung lạ và kênh gửi ra ngoài."
+      ],
+      "ky_nang": [
+        "Mô tả bốn lớp input guardrails theo đúng thứ tự, mỗi lớp một ví dụ",
+        "Dự đoán lớp guardrail nào bắt được một prompt tấn công và giải thích vì sao",
+        "Giải thích vì sao bộ lọc dựa trên pattern luôn có thể bị vượt qua"
+      ]
+    },
+    {
+      "ten": "Output guardrails, defense in depth và red teaming",
+      "kien_thuc": [
+        "Output qua bốn lớp: content filter (chặn nội dung độc hại, che PII) → grounding check (gắn cờ nhận định không có nguồn) → format validation (đúng schema, không link hay số bịa) → human review khi tin cậy thấp.",
+        "Ba tầng chồng nhau: input rails → LLM rails (system prompt gia cố) → output rails. Mỗi tầng bắt một loại lỗi, input bỏ sót thì output vẫn còn cơ hội chặn; chỉ dùng một tầng thì lỗi thuộc tầng khác lọt hết.",
+        "Guardrail kiểm soát nội dung và hành vi của model; access control kiểm soát quyền của người dùng. Người không có quyền mà đòi gửi email cho toàn công ty là lỗi phân quyền, guardrail nội dung không xử lý được.",
+        "Red teaming: tấn công agent bằng adversarial prompt → ghi pass/fail → vá → kiểm tra lại. Bộ test này chạy lại ở mỗi lần phát hành như unit test; agent không qua safety test thì không được deploy."
+      ],
+      "ky_nang": [
+        "Mô tả bốn lớp output guardrails và vai trò của grounding check",
+        "Phân loại một sự cố thuộc guardrail nội dung hay thuộc phân quyền hệ thống",
+        "Chạy vòng red teaming bốn bước và đưa bộ adversarial test vào mỗi lần phát hành"
+      ]
+    },
+    {
+      "ten": "Human-in-the-Loop và Trust UX",
+      "kien_thuc": [
+        "Ba kiểu HITL, can thiệp tăng dần: human-on-the-loop (agent làm trước, người xem lại sau; rủi ro thấp) → human-in-the-loop (agent đề xuất, người duyệt trước) → human-as-tiebreaker (người quyết; rủi ro cao).",
+        "Cần con người khi: hành động không hoàn tác được, quyết định rủi ro cao, độ tin cậy thấp, trường hợp biên chưa gặp, chủ đề nhạy cảm. Gửi email, xoá dữ liệu, chuyển tiền luôn cần người duyệt bất kể điểm tin cậy.",
+        "Ba sai lầm: bắt duyệt mọi request khiến hệ thống nghẽn, người duyệt thiếu context nên duyệt cho có, không có vòng phản hồi để agent cải thiện. Ca dưới ngưỡng liên tục được chấp thuận thì hạ dần ngưỡng.",
+        "Bốn trụ cột Trust UX: hiển thị lý do trước khi hành động, hoàn tác được trong một khoảng ngắn, nhãn độ tin cậy khớp tỉ lệ đúng thật, người dùng tự bật tắt quyền của agent (được đọc hay được gửi email)."
+      ],
+      "ky_nang": [
+        "Xếp ba kiểu HITL theo chiều rủi ro tăng dần và chọn đúng kiểu cho một tình huống",
+        "Thiết kế luồng HITL cho ít nhất 3 hành động của agent, có lý do cho từng lựa chọn",
+        "Điều chỉnh ngưỡng độ tin cậy dựa trên tỉ lệ chấp thuận thực tế"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 11: guardrails, HITL và red team cho chatbot ngân hàng",
+    "tom_tat": "Với một chatbot ngân hàng cố ý để mật khẩu và khoá API trong system prompt: viết input guardrails (jailbreak, nội dung lạ từ tài liệu hay email, ký tự Unicode), đặt permission và HITL cho hành động rủi ro cao, xây output guardrail che PII và bí mật, rồi red team bằng ít nhất 5 prompt nâng cao.",
+    "dau_ra": "Chatbot có input, output guardrails và luồng HITL theo mức rủi ro, kèm báo cáo red team có bằng chứng"
+  },
+  "lien_quan": [
+    {
+      "ngay": 4,
+      "ghi_chu": "đã giới thiệu prompt injection và guardrail ở mức nhận biết"
+    },
+    {
+      "ngay": 5,
+      "ghi_chu": "ba đòn bẩy niềm tin, nền cho HITL và Trust UX"
+    },
+    {
+      "ngay": 12,
+      "ghi_chu": "đưa agent đã có guardrails lên cloud"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "ngay": 1,
+  "ten": "AI & LLM Foundation",
+  "ten_ngan": "Gọi LLM API",
+  "cot_moc": 1,
+  "cau_hoi": "Bạn dùng AI mỗi ngày — nhưng bên trong nó đang làm gì?",
+  "muc_tieu": "Hiểu LLM sinh văn bản thế nào và vì sao nó vừa hiểu được context vừa có thể sai; biết model được huấn luyện ra sao và giới hạn ở đâu; chọn được model theo việc, ước tính được chi phí, và tự gọi API lần đầu.",
+  "tu_khoa": ["token", "attention", "context window", "temperature", "RLHF", "chi phí API", "streaming"],
+  "bai_hoc": [
+    "LLM là Transformer dự đoán token tiếp theo từ context, nên có lúc bịa (hallucination)",
+    "Chọn model theo ba trục: chất lượng, độ trễ, chi phí",
+    "Output token đắt hơn input 3–5 lần; tiếng Việt tốn token hơn tiếng Anh",
+    "Vibe coding tốt = intent rõ + context đủ + review kỹ"
+  ],
+  "tu_soi": "Một lượt chat trong app của bạn tốn bao nhiêu token, và bao nhiêu tiền?",
+  "module": [
+    {
+      "ten": "AI là gì, và vì sao mất 70 năm",
+      "kien_thuc": [
+        "Các khái niệm lồng nhau: AI ⊃ machine learning ⊃ deep learning ⊃ generative AI ⊃ LLM. Generative AI rộng hơn LLM: Midjourney sinh ảnh nhưng không phải LLM.",
+        "Ba nhóm ứng dụng: discriminative (phân loại, như lọc thư rác), generative (sinh nội dung) và agentic (tự hành động). Chương trình tập trung vào agentic AI.",
+        "AI từng thất bại hai lần (1950–1993) không phải vì ý tưởng sai, mà vì thiếu dữ liệu và năng lực tính toán.",
+        "AI bùng nổ giai đoạn 2012–2022 nhờ ba yếu tố hội tụ: dữ liệu lớn (ImageNet), GPU, và Transformer (2017) thay cho RNN vốn xử lý tuần tự, khó giữ context dài."
+      ],
+      "ky_nang": [
+        "Xếp một sản phẩm AI bất kỳ vào đúng tầng khái niệm",
+        "Giải thích Transformer giải quyết hạn chế gì của RNN"
+      ]
+    },
+    {
+      "ten": "Cách LLM sinh văn bản và hiểu ngữ cảnh",
+      "kien_thuc": [
+        "LLM chỉ làm một việc: dự đoán token tiếp theo. Đầu ra là phân bố xác suất trên toàn bộ từ vựng; model chọn một token, nối vào, rồi lặp lại. Chatbot là lớp ứng dụng bọc bên ngoài model.",
+        "Token là đơn vị xử lý và cũng là đơn vị tính tiền. Cùng một nội dung, tiếng Việt tốn nhiều token hơn tiếng Anh.",
+        "Context window là lượng thông tin model xử lý trong một lần: 128K token tương đương khoảng 300 trang.",
+        "Attention: mỗi token đánh giá mức liên quan với mọi token trước nó, nên model biết “nó” trong “Lan bỏ quyển sách vào túi vì nó quá dày” là quyển sách. Multi-head attention là nhiều góc nhìn chạy song song."
+      ],
+      "ky_nang": [
+        "Mô tả vòng lặp sinh văn bản từng token",
+        "Quy đổi context window ra số trang, ước lượng token cho văn bản tiếng Việt",
+        "Giải thích vì sao attention hiểu context tốt hơn cách chỉ nhìn vài từ gần nhất"
+      ]
+    },
+    {
+      "ten": "Huấn luyện và giới hạn của model",
+      "kien_thuc": [
+        "Ba giai đoạn huấn luyện: pre-training trên khối văn bản lớn → supervised fine-tuning bằng ví dụ mẫu → RLHF. Reward model học từ xếp hạng của người đánh giá, không phải người sửa từng câu trả lời.",
+        "Ba giới hạn cố hữu: kiến thức dừng ở thời điểm huấn luyện, trả lời tự tin cả khi sai, context có giới hạn. Model còn hay bám tương quan bề mặt và chiều theo người dùng.",
+        "Top-k và top-p giới hạn tập token ứng viên; temperature chỉnh mức ngẫu nhiên khi chọn trong tập đó. Temperature không phải “độ sáng tạo”.",
+        "Đưa thông tin vào context: đặt yêu cầu quan trọng ở đầu hoặc cuối vì phần giữa dễ bị bỏ sót (lost in the middle), giữ context gọn, trích đoạn liên quan thay vì cả tài liệu. Đây là nền của RAG.",
+        "Bốn cách dùng LLM theo mức kiểm soát tăng dần: ứng dụng chat, trợ lý lập trình, API, tự triển khai."
+      ],
+      "ky_nang": [
+        "Phân biệt ba giai đoạn huấn luyện và nói được reward model học từ đâu",
+        "Chỉnh temperature, top-p, top-k theo mục đích và đoán trước tác động",
+        "Sắp xếp thông tin trong prompt dài để model không bỏ sót"
+      ]
+    },
+    {
+      "ten": "Từ LLM đến Agent, và bản đồ thị trường",
+      "kien_thuc": [
+        "Agent không phải một loại model khác, mà là LLM đặt trong vòng lặp: mục tiêu → lập luận → gọi tool → quan sát → hành động.",
+        "Năm thành phần bọc quanh LLM: context, tools, memory, guardrails, evaluation. Evaluation quyết định phần lớn thành công của sản phẩm.",
+        "Chain-of-thought (cho model lập luận từng bước) làm câu trả lời chính xác hơn.",
+        "Ba xu hướng thị trường: chi phí giảm khoảng 10 lần mỗi năm, model mở và model đóng hội tụ năng lực, trọng tâm dời từ model sang thiết kế hệ thống. Transformer không đổi từ 2017; tiến bộ đến từ cách huấn luyện."
+      ],
+      "ky_nang": [
+        "Giải thích agent khác chatbot ở đâu",
+        "Chỉ ra tác vụ hỏng ở đâu khi thiếu từng thành phần context, tools, memory, guardrails",
+        "Tìm một chỗ trong công việc của mình có thể dùng AI"
+      ]
+    },
+    {
+      "ten": "Chọn model, ước tính chi phí, gọi API",
+      "kien_thuc": [
+        "Chọn model theo ba tầng thay vì theo tên: tầng cao nhất, tầng cân bằng (mặc định), tầng tự triển khai. Benchmark chỉ để tham khảo; thử trên chính dữ liệu của mình mới đáng tin.",
+        "Token đầu ra đắt gấp 3–5 lần token đầu vào. Hội thoại càng dài, mỗi lượt càng đắt vì lịch sử bị gửi lại.",
+        "Một lần gọi API: request gồm model, messages, max_tokens, temperature; response gồm content, finish_reason, usage. Prompt có bốn lớp: system, user, context, định dạng đầu ra.",
+        "Model không nhớ gì giữa hai lần gọi: ứng dụng chat tự giữ lịch sử và gửi lại mỗi lượt. Streaming trả kết quả về từng token."
+      ],
+      "ky_nang": [
+        "Ước tính chi phí một lượt gọi và chi phí theo tháng",
+        "Đọc request, response và trường usage của một lần gọi API",
+        "Giải thích vì sao model không “nhớ” giữa hai lần gọi"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 1: gọi API và đo chi phí",
+    "tom_tat": "Gọi API của ba nhà cung cấp, thử temperature, top_p, max_tokens, so sánh đầu ra giữa các model trên cùng prompt, đo độ trễ và chi phí mỗi lần gọi.",
+    "dau_ra": "Script gọi API chạy được và một ứng dụng chat đơn giản có streaming"
+  },
+  "lien_quan": [
+    {"ngay": 3, "ghi_chu": "vòng lặp agent thành ReAct"},
+    {"ngay": 4, "ghi_chu": "áp dụng temperature và lost in the middle khi viết prompt"}
+  ]
+}

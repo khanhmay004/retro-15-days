@@ -1,0 +1,126 @@
+{
+  "ngay": 12,
+  "ten": "Hạ tầng Cloud & Deployment",
+  "ten_ngan": "Deploy",
+  "cot_moc": 4,
+  "cau_hoi": "Agent ra khỏi laptop — deploy thế nào?",
+  "muc_tieu": "Hiểu vì sao agent trên laptop chưa phải dịch vụ và ba tính chất khiến agent khác web app thường; đóng gói agent thành container chuẩn; bảo vệ endpoint bằng xác thực, giới hạn tần suất, ngân sách; thiết kế dịch vụ stateless; deploy lên cloud không rớt request.",
+  "tu_khoa": [
+    "container",
+    "multi-stage build",
+    "health check",
+    "API gateway",
+    "rate limiting",
+    "stateless",
+    "scale ngang",
+    "CI/CD"
+  ],
+  "bai_hoc": [
+    "Cùng cỗ máy, khác cái hộp: localhost không phải production",
+    "Container: multi-stage, slim, non-root; tránh Alpine cho ML",
+    "Chọn platform theo timeout, scale theo concurrency",
+    "Ngân sách không tự chặn: cần admission control và eval gate trong CI"
+  ],
+  "tu_soi": "Nếu ai đó spam app của bạn đêm nay, ai trả tiền và cái gì chặn lại?",
+  "module": [
+    {
+      "ten": "Khoảng cách giữa laptop và production",
+      "kien_thuc": [
+        "Năm khác biệt giữa dev và production: thư viện, cấu hình, mạng, số người dùng, cách xử lý sự cố. Có 10 máy thì không thể chép .env lên từng máy. Dev, staging, production càng giống nhau càng ít lỗi khi deploy.",
+        "Ba tính chất của agent: vòng suy luận chạy 10–60 giây, vượt timeout mặc định 29–60 giây của gateway; có memory hội thoại, trái với stateless; chi phí tăng siêu tuyến tính vì mỗi lượt gửi lại cả lịch sử.",
+        "Vẫn ship bằng CI/CD, container, cân bằng tải, nhưng định nghĩa lại: kiểm thử bằng eval gate thay vì so khớp chính xác, hoá đơn theo token thay vì giờ CPU, dependency là model nhà cung cấp, có thể bị khai tử.",
+        "Sáu lớp của ứng dụng AI theo đường request: client → gateway, xác thực → backend (phiên, RAG, tool, worker) → model → dữ liệu (vector DB, cache) → hạ tầng cloud. Là bản đồ định vị, không phải thứ tự làm."
+      ],
+      "ky_nang": [
+        "Chỉ ra chỗ agent hiện tại của mình vi phạm từng khác biệt giữa dev và production",
+        "Dự đoán tính chất nào gây lỗi 504, tính chất nào làm hoá đơn tăng bất ngờ",
+        "Đặt từng thành phần agent đã xây vào đúng lớp trong sáu lớp"
+      ]
+    },
+    {
+      "ten": "Chuẩn bị agent cho production: cấu hình, health check, log và tắt êm",
+      "kien_thuc": [
+        "Cấu hình đọc từ biến môi trường, không hardcode (12-factor). Secret không có giá trị mặc định để ứng dụng dừng ngay khi thiếu khoá. Khoá lộ lên repo công khai: thu hồi, tạo khoá mới, thêm quét secret vào CI.",
+        "/health (liveness): khác 200 thì container bị khởi động lại. /ready (readiness) kiểm tra cả phụ thuộc như Redis; lỗi thì chỉ ngắt traffic. Gộp làm một thì Redis chập chờn cũng khiến cả cụm khởi động lại.",
+        "Log dạng JSON hoặc key-value để máy truy vấn được, thay cho print; mỗi dòng có tên sự kiện, độ dài request, địa chỉ client, không bao giờ chứa secret. Mã 4xx là lỗi phía client, 5xx là lỗi phía mình.",
+        "SIGKILL tắt ngay, cắt ngang request đang dở. SIGTERM cho tắt êm: ngừng nhận request mới, xử lý nốt request dở, rồi thoát. Lượt agent có thể kéo dài nên thời gian chờ tắt phải lớn hơn lượt dài nhất."
+      ],
+      "ky_nang": [
+        "Tách cấu hình ra module Settings đọc từ môi trường, secret không có giá trị mặc định",
+        "Viết /health và /ready đúng vai trò, phân biệt lỗi 4xx với 5xx",
+        "Cài hàm xử lý SIGTERM để request đang dở vẫn được trả về"
+      ]
+    },
+    {
+      "ten": "Đóng gói agent bằng Docker",
+      "kien_thuc": [
+        "Máy ảo mang cả hệ điều hành, nặng hàng GB, khởi động chậm; container gói code, thư viện, runtime, dùng chung nhân hệ điều hành nên nhẹ, chạy trong vài giây. Image là bản thiết kế, container là image đang chạy.",
+        "Dockerfile tối thiểu: FROM, WORKDIR, COPY, RUN, EXPOSE, CMD, mỗi lệnh một layer. Layer nào đổi thì mọi layer sau chạy lại, nên cài thư viện trước, chép code sau. Image push lên registry, máy khác pull về chạy.",
+        "Multi-stage build tách build và chạy, image từ khoảng 1 GB còn dưới 500 MB. Mặc định cho Python là bản slim (khoảng 150 MB); tránh Alpine vì thư viện tính toán phải biên dịch lại. Chạy bằng user non-root.",
+        "Docker Compose khai báo agent, Redis, vector store trong một file, chạy bằng một lệnh; dữ liệu bền nằm ở volume. Một image dùng cho mọi môi trường, chỉ khác biến môi trường truyền vào lúc chạy."
+      ],
+      "ky_nang": [
+        "Viết Dockerfile hai giai đoạn, chạy bằng user thường, với image gốc phù hợp",
+        "Sắp xếp lại Dockerfile để sửa code xong chỉ build lại vài giây",
+        "Viết docker-compose.yml cho agent kèm Redis"
+      ]
+    },
+    {
+      "ten": "Bảo vệ agent: gateway, xác thực, giới hạn tần suất và ngân sách",
+      "kien_thuc": [
+        "Gateway là cổng vào duy nhất: xác thực (sai trả 401) → giới hạn tần suất (vượt trả 429) → kiểm tra đầu vào và ngân sách → mới vào agent. Từ chối sớm thì không tốn token. Với MVP, một middleware FastAPI là đủ.",
+        "Ba mẫu xác thực: khoá API trong header (MVP, giữa các dịch vụ), JWT (ứng dụng hướng người dùng), OAuth 2.1 với PKCE (host MCP server từ xa). CORS chỉ là kiểm soát của trình duyệt, không thay được xác thực.",
+        "Cửa sổ cố định đặt lại ở giây 00: với hạn mức 10 lượt mỗi phút vẫn lọt 20 lượt trong 2 giây quanh mốc. Cửa sổ trượt đếm 60 giây gần nhất nên không có kẽ hở; xô token cho bùng nổ ngắn rồi nạp lại dần.",
+        "Ngân sách trên bảng điều khiển nhà cung cấp chỉ báo, không chặn. Phải chặn trước khi gọi model (admission control): đếm token đầu vào, ước chi phí với đầu ra tối đa, so với ngân sách còn lại, vượt thì từ chối."
+      ],
+      "ky_nang": [
+        "Vẽ vòng đời request qua gateway kèm mã lỗi ở từng bước từ chối",
+        "Chọn mẫu xác thực theo tình huống và giải thích vì sao bật CORS chưa phải bảo mật",
+        "Viết hàm guard ước chi phí trước khi gọi model; nêu ca ngân sách chặn mà tần suất cho qua"
+      ]
+    },
+    {
+      "ten": "Mở rộng và giữ agent sống: stateless, health probe, deploy không gián đoạn",
+      "kien_thuc": [
+        "Stateless: lịch sử hội thoại lưu ở Redis hoặc Postgres, không trong bộ nhớ tiến trình. Để trong dict của tiến trình thì sau bộ cân bằng tải mỗi instance chỉ nhớ phần mình nhận, instance chết là mất.",
+        "Scale dọc (thêm RAM, CPU) phải khởi động lại, có trần. Scale ngang (thêm instance) cần stateless. Agent nặng I/O nên tự mở rộng theo số request đang chờ, không theo CPU; luôn đặt trần số instance.",
+        "Deploy không gián đoạn: khởi động bản mới → chờ health pass → chuyển traffic → rút cạn, tắt bản cũ bằng SIGTERM. Phát hành thử cho nhóm ngẫu nhiên. Rollback dưới 2 phút, gồm cả prompt và phiên bản model.",
+        "Thử lại với chờ tăng dần 1, 2, 4 giây chỉ cho hành động thử lại được; gửi email hay trừ tiền mà thử lại mù là làm hai lần, cần khoá idempotency. Ngắt mạch khi lỗi liên tiếp để phần khác khỏi chờ timeout."
+      ],
+      "ky_nang": [
+        "Chuyển lịch sử hội thoại từ dict trong tiến trình sang Redis",
+        "Chọn scale dọc hay ngang và tín hiệu tự động mở rộng đúng cho agent",
+        "Mô tả bốn bước deploy không gián đoạn và cách rollback"
+      ]
+    },
+    {
+      "ten": "Chọn nơi deploy và tự động hoá",
+      "kien_thuc": [
+        "Bốn tầng, tự quản giảm dần: Kubernetes → container tự scale (Cloud Run, Fargate) → nền tảng đơn giản (Railway, Render) → runtime agent trọn gói. Càng ít lo hạ tầng càng đắt; bắt đầu đơn giản, lên tầng khi cần.",
+        "Với agent, trục so sánh chính là timeout (thời gian tối đa một request được chạy), không phải giá. Hàm serverless giới hạn 5–15 phút, mất state giữa các lần gọi nên không hợp agent chạy lâu.",
+        "Deploy lên Railway/Render: kết nối repo → nhận Dockerfile → đặt biến môi trường → deploy → có URL HTTPS. Phải đọc cổng từ biến PORT, nghe trên 0.0.0.0; image build trên máy ARM có thể không chạy trên x86.",
+        "Pipeline CI/CD: test → build image → quét lỗ hổng → đánh giá → deploy khi tất cả xanh. Agent sai vẫn trả lời bình thường nên cần cổng đánh giá ngoài test. Prompt và phiên bản model cũng là artifact deploy."
+      ],
+      "ky_nang": [
+        "Chọn tầng nền tảng cho một tình huống, lấy timeout làm trục so sánh chính",
+        "Deploy agent lên Railway hoặc Render và chẩn đoán lỗi deploy đầu tiên",
+        "Vẽ pipeline năm bước cho agent có cổng đánh giá"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 12: đóng gói và deploy agent lên cloud",
+    "tom_tat": "Đi qua năm mốc có test tự chấm: tách cấu hình, thêm /health và log JSON; Dockerfile hai giai đoạn dưới 500 MB kèm Compose và Redis; khoá API, giới hạn tần suất cửa sổ trượt, ngân sách tháng; phiên ở Redis, ba bản agent sau Nginx; deploy lên Railway hoặc Render.",
+    "dau_ra": "Agent chạy trên địa chỉ công khai, có health check, khoá API và kiểm soát ngân sách"
+  },
+  "lien_quan": [
+    {
+      "ngay": 13,
+      "ghi_chu": "health check 200 OK chưa nói câu trả lời đúng: thêm metrics, logs, traces"
+    },
+    {
+      "ngay": 14,
+      "ghi_chu": "cổng đánh giá trong CI/CD dựa trên golden set và LLM-as-judge"
+    }
+  ]
+}

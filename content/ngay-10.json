@@ -1,0 +1,113 @@
+{
+  "ngay": 10,
+  "ten": "Data Pipeline & Data Observability",
+  "ten_ngan": "Data pipeline",
+  "cot_moc": 3,
+  "cau_hoi": "Garbage in, garbage out — sửa từ đâu, và bạn biết trước hay đợi người dùng báo?",
+  "muc_tieu": "Hiểu vì sao lỗi dữ liệu đắt hơn tưởng; chọn kiến trúc ingest theo loại nguồn; phân biệt dữ liệu hợp lệ với đúng thực tế, viết bộ luật dữ liệu để phán quyết; quan sát pipeline, chẩn đoán đúng thứ tự; quyết định dừng, tách riêng hay ghi lại.",
+  "tu_khoa": [
+    "data cascade",
+    "ETL / ELT",
+    "batch / streaming",
+    "cursor pagination",
+    "data contract",
+    "data quality",
+    "data observability",
+    "idempotency"
+  ],
+  "bai_hoc": [
+    "60–80% công sức thực tế nằm ở phần dữ liệu",
+    "Kiểm tra chất lượng chạy như code; dữ liệu hỏng thì dừng pipeline",
+    "5 pillars: freshness, distribution, volume, schema, lineage",
+    "Agent trả lời chính sách cũ? Soi tầng dữ liệu trước khi sửa prompt"
+  ],
+  "tu_soi": "Nếu dữ liệu của bạn sai hôm nay, bạn biết trước hay sau người dùng?",
+  "module": [
+    {
+      "ten": "Data pipeline: nền tảng của mọi AI product",
+      "kien_thuc": [
+        "Khoảng 60–80% thời gian dự án AI là việc dữ liệu. Data cascade: thay đổi nhỏ ở nguồn (như đổi cách ghi ngày) trôi qua mọi bước không ai báo lỗi, chỉ lộ ra khi agent trả lời sai. Cách thoát: gắn điểm đo sớm.",
+        "Năm triệu chứng chỉ về tầng dữ liệu: agent trả lời đúng nhưng cũ, lẫn hai phiên bản, bịa nghe hợp lý, chỉ sai với một loại nguồn, đột biến sau khi triển khai. Đọc triệu chứng trước khi sửa prompt hay đổi model.",
+        "Lấy mẫu bám hành vi người dùng, không theo dữ liệu nguồn sẵn có: cần một số đo mỗi ngày mà nguồn đo 5 phút một lần thì lấy một điểm cùng khung giờ (có dung sai), không lấy trung bình vì mất dao động.",
+        "ETL transform trước khi nạp, ELT nạp thô rồi transform. Câu hỏi quyết định: có được giữ dữ liệu thô không? Không (log có thông tin cá nhân phải che) thì ETL; chưa chắc cách transform thì ELT, giữ quyền đổi ý.",
+        "Batch chạy theo lịch, rẻ, dễ chạy lại nhưng dữ liệu trễ vài giờ; streaming xử lý ngay, độ trễ mili giây nhưng đắt và khó gỡ lỗi. Câu hỏi quyết định: dữ liệu trễ 6 tiếng thì agent sai tới mức nào?"
+      ],
+      "ky_nang": [
+        "Suy ra tầng dữ liệu khả nghi từ một triệu chứng của agent",
+        "Chọn cách lấy mẫu bám hành vi người dùng thay vì dữ liệu nguồn sẵn có",
+        "Chọn ETL hay ELT, batch hay streaming bằng đúng câu hỏi quyết định"
+      ]
+    },
+    {
+      "ten": "Ingestion: kéo dữ liệu về mà không mất bản ghi",
+      "kien_thuc": [
+        "Mỗi loại nguồn hỏng một kiểu: database timeout, đổi schema; API dính giới hạn tần suất, lệch phân trang; PDF, HTML đọc sai chữ; luồng sự kiện dồn ứ hoặc trùng. Nguồn không ai chịu trách nhiệm sẽ gây sự cố.",
+        "Phân trang offset (“từ dòng N trở đi”) lệch khi có bản ghi chèn vào lúc đang đọc: đọc trùng bản cũ, sót bản mới, không lỗi nào bắn ra. Cursor nhớ đúng mốc đã dừng nên an toàn khi nguồn đang thay đổi.",
+        "Gặp giới hạn tần suất thì chờ tăng cấp số nhân (1, 2, 4 giây), ưu tiên thời gian chờ API đề xuất, thêm jitter (khoảng ngẫu nhiên) để các tiến trình không thử lại cùng lúc. Thử lại vô hạn là tự tấn công nguồn.",
+        "Với tệp, hash nội dung trả lời “tệp có đổi không” để quyết định xử lý lại; phiên bản logic trả lời “đây là bản nào” để agent lọc đúng bản. Chữ đọc từ ảnh scan có điểm tin cậy thấp phải gắn cờ trước khi công bố.",
+        "Hàng đợi phình là triệu chứng: hỏi vì sao bên xử lý chậm. Áp lực ngược (backpressure) báo bên phát chậm lại; bản ghi thử lại vẫn lỗi tách sang hàng chờ bản ghi lỗi để xem lại, không chặn cả hàng."
+      ],
+      "ky_nang": [
+        "Dự đoán kết quả phân trang offset và cursor khi có bản ghi chèn giữa",
+        "Thiết kế thử lại có backoff cấp số nhân, jitter và giới hạn số lần",
+        "Chọn cách đo cho một nguồn dữ liệu mới theo kiểu hỏng đặc trưng của nó"
+      ]
+    },
+    {
+      "ten": "Transform và data quality: làm sạch, chuẩn hoá, đo bằng code",
+      "kien_thuc": [
+        "Mỗi bản ghi rẽ một trong ba hướng: sửa được (cắt khoảng trắng, chuẩn hoá ngày, unicode) thì vào kho; nghi ngờ thì chờ người duyệt; không cứu được (rỗng, trùng khoá chính) thì tách riêng, ghi kèm mã lần chạy.",
+        "Năm kiểu dữ liệu bẩn: giá trị thiếu (rỗng, chữ “chưa có”, số không giả làm thiếu), giá trị bất thường, bản ghi trùng, định dạng lệch nhau, lỗi bảng mã. Mọi đội phải dùng chung một cách ghi “chưa có giá trị”.",
+        "Sáu khía cạnh chất lượng: năm cái máy tự kiểm trên chính bảng (kiểu và khoảng giá trị, tỉ lệ thiếu, trùng lặp, đối chiếu chéo, tuổi bản ghi); cái thứ sáu, đúng với thực tế, cần nguồn đối chiếu bên ngoài.",
+        "Hợp lệ chưa chắc đúng: số tiền dương, đúng kiểu vẫn có thể nhập sai. Data contract (bộ luật dữ liệu) gồm giá trị hợp lệ, quy tắc nghiệp vụ (tiền hoàn có thể âm) và quan trọng nhất: những gì nó không quy định.",
+        "Mỗi phát hiện bất thường được phán quyết theo bộ luật: sai (vi phạm điều viết rõ), đúng (trông lạ nhưng luật giải thích được), hoặc không thể biết (luật không nói; ghi rõ cần hỏi nguồn nào)."
+      ],
+      "ky_nang": [
+        "Phân loại một bản ghi lỗi vào sửa, gắn cờ hay loại, và ghi lại bản ghi bị loại",
+        "Phân biệt lỗi kiểm tra tự động bắt được với lỗi cần nguồn đối chiếu bên ngoài",
+        "Phán quyết một phát hiện bất thường là sai, đúng nhưng trông lạ, hay không thể biết"
+      ]
+    },
+    {
+      "ten": "Data Observability",
+      "kien_thuc": [
+        "Năm điều cần thấy: freshness (độ mới), volume (khối lượng), distribution (phân phối), schema (cấu trúc), lineage (dòng chảy dữ liệu). Bốn cái đầu chỉ báo có sự cố; lineage nối các điểm đo, chỉ ra bước gây lỗi.",
+        "Sự cố im lặng: bước đồng bộ rạng sáng hỏng mà job vẫn xong, log không báo gì, vì “không có gì mới” trông y hệt “không có gì cần làm”. Agent sai thì kiểm: độ mới → khối lượng → cấu trúc → lineage → model.",
+        "Cam kết độ mới viết theo hệ quả người dùng thấy (chính sách mới vào câu trả lời trong bao lâu từ lúc ký), đo lúc agent đọc được, không phải lúc tệp vào thư mục tạm. Hết nửa hạn báo nhẹ, hết hạn báo khẩn.",
+        "Lệch phân phối chỉ nói phân phối đã đổi, không nói dữ liệu sai: có thể chỉ là hành vi người dùng đổi. Một kiểu biểu đồ tổng hợp duy nhất có thể che một điểm lệch nhỏ về tỉ lệ nhưng lớn về hệ quả.",
+        "Đủ số dòng chưa chắc ổn: tỉ lệ thiếu tăng vọt ở một cột, nội dung ngắn bất thường, ràng buộc giữa các cột vô lý, thời gian vượt hiện tại. Các lỗi này không làm pipeline dừng, chỉ làm agent tệ dần."
+      ],
+      "ky_nang": [
+        "Áp đúng thứ tự chẩn đoán tầng dữ liệu khi agent trả lời sai",
+        "Viết cam kết độ mới theo ngôn ngữ nghiệp vụ và chọn đúng điểm đo",
+        "Phân biệt cột bị đánh dấu lệch với cột thực sự hỏng"
+      ]
+    },
+    {
+      "ten": "Từ phát hiện đến chính sách",
+      "kien_thuc": [
+        "Ba mức xử lý: lỗi làm sai mọi thứ phía sau (trùng khoá chính, bảng mã hỏng) thì dừng pipeline; khoá đúng mà nội dung đáng ngờ thì tách riêng chờ duyệt; lỗi ở trường không bắt buộc thì ghi lại rồi đi tiếp.",
+        "Xếp mức bằng câu hỏi “lỗi lọt qua thì hậu quả tới đâu, có chờ được không”, không phải “nghe đáng sợ cỡ nào”. Mức xử lý ghi trong data contract; khu vực tách riêng không bao giờ cho agent đọc.",
+        "Viết quy tắc kiểm tra thì dễ; khó là biết nó đủ tin để dừng cả hệ thống chưa. Đo trong số dòng bị chặn có bao nhiêu % là lỗi thật, rồi mới xếp quy tắc vào mức dừng, tách hay ghi lại.",
+        "Pipeline sẽ bị chạy lại nên phải idempotent (chạy lại không sinh trùng): cập nhật theo khoá tự nhiên thay vì sinh mã mới, hoặc nạp vào vùng tạm rồi mới chuyển hướng đọc. Thiếu nó, agent lấy cả bản cũ lẫn mới.",
+        "Bản ghi sự cố trả lời 5 câu: người dùng thấy gì, chỉ số nào báo, nguyên nhân gốc ở đâu, đã chặn lan thế nào, đã thêm gì để không tái diễn. Chưa có chỉ số nào báo trước người dùng thì phải thêm chỉ số đo mới."
+      ],
+      "ky_nang": [
+        "Xếp một lỗi vào mức dừng, tách riêng hay ghi lại theo hậu quả nếu nó lọt qua",
+        "Viết quy tắc kiểm tra và đo tỉ lệ lỗi thật trong số dòng bị chặn",
+        "Thiết kế bước nạp chạy lại an toàn, không sinh bản ghi trùng"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 10: sửa một pipeline dữ liệu chưa hoàn chỉnh và chứng minh cải thiện",
+    "tom_tat": "Phân tích dữ liệu thô của một trợ lý nội bộ (bản ghi trùng, thiếu ngày, xung đột phiên bản, sót một nguồn), sửa quy tắc làm sạch và bộ kiểm tra chất lượng đến khi pipeline chạy thông, rồi cố ý làm hỏng dữ liệu để đo ảnh hưởng lên chất lượng truy xuất.",
+    "dau_ra": "Pipeline chạy được, bằng chứng trước và sau bằng số, hồ sơ dữ liệu và quy trình xử lý sự cố"
+  },
+  "lien_quan": [
+    {
+      "ngay": 13,
+      "ghi_chu": "quan sát agent lúc chạy, tách khỏi quan sát dữ liệu chảy vào"
+    }
+  ]
+}

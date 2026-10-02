@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 12 · Hạ tầng Cloud &amp; Deployment · Retro 15 ngày</title>
+<meta name="description" content="Agent ra khỏi laptop — deploy thế nào?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 12 · Hạ tầng Cloud &amp; Deployment · Retro 15 ngày">
+<meta property="og:description" content="Agent ra khỏi laptop — deploy thế nào?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-12">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-4" data-prev="/ngay/ngay-11" data-next="/ngay/ngay-13">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4 on" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy" aria-current="page">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 12 · Cột mốc 4 · Vận hành</p>
+  <h1>Hạ tầng Cloud &amp; Deployment</h1>
+  <blockquote class="q">Agent ra khỏi laptop — deploy thế nào?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Hiểu vì sao agent trên laptop chưa phải dịch vụ và ba tính chất khiến agent khác web app thường; đóng gói agent thành container chuẩn; bảo vệ endpoint bằng xác thực, giới hạn tần suất, ngân sách; thiết kế dịch vụ stateless; deploy lên cloud không rớt request.</p>
+  <p class="chips"><span class="chip">container</span><span class="chip">multi-stage build</span><span class="chip">health check</span><span class="chip">API gateway</span><span class="chip">rate limiting</span><span class="chip">stateless</span><span class="chip">scale ngang</span><span class="chip">CI/CD</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>Cùng cỗ máy, khác cái hộp: localhost không phải production</li><li>Container: multi-stage, slim, non-root; tránh Alpine cho ML</li><li>Chọn platform theo timeout, scale theo concurrency</li><li>Ngân sách không tự chặn: cần admission control và eval gate trong CI</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Khoảng cách giữa laptop và production</a><a href="#m2"><span>2</span>Chuẩn bị agent cho production: cấu hình, health check, log và tắt êm</a><a href="#m3"><span>3</span>Đóng gói agent bằng Docker</a><a href="#m4"><span>4</span>Bảo vệ agent: gateway, xác thực, giới hạn tần suất và ngân sách</a><a href="#m5"><span>5</span>Mở rộng và giữ agent sống: stateless, health probe, deploy không gián đoạn</a><a href="#m6"><span>6</span>Chọn nơi deploy và tự động hoá</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Khoảng cách giữa laptop và production</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Năm khác biệt giữa dev và production: thư viện, cấu hình, mạng, số người dùng, cách xử lý sự cố. Có 10 máy thì không thể chép .env lên từng máy. Dev, staging, production càng giống nhau càng ít lỗi khi deploy.</li><li>Ba tính chất của agent: vòng suy luận chạy 10–60 giây, vượt timeout mặc định 29–60 giây của gateway; có memory hội thoại, trái với stateless; chi phí tăng siêu tuyến tính vì mỗi lượt gửi lại cả lịch sử.</li><li>Vẫn ship bằng CI/CD, container, cân bằng tải, nhưng định nghĩa lại: kiểm thử bằng eval gate thay vì so khớp chính xác, hoá đơn theo token thay vì giờ CPU, dependency là model nhà cung cấp, có thể bị khai tử.</li><li>Sáu lớp của ứng dụng AI theo đường request: client → gateway, xác thực → backend (phiên, RAG, tool, worker) → model → dữ liệu (vector DB, cache) → hạ tầng cloud. Là bản đồ định vị, không phải thứ tự làm.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chỉ ra chỗ agent hiện tại của mình vi phạm từng khác biệt giữa dev và production</li><li>Dự đoán tính chất nào gây lỗi 504, tính chất nào làm hoá đơn tăng bất ngờ</li><li>Đặt từng thành phần agent đã xây vào đúng lớp trong sáu lớp</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Chuẩn bị agent cho production: cấu hình, health check, log và tắt êm</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Cấu hình đọc từ biến môi trường, không hardcode (12-factor). Secret không có giá trị mặc định để ứng dụng dừng ngay khi thiếu khoá. Khoá lộ lên repo công khai: thu hồi, tạo khoá mới, thêm quét secret vào CI.</li><li>/health (liveness): khác 200 thì container bị khởi động lại. /ready (readiness) kiểm tra cả phụ thuộc như Redis; lỗi thì chỉ ngắt traffic. Gộp làm một thì Redis chập chờn cũng khiến cả cụm khởi động lại.</li><li>Log dạng JSON hoặc key-value để máy truy vấn được, thay cho print; mỗi dòng có tên sự kiện, độ dài request, địa chỉ client, không bao giờ chứa secret. Mã 4xx là lỗi phía client, 5xx là lỗi phía mình.</li><li>SIGKILL tắt ngay, cắt ngang request đang dở. SIGTERM cho tắt êm: ngừng nhận request mới, xử lý nốt request dở, rồi thoát. Lượt agent có thể kéo dài nên thời gian chờ tắt phải lớn hơn lượt dài nhất.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Tách cấu hình ra module Settings đọc từ môi trường, secret không có giá trị mặc định</li><li>Viết /health và /ready đúng vai trò, phân biệt lỗi 4xx với 5xx</li><li>Cài hàm xử lý SIGTERM để request đang dở vẫn được trả về</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Đóng gói agent bằng Docker</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Máy ảo mang cả hệ điều hành, nặng hàng GB, khởi động chậm; container gói code, thư viện, runtime, dùng chung nhân hệ điều hành nên nhẹ, chạy trong vài giây. Image là bản thiết kế, container là image đang chạy.</li><li>Dockerfile tối thiểu: FROM, WORKDIR, COPY, RUN, EXPOSE, CMD, mỗi lệnh một layer. Layer nào đổi thì mọi layer sau chạy lại, nên cài thư viện trước, chép code sau. Image push lên registry, máy khác pull về chạy.</li><li>Multi-stage build tách build và chạy, image từ khoảng 1 GB còn dưới 500 MB. Mặc định cho Python là bản slim (khoảng 150 MB); tránh Alpine vì thư viện tính toán phải biên dịch lại. Chạy bằng user non-root.</li><li>Docker Compose khai báo agent, Redis, vector store trong một file, chạy bằng một lệnh; dữ liệu bền nằm ở volume. Một image dùng cho mọi môi trường, chỉ khác biến môi trường truyền vào lúc chạy.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết Dockerfile hai giai đoạn, chạy bằng user thường, với image gốc phù hợp</li><li>Sắp xếp lại Dockerfile để sửa code xong chỉ build lại vài giây</li><li>Viết docker-compose.yml cho agent kèm Redis</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Bảo vệ agent: gateway, xác thực, giới hạn tần suất và ngân sách</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Gateway là cổng vào duy nhất: xác thực (sai trả 401) → giới hạn tần suất (vượt trả 429) → kiểm tra đầu vào và ngân sách → mới vào agent. Từ chối sớm thì không tốn token. Với MVP, một middleware FastAPI là đủ.</li><li>Ba mẫu xác thực: khoá API trong header (MVP, giữa các dịch vụ), JWT (ứng dụng hướng người dùng), OAuth 2.1 với PKCE (host MCP server từ xa). CORS chỉ là kiểm soát của trình duyệt, không thay được xác thực.</li><li>Cửa sổ cố định đặt lại ở giây 00: với hạn mức 10 lượt mỗi phút vẫn lọt 20 lượt trong 2 giây quanh mốc. Cửa sổ trượt đếm 60 giây gần nhất nên không có kẽ hở; xô token cho bùng nổ ngắn rồi nạp lại dần.</li><li>Ngân sách trên bảng điều khiển nhà cung cấp chỉ báo, không chặn. Phải chặn trước khi gọi model (admission control): đếm token đầu vào, ước chi phí với đầu ra tối đa, so với ngân sách còn lại, vượt thì từ chối.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Vẽ vòng đời request qua gateway kèm mã lỗi ở từng bước từ chối</li><li>Chọn mẫu xác thực theo tình huống và giải thích vì sao bật CORS chưa phải bảo mật</li><li>Viết hàm guard ước chi phí trước khi gọi model; nêu ca ngân sách chặn mà tần suất cho qua</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Mở rộng và giữ agent sống: stateless, health probe, deploy không gián đoạn</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Stateless: lịch sử hội thoại lưu ở Redis hoặc Postgres, không trong bộ nhớ tiến trình. Để trong dict của tiến trình thì sau bộ cân bằng tải mỗi instance chỉ nhớ phần mình nhận, instance chết là mất.</li><li>Scale dọc (thêm RAM, CPU) phải khởi động lại, có trần. Scale ngang (thêm instance) cần stateless. Agent nặng I/O nên tự mở rộng theo số request đang chờ, không theo CPU; luôn đặt trần số instance.</li><li>Deploy không gián đoạn: khởi động bản mới → chờ health pass → chuyển traffic → rút cạn, tắt bản cũ bằng SIGTERM. Phát hành thử cho nhóm ngẫu nhiên. Rollback dưới 2 phút, gồm cả prompt và phiên bản model.</li><li>Thử lại với chờ tăng dần 1, 2, 4 giây chỉ cho hành động thử lại được; gửi email hay trừ tiền mà thử lại mù là làm hai lần, cần khoá idempotency. Ngắt mạch khi lỗi liên tiếp để phần khác khỏi chờ timeout.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chuyển lịch sử hội thoại từ dict trong tiến trình sang Redis</li><li>Chọn scale dọc hay ngang và tín hiệu tự động mở rộng đúng cho agent</li><li>Mô tả bốn bước deploy không gián đoạn và cách rollback</li></ul></div>
+  </div>
+</section><section class="mod" id="m6" aria-labelledby="m6-h">
+  <div class="mod-h"><span class="mod-n">06</span><h2 id="m6-h">Chọn nơi deploy và tự động hoá</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Bốn tầng, tự quản giảm dần: Kubernetes → container tự scale (Cloud Run, Fargate) → nền tảng đơn giản (Railway, Render) → runtime agent trọn gói. Càng ít lo hạ tầng càng đắt; bắt đầu đơn giản, lên tầng khi cần.</li><li>Với agent, trục so sánh chính là timeout (thời gian tối đa một request được chạy), không phải giá. Hàm serverless giới hạn 5–15 phút, mất state giữa các lần gọi nên không hợp agent chạy lâu.</li><li>Deploy lên Railway/Render: kết nối repo → nhận Dockerfile → đặt biến môi trường → deploy → có URL HTTPS. Phải đọc cổng từ biến PORT, nghe trên 0.0.0.0; image build trên máy ARM có thể không chạy trên x86.</li><li>Pipeline CI/CD: test → build image → quét lỗ hổng → đánh giá → deploy khi tất cả xanh. Agent sai vẫn trả lời bình thường nên cần cổng đánh giá ngoài test. Prompt và phiên bản model cũng là artifact deploy.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn tầng nền tảng cho một tình huống, lấy timeout làm trục so sánh chính</li><li>Deploy agent lên Railway hoặc Render và chẩn đoán lỗi deploy đầu tiên</li><li>Vẽ pipeline năm bước cho agent có cổng đánh giá</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 12: đóng gói và deploy agent lên cloud</h2>
+  <p>Đi qua năm mốc có test tự chấm: tách cấu hình, thêm /health và log JSON; Dockerfile hai giai đoạn dưới 500 MB kèm Compose và Redis; khoá API, giới hạn tần suất cửa sổ trượt, ngân sách tháng; phiên ở Redis, ba bản agent sau Nginx; deploy lên Railway hoặc Render.</p>
+  <p class="out"><span>Đầu ra</span>Agent chạy trên địa chỉ công khai, có health check, khoá API và kiểm soát ngân sách</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Nếu ai đó spam app của bạn đêm nay, ai trả tiền và cái gì chặn lại?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-4" href="/ngay/ngay-13"><strong>Ngày 13 · Monitoring</strong><span>health check 200 OK chưa nói câu trả lời đúng: thêm metrics, logs, traces</span></a><a class="rel cm-4" href="/ngay/ngay-14"><strong>Ngày 14 · Evaluation</strong><span>cổng đánh giá trong CI/CD dựa trên golden set và LLM-as-judge</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-11" rel="prev"><span>← Ngày 11</span><strong>Guardrails</strong></a><a class="pn-a next" href="/ngay/ngay-13" rel="next"><span>Ngày 13 →</span><strong>Monitoring</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

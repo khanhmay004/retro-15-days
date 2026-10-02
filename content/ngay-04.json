@@ -1,0 +1,128 @@
+{
+  "ngay": 4,
+  "ten": "Prompt Engineering & Tool Calling",
+  "ten_ngan": "Prompt & tool",
+  "cot_moc": 1,
+  "cau_hoi": "Cùng một model — vì sao prompt của người này cho kết quả xuất sắc, của người kia thì không dùng được, và agent lúc gọi đúng tool lúc gọi sai?",
+  "muc_tieu": "Viết prompt theo Role, Task, Context, Format; biết khi nào cần few-shot và chain-of-thought; viết system prompt chuẩn production cho agent; khai báo tool schema và nắm vòng tool calling từ model đến tool rồi về model; nhận diện prompt injection và phòng cơ bản; xây một agent hoàn chỉnh.",
+  "tu_khoa": [
+    "system prompt",
+    "few-shot",
+    "chain-of-thought",
+    "thẻ XML",
+    "lost in the middle",
+    "prompt injection",
+    "tool schema",
+    "tool description"
+  ],
+  "bai_hoc": [
+    "System prompt 5 phần: Persona, Rules, Capabilities, Constraints, Output format",
+    "Tool description quyết định model chọn đúng tool và đúng tham số",
+    "Context có 5 “rổ” token; thông tin ở giữa dễ bị quên (Lost in the Middle)",
+    "Prompt safety là bắt buộc cho production, không phải “nice to have”"
+  ],
+  "tu_soi": "Tool description nào của bạn từng khiến agent gọi sai tool?",
+  "module": [
+    {
+      "ten": "Nền tảng viết prompt",
+      "kien_thuc": [
+        "Prompt tốt tạo hành vi ổn định, lặp lại được, không phải nghe hay. Khung bốn phần: Role, Task, Context, Format. Bắt đầu từ Task (việc cần làm) và Format (đầu ra); chỉ thêm Role, Context khi thật cần.",
+        "Ba loại prompt: instruction (một tác vụ), conversation (giữ mạch nhiều lượt), system prompt (policy và ràng buộc cho cả phiên). Nói rõ nên làm gì thay thế hiệu quả hơn chỉ nói “đừng”.",
+        "Temperature (Ngày 1) làm phân bố xác suất phẳng hay nhọn hơn trước khi chọn token; ở 0, model luôn lấy token cao nhất nên top-p, top-k vô tác dụng. Gần 0 cho tác vụ cần nhất quán, cao hơn cho brainstorm."
+      ],
+      "ky_nang": [
+        "Viết prompt đủ Role, Task, Context, Format và tự tìm trường hợp biên còn sót",
+        "Viết lại một câu “đừng” thành hướng dẫn có hành vi thay thế",
+        "Chọn temperature, top-p phù hợp cho một tác vụ cụ thể"
+      ]
+    },
+    {
+      "ten": "Kỹ thuật prompt nâng cao",
+      "kien_thuc": [
+        "Few-shot đưa vài ví dụ mẫu vào prompt để model theo khuôn; 3–5 ví dụ đa dạng thường đủ, ví dụ một chiều gây thiên lệch. Dễ sai khi lẫn input với output, hoặc ví dụ đúng định dạng nhưng khác loại tình huống.",
+        "Chain-of-thought yêu cầu model trình bày từng bước trước khi trả lời, giúp bài toán nhiều bước chính xác hơn. Model suy luận hiện nay tự làm một phần việc này, nên với tác vụ đơn giản có thể thừa.",
+        "Mô tả đích đến, không mô tả lộ trình: lộ trình có thể kéo model vào hướng giải quen thuộc thay vì hướng tốt nhất. Thinking budget là số token cho suy luận nội bộ, không phải bộ tham số (parameters) của model.",
+        "Bọc từng phần prompt (hướng dẫn, dữ liệu người dùng, tài liệu) trong thẻ như XML để model phân biệt đâu là chỉ dẫn, đâu là nội dung cần xử lý. Model nhận diện cấu trúc thẻ tốt vì gặp nhiều khi huấn luyện."
+      ],
+      "ky_nang": [
+        "Chọn ví dụ few-shot đúng loại tình huống và tách rõ input, output",
+        "Quyết định khi nào cần yêu cầu model lập luận từng bước",
+        "Viết prompt có thẻ cấu trúc tách chỉ dẫn khỏi dữ liệu"
+      ]
+    },
+    {
+      "ten": "System prompt production-grade",
+      "kien_thuc": [
+        "System prompt đầy đủ có năm phần: persona, rules, capabilities, constraints, output contract (định dạng đầu ra cam kết). Vụ chatbot hứa hoàn tiền sai chính sách cho thấy constraints là bắt buộc.",
+        "Ba lỗi phổ biến: mơ hồ (đòi “thông minh hơn” mà không nói hành vi cụ thể), mâu thuẫn (vừa đòi ngắn gọn vừa đòi giải thích từng bước), quá tải (quá nhiều quy tắc tự triệt tiêu nhau).",
+        "Test system prompt bằng nhiều lượt hỏi khác nhau, không chỉ một lần chạy: độ ổn định qua nhiều lần thử mới đáng tin, một kết quả đẹp thì chưa.",
+        "Gặp câu không biết hoặc ngoài phạm vi, agent từ chối có ích: nói rõ không có thông tin, gợi ý bước tiếp, hoặc chuyển người phụ trách. Việc có hậu quả thật như xác nhận giao dịch tài chính phải qua con người."
+      ],
+      "ky_nang": [
+        "Viết system prompt đủ năm phần cho một agent cụ thể",
+        "Tìm lỗi mơ hồ, mâu thuẫn, quá tải trong một system prompt có sẵn",
+        "Viết điều khoản từ chối và điều kiện chuyển cho người"
+      ]
+    },
+    {
+      "ten": "Quản lý context",
+      "kien_thuc": [
+        "Trong một lần gọi, chỉ system prompt là cố định; lịch sử hội thoại, dữ liệu đưa vào, danh sách tool và đầu ra thay đổi theo từng lượt, và tất cả cùng chiếm chỗ trong context window.",
+        "Lost in the middle (Ngày 1) áp vào prompt dài: thông tin ở giữa dễ bị bỏ sót hơn ở đầu hoặc cuối, nên đặt yêu cầu quan trọng ở hai đầu. Phiên dài bắt đầu trả lời kém thì nên mở phiên mới.",
+        "Chatbot “nhớ” vì ứng dụng gửi lại lịch sử hoặc bản tóm tắt mỗi lượt. Hội thoại dài thì nén phần cũ thành tóm tắt để context không phình và đỡ tốn; nén tốt là bỏ đúng phần thừa, không cắt ngẫu nhiên.",
+        "Memory injection: nếu hệ thống tự lưu chi tiết cá nhân người dùng kể trong lúc trò chuyện, chi tiết đó có thể xuất hiện lại không đúng lúc ở một lượt hội thoại khác."
+      ],
+      "ky_nang": [
+        "Đặt yêu cầu quan trọng đúng chỗ trong một prompt dài",
+        "Giải thích chatbot “nhớ” bằng cách nào và nhận diện rủi ro memory injection"
+      ]
+    },
+    {
+      "ten": "An toàn và đánh giá prompt",
+      "kien_thuc": [
+        "Prompt injection: chỉ dẫn giả lẫn trong nội dung agent xử lý khiến nó làm theo. Trực tiếp: người dùng bảo model bỏ qua chỉ dẫn. Gián tiếp, nguy hiểm hơn: giấu trong trang web, tài liệu, email agent đọc.",
+        "Không lớp nào chặn hết injection nên xếp chồng nhiều lớp: tách nội dung tin cậy và chưa tin cậy bằng thẻ, cấp quyền tool tối thiểu, coi mọi nội dung không do người vận hành viết là chưa đáng tin.",
+        "Vượt được system prompt hay không tuỳ cả cách viết lẫn model; không có gì tuyệt đối an toàn hay tuyệt đối bị phá. Hệ thống càng nhanh, càng tự động thì càng cần kiểm soát tốt, như xe nhanh cần phanh tốt.",
+        "Prompt tốt hôm nay có thể lệch khi model, dữ liệu hay prompt đổi. Đánh giá bằng bộ câu test cố định qua các phiên bản (độ đúng, độ ổn định, an toàn); lưu từng phiên bản prompt kèm kết quả."
+      ],
+      "ky_nang": [
+        "Phân biệt injection trực tiếp và gián tiếp, nhận ra chỉ dẫn giả trong nội dung agent đọc",
+        "Áp ít nhất hai lớp phòng thủ cơ bản cho một agent cụ thể",
+        "Thiết kế bộ câu test để so sánh hai phiên bản prompt"
+      ]
+    },
+    {
+      "ten": "Tool calling và thiết kế tool",
+      "kien_thuc": [
+        "Model không tự chạy tool: nó trả về yêu cầu có cấu trúc (tên tool, tham số), ứng dụng thực thi rồi gửi kết quả lại cho model. tool_choice cho phép bắt buộc, tuỳ model hoặc tắt gọi tool; câu chào không cần tool.",
+        "Model chọn tool theo tên và description, không theo code bên trong, nên description là một phần của prompt. Mô tả tốt nêu: làm gì, khi nào dùng, khi nào không; tránh hai tool chồng phạm vi.",
+        "Tool lỗi (dịch vụ không phản hồi, sai định dạng, vượt giới hạn lượt gọi) thì trả lỗi rõ để model tự sửa: “không tìm thấy thành phố” tốt hơn “gặp lỗi”. Tool chính không phản hồi thì cần phương án dự phòng.",
+        "Tool tốt trả kết quả nhất quán về định dạng. Granularity (độ chi tiết) vừa phải: quá nhỏ thì gọi nhiều lần cho một việc, quá to thì khó chọn đúng thao tác. Trả về gọn, có cấu trúc, không đổ dữ liệu thô."
+      ],
+      "ky_nang": [
+        "Mô tả vai trò của model và của ứng dụng ở từng bước tool calling",
+        "Viết tool schema có description đủ ba phần và phân biệt tham số bắt buộc, tuỳ chọn",
+        "Thiết kế thông báo lỗi giúp model tự sửa và chọn granularity hợp lý cho tool"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 4: agent đầu tiên với system prompt, hai tool và 5 câu test",
+    "tom_tat": "Viết system prompt production-grade, khai báo hai tool (một gọi API bên ngoài, một truy vấn dữ liệu có sẵn) rồi nối vào vòng lặp agent; 5 câu test kiểm tra agent biết khi nào trả lời thẳng, khi nào gọi tool, khi nào từ chối.",
+    "dau_ra": "Agent chạy được với system prompt, hai tool, 5 câu test và ghi chú phân loại lỗi: do prompt, tool schema hay luồng điều khiển"
+  },
+  "lien_quan": [
+    {
+      "ngay": 1,
+      "ghi_chu": "temperature, top-p và lost in the middle được giới thiệu lần đầu"
+    },
+    {
+      "ngay": 3,
+      "ghi_chu": "vòng lặp ReAct mà bước tool calling nằm bên trong"
+    },
+    {
+      "ngay": 11,
+      "ghi_chu": "đi sâu các kiểu tấn công, tầng phòng thủ và HITL"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 3 · Từ chatbot đến agentic agent · Retro 15 ngày</title>
+<meta name="description" content="Cái gì biến chatbot thành agent?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 3 · Từ chatbot đến agentic agent · Retro 15 ngày">
+<meta property="og:description" content="Cái gì biến chatbot thành agent?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-03">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-1" data-prev="/ngay/ngay-02" data-next="/ngay/ngay-04">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1 on" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent" aria-current="page">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 03 · Cột mốc 1 · Nền móng</p>
+  <h1>Từ chatbot đến agentic agent</h1>
+  <blockquote class="q">Cái gì biến chatbot thành agent?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Phân biệt bốn mức hệ thống AI, từ luật cố định đến agent tự chủ; dùng Agentic Fit để quyết định có cần agent; giải thích vòng lặp ReAct, phân biệt nó với function calling; nâng cấp một chatbot thành ReAct agent có tool, có trace và so sánh hai hệ thống.</p>
+  <p class="chips"><span class="chip">Agentic Fit</span><span class="chip">ReAct</span><span class="chip">trace</span><span class="chip">tool</span><span class="chip">MCP</span><span class="chip">function calling</span><span class="chip">vòng lặp chịu lỗi</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>Agent = LLM + reasoning + tools + memory, không phải “chatbot thông minh hơn”</li><li>ReAct: Thought → Action → Observation, debug bằng cách đọc trace</li><li>Chấm Agentic Fit: 0–5 điểm chatbot là đủ, từ 11 điểm mới đáng thử agent</li><li>Agent đắt hơn ~4,5× và chậm hơn ~4× chatbot cho cùng câu hỏi</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Bốn mức hệ thống AI</a><a href="#m2"><span>2</span>Agentic Fit: khi nào bài toán cần agent</a><a href="#m3"><span>3</span>Bên trong một agent</a><a href="#m4"><span>4</span>ReAct: vòng lặp biến LLM thành agent</a><a href="#m5"><span>5</span>Xây và vận hành agent</a><a href="#m6"><span>6</span>Demo, debug, và khi nào dùng gì</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Bốn mức hệ thống AI</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>LLM một mình chỉ sinh chữ: không tự tra cứu, không lấy được dữ liệu mới, không hành động ngoài hội thoại. Gắn tool (tra cứu, gọi dịch vụ, thao tác ứng dụng) mới cho nó lấy dữ liệu thật và hành động.</li><li>Bốn mức theo độ tự chủ: bot theo luật (dễ đoán, không thích nghi) → chatbot dùng LLM (hỏi đáp một lượt) → agent phản ứng (dùng tool, chỉnh theo quan sát) → agent tự chủ (giữ mục tiêu qua nhiều quyết định).</li><li>Dùng LLM chưa chắc là agent: agent chỉ xuất hiện khi hệ thống phải quyết định, hành động, quan sát kết quả rồi lặp lại. Sản phẩm cùng gắn nhãn AI có thể ở những mức rất khác nhau.</li><li>Hỏi “vé Hà Nội đi TP.HCM dưới 2 triệu, gợi ý trang phục nếu mưa”: bot trả menu cố định, chatbot viết mượt nhưng giá vé từ dữ liệu cũ, agent gọi từng tool rồi tổng hợp kết quả có nguồn.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Giải thích vì sao LLM đơn lẻ không tự hành động được và tool nào biến nó thành agent</li><li>Xếp một sản phẩm AI vào đúng một trong bốn mức</li><li>Chỉ ra phần nào của câu trả lời có nguồn, phần nào là suy đoán</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Agentic Fit: khi nào bài toán cần agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Bốn tiêu chí Agentic Fit: multi-step reasoning (nhiều bước phụ thuộc nhau), tool interaction (gọi tool ngoài), dynamic decision (bước sau tuỳ kết quả vừa thấy), long horizon (giữ mục tiêu qua nhiều vòng).</li><li>Chấm 1–5 cho từng nhóm reasoning, tool use, dynamic decision rồi cộng: tổng thấp thì chatbot là đủ, trung bình thì chatbot kèm vài tool cố định, cao thì agent mới đáng thử.</li><li>Ba lầm tưởng: gọi LLM là có agent (gọi một lần chỉ là chatbot); agent luôn tốt hơn (với bài đơn giản là lãng phí); càng nhiều tool càng mạnh (thực ra càng dễ chọn nhầm, mô tả rõ quan trọng hơn số lượng).</li><li>Giữa chatbot và agent còn ba mức: chuỗi bước cố định, định tuyến theo loại câu hỏi, điều phối (một tầng lập kế hoạch chia việc cho nhiều tầng thực thi). Bắt đầu từ cấu trúc đơn giản nhất đủ dùng.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chấm Agentic Fit cho một bài toán thật và đọc đúng gợi ý theo tổng điểm</li><li>Bác bỏ từng lầm tưởng về agent bằng một ví dụ phản chứng</li><li>Xếp một bài toán vào đúng mức trong năm mức kiến trúc</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Bên trong một agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Agent gồm bốn khối: nhận thức (nhận input người dùng và kết quả tool), suy luận (LLM chọn bước tiếp), hành động (gọi tool hoặc trả lời), trí nhớ (giữ mục tiêu, dữ kiện, kết quả trung gian).</li><li>Bốn khối cũng là bốn nguồn chi phí khi vận hành: lượng token xử lý, dung lượng lưu trữ, số lần gọi tool và độ trễ.</li><li>Tool là bất kỳ khả năng nào agent gọi được; API là giao thức để hai phần mềm trao đổi, có từ trước agent; MCP là chuẩn mô tả tool để model dùng được ngay. Gọi tool không bắt buộc phải có MCP.</li><li>Mô tả tool tốt có năm phần: tên dạng động từ + danh từ, một câu nói làm gì và khi nào dùng, tham số kèm kiểu và ràng buộc, định dạng kết quả, các kiểu lỗi. Thiếu phần nào, agent phải đoán.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Gọi tên bốn khối của agent và vai trò từng khối</li><li>Phân biệt tool, API và MCP</li><li>Viết mô tả tool đủ năm phần</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">ReAct: vòng lặp biến LLM thành agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>ReAct lặp ba bước đến khi đủ thông tin hoặc gặp điều kiện dừng: Thought (còn thiếu gì) → Action (gọi tool kèm tham số) → Observation (đọc kết quả). Agent là một vòng lặp, không phải một bước.</li><li>Trace ghi từng bước nghĩ, gọi tool, quan sát, cho biết agent dựa vào dữ liệu nào. Lỗi hay ẩn trong trace trông hợp lý: gọi tool sai thứ tự, sai tham số, câu trả lời cuối lệch kết quả đã quan sát.</li><li>Tool lỗi (hết thời gian chờ, trả rỗng, sai định dạng): thử lại một lần, vẫn lỗi thì báo người dùng và đề xuất phương án khác. Không bịa kết quả, không lặp vô hạn.</li><li>ReAct viết lý do ra chữ nên dễ debug nhưng dễ vỡ khi định dạng lệch; function calling trả lệnh gọi có cấu trúc, ổn định hơn nhưng có thể ẩn lý do. Production thường gọi có cấu trúc kèm yêu cầu viết lý do.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Mô tả ba bước của vòng lặp ReAct và vì sao agent phải lặp</li><li>Đọc một trace ReAct và tìm lỗi thứ tự, tham số, số liệu bịa</li><li>Chọn ReAct hay function calling cho một tình huống cụ thể</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Xây và vận hành agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Vòng lặp agent tối thiểu: danh sách tin nhắn tích luỹ → gọi model kèm danh sách tool → trả lời cuối thì dừng, còn gọi tool thì chạy tool, ghi kết quả vào tin nhắn rồi lặp, có giới hạn số vòng.</li><li>Ba lớp chịu lỗi: bắt lỗi khi gọi tool thay vì để chương trình dừng đột ngột, phát hiện lệnh gọi trùng lặp để không lặp vô hạn, và phương án dừng an toàn khi chạm số vòng tối đa.</li><li>Agent gọi model nhiều lượt cộng lượt gọi tool nên tốn và chậm hơn chatbot nhiều. Câu hỏi đúng: độ chính xác nhờ dữ liệu thật có đáng chi phí không; khi chatbot hay bịa, trả lời sai có khi đắt hơn.</li><li>Thêm tool là thêm bề mặt tấn công: trang web, tài liệu tool trả về có thể giấu chỉ dẫn độc hại. Phòng vệ cơ bản: lọc chỉ dẫn khả nghi, danh sách tool cho phép, người xác nhận trước hành động không thể hoàn tác.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chỉ ra từng phần của một vòng lặp agent tối thiểu làm gì</li><li>Dự đoán chỗ vòng lặp tối thiểu sẽ vỡ và thêm lớp chịu lỗi tương ứng</li><li>Cân chi phí với độ chính xác trước khi chọn agent thay chatbot</li></ul></div>
+  </div>
+</section><section class="mod" id="m6" aria-labelledby="m6-h">
+  <div class="mod-h"><span class="mod-n">06</span><h2 id="m6-h">Demo, debug, và khi nào dùng gì</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Lắp agent tối thiểu: định nghĩa tool → system prompt kèm điều kiện kết luận → chạy vòng lặp, đọc trace → cố tình gây lỗi xem agent phản ứng → sửa prompt hoặc mô tả tool. Debug quan trọng ngang viết agent.</li><li>Agent sai thì đọc trace trước khi sửa. Chấm trace theo 5 câu: lý do mỗi bước có rõ, chọn đúng tool, tham số hợp lệ, dừng đúng lúc, câu trả lời cuối khớp dữ liệu đã quan sát.</li><li>Bốn chỗ hay phải sửa: mô tả tool mơ hồ, system prompt thiếu điều kiện dừng, thiếu cơ chế an toàn cho thử lại và lặp vô hạn, đánh giá chỉ chấm câu trả lời cuối mà bỏ qua trace.</li><li>Trợ lý chat cơ bản là chatbot; trợ lý duyệt web, chạy code là dạng lai; trợ lý lập trình tự chạy nhiều bước là agent phản ứng. Thực dụng nhất là lai: câu đơn giản đi đường chatbot, câu khó mới mở vòng lặp.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Lắp một agent tối thiểu từ định nghĩa tool đến khi chạy được</li><li>Chấm một trace theo 5 câu hỏi và chỉ ra chỗ cần sửa</li><li>Phân loại một sản phẩm AI và giải thích vì sao thiết kế lai thường thực dụng nhất</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 3: chatbot cơ bản đến ReAct agent</h2>
+  <p>Xây một chatbot chỉ dùng một lời gọi model, nâng cấp thành ReAct agent có 1–2 tool, rồi chạy cùng 5 tình huống kiểm thử trên cả hai: có tình huống chatbot đủ tốt, tình huống agent vượt trội và một tình huống biên.</p>
+  <p class="out"><span>Đầu ra</span>Chatbot và ReAct agent chạy được, 5 tình huống kiểm thử, một trace đầy đủ và flowchart</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Lần gần nhất agent của bạn sai, bạn đọc trace hay chỉ nhìn câu trả lời cuối?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-1" href="/ngay/ngay-04"><strong>Ngày 4 · Prompt &amp; tool</strong><span>đi sâu bước quyết định gọi tool nào và viết tool schema</span></a><a class="rel cm-3" href="/ngay/ngay-09"><strong>Ngày 9 · Multi-agent &amp; MCP</strong><span>MCP: kiến trúc và bảo mật</span></a><a class="rel cm-4" href="/ngay/ngay-11"><strong>Ngày 11 · Guardrails</strong><span>tấn công qua kết quả tool, các tầng phòng thủ và HITL</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-02" rel="prev"><span>← Ngày 2</span><strong>Đóng khung bài toán</strong></a><a class="pn-a next" href="/ngay/ngay-04" rel="next"><span>Ngày 4 →</span><strong>Prompt &amp; tool</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

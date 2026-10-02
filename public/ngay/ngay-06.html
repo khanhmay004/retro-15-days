@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 6 · AI Product Hackathon · Retro 15 ngày</title>
+<meta name="description" content="SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục — nhóm bạn chứng minh được đến đâu?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 6 · AI Product Hackathon · Retro 15 ngày">
+<meta property="og:description" content="SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục — nhóm bạn chứng minh được đến đâu?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-06">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-2" data-prev="/ngay/ngay-05" data-next="/ngay/ngay-07">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2 on" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show" aria-current="page">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 06 · Cột mốc 2 · Product hoá</p>
+  <h1>AI Product Hackathon</h1>
+  <blockquote class="q">SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục — nhóm bạn chứng minh được đến đâu?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Đi trọn một vòng từ nỗi đau có bằng chứng đến prototype có AI chạy thật trong ít nhất một luồng; đo bằng golden set, kiểm chứng với người dùng thật, trình bày dưới phản biện của nhóm khác. Chuỗi bằng chứng quan trọng hơn độ hoành tráng.</p>
+  <p class="chips"><span class="chip">bằng chứng nỗi đau</span><span class="chip">Product Canvas</span><span class="chip">AI Spec</span><span class="chip">lát cắt mỏng</span><span class="chip">golden set</span><span class="chip">kiểm chứng người dùng</span><span class="chip">error path</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục</li><li>Bằng chứng gồm hai phần: golden set nhỏ có đáp án và phản hồi của người dùng thật</li><li>Demo phải có cả happy path lẫn error path</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Đề bài và luật chơi</a><a href="#m2"><span>2</span>Năm giai đoạn</a><a href="#m3"><span>3</span>Sáu mốc kiểm tra</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Đề bài và luật chơi</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Năm tiêu chí tối thiểu để một sản phẩm AI được nghiệm thu: có bằng chứng nỗi đau, lát cắt thiết kế rõ, kịch bản rủi ro, kiểm thử đo được, prototype chạy thật với AI trong ít nhất một luồng.</li><li>Bảy khối chấm, mỗi khối trỏ về một file cụ thể trong repo: bằng chứng và tác động, lát cắt thiết kế, chỗ khó và kịch bản rủi ro, kiểm thử, prototype chạy được, kiểm chứng với người dùng, quy trình và repo.</li><li>Ba nguyên tắc chấm: điểm theo chuỗi quyết định, không theo độ hoành tráng; kết quả đo trung thực được tính đủ điểm kể cả khi không đạt mục tiêu; số liệu chỉnh sửa không được tính.</li><li>Repo cấu trúc cố định: README (thành viên, phân công), file spec theo template, codebase ghi rõ phần mock, thư mục eval (golden set, kết quả), thư mục validation (feedback log), reflection từng người.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Đọc rubric ngay từ đầu để biết mỗi điểm đến từ file nào</li><li>Đối chiếu sản phẩm với năm tiêu chí nghiệm thu tối thiểu trước khi nộp</li><li>Dựng đúng cấu trúc repo ngay từ đầu để không mất điểm quy trình</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Năm giai đoạn</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Khám phá: bắt đầu từ bằng chứng, không từ ý tưởng. Đọc chatlog đã ẩn danh, transcript, khảo sát để tìm nỗi đau lặp lại; câu nỗi đau có người, bối cảnh, tần suất, gom trên Product Canvas một trang.</li><li>AI Spec gồm bảy phần: bằng chứng và tác động, người dùng và bối cảnh, lát cắt chọn làm, thiết kế luồng, chỗ khó và rủi ro, kịch bản khi AI sai, kế hoạch kiểm thử. Mỗi phần là giả thuyết phải kiểm chứng được.</li><li>Build một lát cắt mỏng end-to-end có AI chạy thật trong ít nhất một luồng, phần mock ghi rõ là mock. Làm thứ bấm được trước để có phản hồi, rồi mới lắp AI: một luồng chạy trọn hơn ba luồng dở dang.</li><li>Đo và kiểm chứng: chạy prototype trên golden set 10–20 ca có đáp án mong đợi, ghi lại đúng sai; rồi cho người dùng thật dùng thử và ghi feedback log. Đây là chỗ tách tư duy sản phẩm khỏi một demo đẹp.</li><li>Demo 6 phần: nỗi đau và bằng chứng, lát cắt đã chọn, luồng end-to-end, kết quả đo, điều học được, việc tiếp theo. Luồng demo phải có cả happy case lẫn error case: AI sai thì sản phẩm đỡ thế nào.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết câu nỗi đau từ dữ liệu thật thay vì suy đoán, trình bày trên một Product Canvas</li><li>Viết AI Spec theo bảy phần, phần nào cũng đủ cụ thể để kiểm chứng</li><li>Dựng golden set nhỏ, chạy đo và tổ chức một vòng dùng thử với người ngoài nhóm</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Sáu mốc kiểm tra</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Sáu mốc, mỗi mốc phải show một thứ cụ thể được xác minh: Canvas → thứ bấm được → AI chạy thật kèm số đo đầu → chốt phạm vi và spec → kiểm chứng người dùng, dry run → demo.</li><li>Mốc đầu xác minh nỗi đau có nguồn thật trước khi đầu tư build. Mốc thứ hai chỉ cần mockup hoặc prototype bấm được, chưa cần AI, để sớm có thứ hữu hình cho mọi người cùng nhìn và góp ý.</li><li>Mốc khó nhất là AI chạy thật trong ít nhất một luồng kèm số đo lượt đầu trên golden set: nhiều nhóm đến đây mới thấy lát cắt quá rộng.</li><li>Sau khi chốt phạm vi demo và nộp spec thì không mở rộng thêm; spec được đánh giá theo bản đã nộp. Trước demo cần có feedback log thật và ít nhất một lần dry run.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chia việc build thành các mốc, mỗi mốc có một thứ cụ thể để show và xác minh</li><li>Chốt phạm vi sẽ demo và giữ nguyên, không mở rộng thêm</li><li>Trình bày bằng bằng chứng thay vì lời hứa, trả lời được phản biện</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Thời gian xây</p>
+  <h2 id="lab-h">Build: từ canvas đến demo</h2>
+  <p>Theo nhóm, trong một ngày rưỡi, đi trọn vòng khám phá → viết spec → build lát cắt → đo → kiểm chứng → chuẩn bị demo, trên dữ liệu thật đã ẩn danh và template có sẵn.</p>
+  <p class="out"><span>Đầu ra</span>Repo nhóm gồm Product Canvas, AI Spec, prototype có AI chạy thật, kết quả golden set, feedback log và bản demo</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Demo hackathon của nhóm bạn có cho thấy ít nhất 1 error path không?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-2" href="/ngay/ngay-05"><strong>Ngày 5 · Uncertainty &amp; Thin SPEC</strong><span>SPEC nhẹ viết ở Ngày 5 là điểm xuất phát</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-05" rel="prev"><span>← Ngày 5</span><strong>Uncertainty &amp; Thin SPEC</strong></a><a class="pn-a next" href="/ngay/ngay-07" rel="next"><span>Ngày 7 →</span><strong>Embedding &amp; vector store</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

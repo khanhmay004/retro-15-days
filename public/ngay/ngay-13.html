@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 13 · Monitoring, Logging, Observability &amp; LLMOps · Retro 15 ngày</title>
+<meta name="description" content="Agent bạn vừa triển khai đang chạy thế nào — làm sao biết được điều đó trước khi người dùng phàn nàn?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 13 · Monitoring, Logging, Observability &amp; LLMOps · Retro 15 ngày">
+<meta property="og:description" content="Agent bạn vừa triển khai đang chạy thế nào — làm sao biết được điều đó trước khi người dùng phàn nàn?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-13">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-4" data-prev="/ngay/ngay-12" data-next="/ngay/ngay-14">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4 on" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring" aria-current="page">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 13 · Cột mốc 4 · Vận hành</p>
+  <h1>Monitoring, Logging, Observability &amp; LLMOps</h1>
+  <blockquote class="q">Agent bạn vừa triển khai đang chạy thế nào — làm sao biết được điều đó trước khi người dùng phàn nàn?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Phân biệt monitoring với observability, hiểu vì sao agent cần trụ cột thứ tư ngoài metrics, logs, traces; đọc metric riêng của AI và trace để tìm điểm nghẽn; ghi log có cấu trúc kèm correlation ID, che PII; đặt dashboard, cảnh báo theo SLO; gắn observability vào agent thật.</p>
+  <p class="chips"><span class="chip">observability</span><span class="chip">percentile P99</span><span class="chip">prefill &amp; decode</span><span class="chip">correlation ID</span><span class="chip">trace &amp; span</span><span class="chip">cardinality</span><span class="chip">SLO &amp; ngân sách lỗi</span><span class="chip">online eval</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>Metrics, logs, traces chưa đủ cho AI: còn phải đo liên tục chi phí và chất lượng output</li><li>Cảnh báo theo triệu chứng và SLO, luôn kèm runbook</li><li>Structured log + correlation ID; không log thông tin cá nhân</li><li>Khi streaming, thời gian ra token đầu (TTFT) quan trọng hơn tổng thời gian</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Vì sao agent cần observability</a><a href="#m2"><span>2</span>AI-specific metrics: hiệu năng, chi phí, chất lượng</a><a href="#m3"><span>3</span>Structured logging và PII</a><a href="#m4"><span>4</span>Tracing và debug</a><a href="#m5"><span>5</span>Dashboard, alerting và SLO</a><a href="#m6"><span>6</span>Human feedback và online evaluation</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Vì sao agent cần observability</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Monitoring theo dõi câu hỏi biết trước bằng dashboard, cảnh báo dựng sẵn: hệ thống có hỏng không (known-unknowns). Observability cho đặt câu hỏi mới mà không deploy lại code: vì sao hỏng (unknown-unknowns).</li><li>Agent không crash: vẫn trả 200 OK khi câu trả lời tệ dần, và output đổi mỗi lần nên phải đo chất lượng. Lỗi riêng của AI (tool argument bị bịa, vòng lặp vô hạn, context tràn) không ném exception nào để bắt.</li><li>Bốn trụ cột: metrics (bao nhiêu, bao lâu), logs (chuyện gì xảy ra), traces (request đi đâu, vì sao) và continuous evaluation đo chất lượng output liên tục trên production, điều ba trụ đầu không trả lời được.</li><li>MTTD là thời gian từ lúc sự cố xảy ra đến lúc phát hiện; MTTR là từ lúc phát hiện đến lúc khắc phục xong. Observability tốt rút ngắn cả hai, thay vì đợi người dùng phàn nàn mới biết.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn đúng monitoring hay observability cho một tình huống theo loại câu hỏi cần trả lời</li><li>Nêu bốn trụ cột observability và câu hỏi mỗi trụ cột trả lời</li><li>Xác định mốc MTTD và MTTR trên dòng thời gian một sự cố</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">AI-specific metrics: hiệu năng, chi phí, chất lượng</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Trung bình che long tail: latency trung bình 2 giây vẫn có thể có 1 trên 10 người chờ từ 8 giây. P95 là mốc mà 95% request nhanh hơn. Pipeline 5 bước gần như chắc chắn chạm tail, nên đo P99 cho cả pipeline.</li><li>Token đầu vào xử lý song song một lượt (prefill); token đầu ra sinh tuần tự, token sau chờ token trước (decode). Decode tốn hơn nên token đầu ra đắt hơn khoảng 3–6 lần; khác biệt ở cơ chế, không ở phần cứng.</li><li>Bốn cách giảm chi phí token: model nhỏ nhất đủ tốt cho từng bước, cache câu hỏi giống nhau, cache phần đầu prompt lặp lại, giữ context gọn. Một sản phẩm thật giảm 58% chi phí mỗi người dùng trong 3 tháng.</li><li>Kim tự tháp chất lượng, khó và đắt dần: kiểm tra tự động → model khác chấm → tín hiệu người dùng → kết quả kinh doanh. Bắt ảo giác: đối chiếu nguồn và dữ liệu gốc, hỏi lại nhiều lần, theo dõi nút tạo lại.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Tính số người dùng bị ảnh hưởng khi biết P99</li><li>Ước chi phí một lượt gọi từ số token đầu vào và đầu ra</li><li>Xếp một cách đo chất lượng vào đúng tầng kim tự tháp</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Structured logging và PII</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Log có cấu trúc biến mỗi dòng thành bản ghi có trường: timestamp, mức độ, correlation ID, độ trễ, token, chi phí. Câu hỏi như “chi phí trung bình của request lỗi hôm qua” chỉ cần một truy vấn thay vì đọc tay.</li><li>Correlation ID là mã duy nhất sinh khi request bắt đầu, gắn vào mọi dòng log của request để nối lại cả hành trình. structlog cùng contextvars gắn một lần ở đầu request, không phải truyền tay qua từng hàm.</li><li>Che PII (tên, số điện thoại, căn cước, email) tại điểm phát sinh, trước khi log vào pipeline. Regex nhanh với mẫu cố định; NER bắt được tên, địa chỉ nhưng chậm hơn. Presidio còn yếu với tiếng Việt.</li><li>Audit log (ai làm gì, khi nào) tách khỏi log ứng dụng: không sample, lưu nhiều năm. Luật Việt Nam yêu cầu báo vi phạm dữ liệu trong 72 giờ; gửi log có PII ra máy chủ nước ngoài cần hồ sơ đánh giá tác động.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Liệt kê các trường cần có trong log của một lượt gọi LLM</li><li>Gắn correlation ID vào log bằng structlog</li><li>Chọn regex hay NER để che PII cho từng loại dữ liệu</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Tracing và debug</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Trace là hành trình của một request, có trace ID; mỗi bước là một span, có thể lồng trong span cha. Waterfall cho thấy bước nào tốn thời gian: request 2500 ms có span gọi model 1400 ms thì model chiếm hơn nửa.</li><li>Context propagation truyền trace ID qua ranh giới dịch vụ để mọi span của một request nằm chung một trace. OpenTelemetry cho ghi một lần, gửi tới backend nào cũng được; thuộc tính cho AI bắt đầu bằng gen_ai.</li><li>Bốn kiểu điểm nghẽn hay gặp: bước chạy tuần tự lẽ ra song song được, span dài chờ tài nguyên ngoài khi CPU rảnh, vòng lặp gọi lại cùng một tool nhiều lần, chuỗi thử lại với thời gian chờ quá ngắn.</li><li>Debug theo metric → log → trace: metric khoanh thời điểm (P95 từ 2,5 lên 5 giây lúc 9 giờ, token không đổi), log lọc request chậm theo correlation ID, trace chỉ ra bước chậm (truy xuất từ 600 lên 2800 ms).</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Đọc cây span dạng waterfall và chỉ ra span chiếm nhiều thời gian nhất</li><li>Xếp điểm nghẽn chính của một trace vào đúng một trong bốn kiểu</li><li>Tìm nguyên nhân gốc sự cố độ trễ theo metric → log → trace, viết ghi chú sự cố có bằng chứng</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Dashboard, alerting và SLO</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Alert theo triệu chứng (lỗi, độ trễ vượt SLO) là thứ người dùng cảm nhận, đáng đánh thức người trực; alert theo nguyên nhân (cache miss cao) chỉ để chẩn đoán. Báo quá nhiều thì không ai tin nữa: alert fatigue.</li><li>SLI là con số đo, SLO là mục tiêu cho nó, SLA là cam kết có hậu quả như hoàn tiền. Ngân sách lỗi = (1 − SLO) × khung thời gian: SLO 99,9% cho khoảng 43 phút ngừng mỗi tháng; hết ngân sách thì dừng ra tính năng.</li><li>Cardinality là số tổ hợp giá trị nhãn của metric, mỗi tổ hợp một chuỗi thời gian phải lưu. Nhãn tự do như mã người dùng gây bùng nổ (hai nhãn 100.000 giá trị → 10 tỷ tổ hợp); để giá trị đó ở log hoặc trace.</li><li>Sáu panel tối thiểu: tốc độ request, độ trễ P50/P95/P99 kèm thời gian ra token đầu (TTFT), tỉ lệ lỗi theo loại, chi phí và token, tỉ lệ tool-call thành công, điểm chất lượng lấy mẫu. Mỗi màn hình 6–9 panel.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân loại alert theo triệu chứng hay nguyên nhân</li><li>Tính ngân sách lỗi từ SLO và khung thời gian</li><li>Tính số chuỗi thời gian từ số nhãn và nhận ra nhãn gây bùng nổ cardinality</li></ul></div>
+  </div>
+</section><section class="mod" id="m6" aria-labelledby="m6-h">
+  <div class="mod-h"><span class="mod-n">06</span><h2 id="m6-h">Human feedback và online evaluation</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Offline eval (Ngày 14) chạy trên bộ test cố định có đáp án, trước khi deploy. Online eval chạy liên tục trên traffic thật, không đáp án, bắt drift: người dùng hỏi kiểu mới, nghiệp vụ đổi, model bị cập nhật.</li><li>Phản hồi tường minh (thích, chấm sao) thường dưới 5% người dùng, có khi bấm cho xong. Phản hồi ngầm (bấm tạo lại, hỏi lại, bỏ giữa chừng, chuyển sang người thật) nhiều và trung thực hơn. Nên gắn cả hai.</li><li>Online eval: lấy mẫu khoảng 1% traffic → model giám khảo chấm → chỉ số trên dashboard → cảnh báo khi tụt. Giám khảo cũng trôi: theo dõi cả phân phối điểm, định kỳ cho người chấm lại để hiệu chỉnh.</li><li>Chọn công cụ theo quy mô đội, hệ thống, tuân thủ: Langfuse (mã nguồn mở, có gói miễn phí) cho dự án nhỏ, LangSmith khi đã dùng LangChain, Phoenix khi tự vận hành, Helicone khi chỉ theo dõi chi phí.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Phân biệt online eval và offline eval qua nguồn dữ liệu và thời điểm chạy</li><li>Mô tả bốn bước lấy mẫu, chấm điểm, đẩy thành chỉ số, cảnh báo</li><li>Chọn công cụ LLM-observability theo quy mô đội và yêu cầu tuân thủ</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 13: gắn observability đầy đủ vào agent</h2>
+  <p>Gắn vào agent đã deploy ở Ngày 12: log JSON kèm correlation ID và che PII, metric token, chi phí, P95, TTFT, tool-call, tracing dạng cây span, dashboard 6 panel với ít nhất 3 cảnh báo và 1 SLO; rồi điều tra một sự cố dựng sẵn.</p>
+  <p class="out"><span>Đầu ra</span>Agent có observability đầy đủ và báo cáo sự cố có trace ID hoặc dòng log làm bằng chứng nguyên nhân gốc</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Hoá đơn API tăng gấp 3 đêm nay — bạn mất bao lâu để tìm ra vì sao?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-3" href="/ngay/ngay-09"><strong>Ngày 9 · Multi-agent &amp; MCP</strong><span>trace tự viết và OpenTelemetry lần đầu</span></a><a class="rel cm-4" href="/ngay/ngay-12"><strong>Ngày 12 · Deploy</strong><span>agent đã deploy, có health check và log JSON</span></a><a class="rel cm-4" href="/ngay/ngay-14"><strong>Ngày 14 · Evaluation</strong><span>offline eval: golden set, LLM-as-judge trước khi deploy</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-12" rel="prev"><span>← Ngày 12</span><strong>Deploy</strong></a><a class="pn-a next" href="/ngay/ngay-14" rel="next"><span>Ngày 14 →</span><strong>Evaluation</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

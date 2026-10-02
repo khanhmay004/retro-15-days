@@ -1,0 +1,130 @@
+{
+  "ngay": 13,
+  "ten": "Monitoring, Logging, Observability & LLMOps",
+  "ten_ngan": "Monitoring",
+  "cot_moc": 4,
+  "cau_hoi": "Agent bạn vừa triển khai đang chạy thế nào — làm sao biết được điều đó trước khi người dùng phàn nàn?",
+  "muc_tieu": "Phân biệt monitoring với observability, hiểu vì sao agent cần trụ cột thứ tư ngoài metrics, logs, traces; đọc metric riêng của AI và trace để tìm điểm nghẽn; ghi log có cấu trúc kèm correlation ID, che PII; đặt dashboard, cảnh báo theo SLO; gắn observability vào agent thật.",
+  "tu_khoa": [
+    "observability",
+    "percentile P99",
+    "prefill & decode",
+    "correlation ID",
+    "trace & span",
+    "cardinality",
+    "SLO & ngân sách lỗi",
+    "online eval"
+  ],
+  "bai_hoc": [
+    "Metrics, logs, traces chưa đủ cho AI: còn phải đo liên tục chi phí và chất lượng output",
+    "Cảnh báo theo triệu chứng và SLO, luôn kèm runbook",
+    "Structured log + correlation ID; không log thông tin cá nhân",
+    "Khi streaming, thời gian ra token đầu (TTFT) quan trọng hơn tổng thời gian"
+  ],
+  "tu_soi": "Hoá đơn API tăng gấp 3 đêm nay — bạn mất bao lâu để tìm ra vì sao?",
+  "module": [
+    {
+      "ten": "Vì sao agent cần observability",
+      "kien_thuc": [
+        "Monitoring theo dõi câu hỏi biết trước bằng dashboard, cảnh báo dựng sẵn: hệ thống có hỏng không (known-unknowns). Observability cho đặt câu hỏi mới mà không deploy lại code: vì sao hỏng (unknown-unknowns).",
+        "Agent không crash: vẫn trả 200 OK khi câu trả lời tệ dần, và output đổi mỗi lần nên phải đo chất lượng. Lỗi riêng của AI (tool argument bị bịa, vòng lặp vô hạn, context tràn) không ném exception nào để bắt.",
+        "Bốn trụ cột: metrics (bao nhiêu, bao lâu), logs (chuyện gì xảy ra), traces (request đi đâu, vì sao) và continuous evaluation đo chất lượng output liên tục trên production, điều ba trụ đầu không trả lời được.",
+        "MTTD là thời gian từ lúc sự cố xảy ra đến lúc phát hiện; MTTR là từ lúc phát hiện đến lúc khắc phục xong. Observability tốt rút ngắn cả hai, thay vì đợi người dùng phàn nàn mới biết."
+      ],
+      "ky_nang": [
+        "Chọn đúng monitoring hay observability cho một tình huống theo loại câu hỏi cần trả lời",
+        "Nêu bốn trụ cột observability và câu hỏi mỗi trụ cột trả lời",
+        "Xác định mốc MTTD và MTTR trên dòng thời gian một sự cố"
+      ]
+    },
+    {
+      "ten": "AI-specific metrics: hiệu năng, chi phí, chất lượng",
+      "kien_thuc": [
+        "Trung bình che long tail: latency trung bình 2 giây vẫn có thể có 1 trên 10 người chờ từ 8 giây. P95 là mốc mà 95% request nhanh hơn. Pipeline 5 bước gần như chắc chắn chạm tail, nên đo P99 cho cả pipeline.",
+        "Token đầu vào xử lý song song một lượt (prefill); token đầu ra sinh tuần tự, token sau chờ token trước (decode). Decode tốn hơn nên token đầu ra đắt hơn khoảng 3–6 lần; khác biệt ở cơ chế, không ở phần cứng.",
+        "Bốn cách giảm chi phí token: model nhỏ nhất đủ tốt cho từng bước, cache câu hỏi giống nhau, cache phần đầu prompt lặp lại, giữ context gọn. Một sản phẩm thật giảm 58% chi phí mỗi người dùng trong 3 tháng.",
+        "Kim tự tháp chất lượng, khó và đắt dần: kiểm tra tự động → model khác chấm → tín hiệu người dùng → kết quả kinh doanh. Bắt ảo giác: đối chiếu nguồn và dữ liệu gốc, hỏi lại nhiều lần, theo dõi nút tạo lại."
+      ],
+      "ky_nang": [
+        "Tính số người dùng bị ảnh hưởng khi biết P99",
+        "Ước chi phí một lượt gọi từ số token đầu vào và đầu ra",
+        "Xếp một cách đo chất lượng vào đúng tầng kim tự tháp"
+      ]
+    },
+    {
+      "ten": "Structured logging và PII",
+      "kien_thuc": [
+        "Log có cấu trúc biến mỗi dòng thành bản ghi có trường: timestamp, mức độ, correlation ID, độ trễ, token, chi phí. Câu hỏi như “chi phí trung bình của request lỗi hôm qua” chỉ cần một truy vấn thay vì đọc tay.",
+        "Correlation ID là mã duy nhất sinh khi request bắt đầu, gắn vào mọi dòng log của request để nối lại cả hành trình. structlog cùng contextvars gắn một lần ở đầu request, không phải truyền tay qua từng hàm.",
+        "Che PII (tên, số điện thoại, căn cước, email) tại điểm phát sinh, trước khi log vào pipeline. Regex nhanh với mẫu cố định; NER bắt được tên, địa chỉ nhưng chậm hơn. Presidio còn yếu với tiếng Việt.",
+        "Audit log (ai làm gì, khi nào) tách khỏi log ứng dụng: không sample, lưu nhiều năm. Luật Việt Nam yêu cầu báo vi phạm dữ liệu trong 72 giờ; gửi log có PII ra máy chủ nước ngoài cần hồ sơ đánh giá tác động."
+      ],
+      "ky_nang": [
+        "Liệt kê các trường cần có trong log của một lượt gọi LLM",
+        "Gắn correlation ID vào log bằng structlog",
+        "Chọn regex hay NER để che PII cho từng loại dữ liệu"
+      ]
+    },
+    {
+      "ten": "Tracing và debug",
+      "kien_thuc": [
+        "Trace là hành trình của một request, có trace ID; mỗi bước là một span, có thể lồng trong span cha. Waterfall cho thấy bước nào tốn thời gian: request 2500 ms có span gọi model 1400 ms thì model chiếm hơn nửa.",
+        "Context propagation truyền trace ID qua ranh giới dịch vụ để mọi span của một request nằm chung một trace. OpenTelemetry cho ghi một lần, gửi tới backend nào cũng được; thuộc tính cho AI bắt đầu bằng gen_ai.",
+        "Bốn kiểu điểm nghẽn hay gặp: bước chạy tuần tự lẽ ra song song được, span dài chờ tài nguyên ngoài khi CPU rảnh, vòng lặp gọi lại cùng một tool nhiều lần, chuỗi thử lại với thời gian chờ quá ngắn.",
+        "Debug theo metric → log → trace: metric khoanh thời điểm (P95 từ 2,5 lên 5 giây lúc 9 giờ, token không đổi), log lọc request chậm theo correlation ID, trace chỉ ra bước chậm (truy xuất từ 600 lên 2800 ms)."
+      ],
+      "ky_nang": [
+        "Đọc cây span dạng waterfall và chỉ ra span chiếm nhiều thời gian nhất",
+        "Xếp điểm nghẽn chính của một trace vào đúng một trong bốn kiểu",
+        "Tìm nguyên nhân gốc sự cố độ trễ theo metric → log → trace, viết ghi chú sự cố có bằng chứng"
+      ]
+    },
+    {
+      "ten": "Dashboard, alerting và SLO",
+      "kien_thuc": [
+        "Alert theo triệu chứng (lỗi, độ trễ vượt SLO) là thứ người dùng cảm nhận, đáng đánh thức người trực; alert theo nguyên nhân (cache miss cao) chỉ để chẩn đoán. Báo quá nhiều thì không ai tin nữa: alert fatigue.",
+        "SLI là con số đo, SLO là mục tiêu cho nó, SLA là cam kết có hậu quả như hoàn tiền. Ngân sách lỗi = (1 − SLO) × khung thời gian: SLO 99,9% cho khoảng 43 phút ngừng mỗi tháng; hết ngân sách thì dừng ra tính năng.",
+        "Cardinality là số tổ hợp giá trị nhãn của metric, mỗi tổ hợp một chuỗi thời gian phải lưu. Nhãn tự do như mã người dùng gây bùng nổ (hai nhãn 100.000 giá trị → 10 tỷ tổ hợp); để giá trị đó ở log hoặc trace.",
+        "Sáu panel tối thiểu: tốc độ request, độ trễ P50/P95/P99 kèm thời gian ra token đầu (TTFT), tỉ lệ lỗi theo loại, chi phí và token, tỉ lệ tool-call thành công, điểm chất lượng lấy mẫu. Mỗi màn hình 6–9 panel."
+      ],
+      "ky_nang": [
+        "Phân loại alert theo triệu chứng hay nguyên nhân",
+        "Tính ngân sách lỗi từ SLO và khung thời gian",
+        "Tính số chuỗi thời gian từ số nhãn và nhận ra nhãn gây bùng nổ cardinality"
+      ]
+    },
+    {
+      "ten": "Human feedback và online evaluation",
+      "kien_thuc": [
+        "Offline eval (Ngày 14) chạy trên bộ test cố định có đáp án, trước khi deploy. Online eval chạy liên tục trên traffic thật, không đáp án, bắt drift: người dùng hỏi kiểu mới, nghiệp vụ đổi, model bị cập nhật.",
+        "Phản hồi tường minh (thích, chấm sao) thường dưới 5% người dùng, có khi bấm cho xong. Phản hồi ngầm (bấm tạo lại, hỏi lại, bỏ giữa chừng, chuyển sang người thật) nhiều và trung thực hơn. Nên gắn cả hai.",
+        "Online eval: lấy mẫu khoảng 1% traffic → model giám khảo chấm → chỉ số trên dashboard → cảnh báo khi tụt. Giám khảo cũng trôi: theo dõi cả phân phối điểm, định kỳ cho người chấm lại để hiệu chỉnh.",
+        "Chọn công cụ theo quy mô đội, hệ thống, tuân thủ: Langfuse (mã nguồn mở, có gói miễn phí) cho dự án nhỏ, LangSmith khi đã dùng LangChain, Phoenix khi tự vận hành, Helicone khi chỉ theo dõi chi phí."
+      ],
+      "ky_nang": [
+        "Phân biệt online eval và offline eval qua nguồn dữ liệu và thời điểm chạy",
+        "Mô tả bốn bước lấy mẫu, chấm điểm, đẩy thành chỉ số, cảnh báo",
+        "Chọn công cụ LLM-observability theo quy mô đội và yêu cầu tuân thủ"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 13: gắn observability đầy đủ vào agent",
+    "tom_tat": "Gắn vào agent đã deploy ở Ngày 12: log JSON kèm correlation ID và che PII, metric token, chi phí, P95, TTFT, tool-call, tracing dạng cây span, dashboard 6 panel với ít nhất 3 cảnh báo và 1 SLO; rồi điều tra một sự cố dựng sẵn.",
+    "dau_ra": "Agent có observability đầy đủ và báo cáo sự cố có trace ID hoặc dòng log làm bằng chứng nguyên nhân gốc"
+  },
+  "lien_quan": [
+    {
+      "ngay": 9,
+      "ghi_chu": "trace tự viết và OpenTelemetry lần đầu"
+    },
+    {
+      "ngay": 12,
+      "ghi_chu": "agent đã deploy, có health check và log JSON"
+    },
+    {
+      "ngay": 14,
+      "ghi_chu": "offline eval: golden set, LLM-as-judge trước khi deploy"
+    }
+  ]
+}

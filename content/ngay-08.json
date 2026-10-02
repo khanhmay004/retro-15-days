@@ -1,0 +1,129 @@
+{
+  "ngay": 8,
+  "ten": "RAG Pipeline — Truy xuất và sinh câu trả lời",
+  "ten_ngan": "RAG",
+  "cot_moc": 3,
+  "cau_hoi": "Làm sao agent trả lời đúng từ tài liệu?",
+  "muc_tieu": "Hiểu RAG là ba pipeline, vì sao lỗi thường nằm ở truy xuất; chọn cách biến đổi câu hỏi và cách tìm (dense, sparse, hybrid, re-ranking); đóng gói context có cấu trúc; sinh câu trả lời có trích dẫn, biết từ chối; đọc ba trục đo để tìm khâu lỗi.",
+  "tu_khoa": [
+    "hybrid search",
+    "BM25",
+    "RRF",
+    "re-ranking",
+    "HyDE",
+    "đóng gói context",
+    "trích dẫn",
+    "faithfulness"
+  ],
+  "bai_hoc": [
+    "80% lỗi RAG nằm ở Retrieval, chỉ 20% ở Generation",
+    "Hybrid (dense + BM25) và rerank là đòn bẩy khi dense-only hụt",
+    "Grounding chặt: ép trích dẫn, biết nói “tôi không biết”",
+    "Muốn tốt lên phải có test set + scorecard, không dựa cảm giác"
+  ],
+  "tu_soi": "Scorecard trước và sau tuning của bạn chênh nhau bao nhiêu?",
+  "module": [
+    {
+      "ten": "Từ pipeline truy xuất của Ngày 7 đến RAG đầy đủ",
+      "kien_thuc": [
+        "RAG là ba pipeline phối hợp: indexing chạy offline để xây kho, retrieval tìm chứng cứ khi có câu hỏi, generation tổng hợp chứng cứ thành câu trả lời có trích dẫn.",
+        "Indexing quyết định trần của retrieval, và phần lớn lỗi khi RAG trả lời sai nằm ở khâu truy xuất chứ không ở model. Phản xạ “đổi model lớn hơn” thường là sai.",
+        "Pipeline của Ngày 7 (dense search, ngưỡng điểm, top-k, nhét vào prompt) còn thiếu bốn thứ: hybrid search, re-ranking, đóng gói context và đo lường.",
+        "Cần RAG khi dữ liệu nội bộ đổi liên tục, câu trả lời phải có nguồn, hoặc cần phân quyền truy cập. Kho nhỏ và ổn định (wiki sản phẩm 1.800 dòng) thì đưa thẳng vào context còn đúng hơn, vì không có lỗi truy xuất."
+      ],
+      "ky_nang": [
+        "Vẽ ba pipeline của RAG và giải thích vì sao lỗi thường nằm ở retrieval",
+        "Quyết định một bài toán cần RAG, in-context hay fine-tuning, kèm lý do"
+      ]
+    },
+    {
+      "ten": "Xử lý câu hỏi trước khi tìm",
+      "kien_thuc": [
+        "Lọc metadata (phòng ban, ngày hiệu lực, quyền truy cập) trước khi vector search: nhanh và chính xác hơn, lọc sau có thể loại sạch 10 kết quả. Quyền truy cập phải lọc trước để tài liệu mật không vào context.",
+        "Câu hỏi và tài liệu lệch nhau về từ vựng (“nghỉ đẻ” và “chế độ thai sản”) và về cấu trúc câu, nên embedding nằm xa nhau. Biến đổi câu hỏi bằng một model nhỏ, nhanh trước retrieval để kéo chúng lại gần.",
+        "Bốn cách biến đổi: mở rộng (thêm đồng nghĩa, sửa chính tả, dịch sang ngôn ngữ của kho), tách câu hỏi nhiều vế thành nhiều truy vấn, lùi một bước khi câu hỏi quá chi tiết, và HyDE.",
+        "HyDE sinh một câu trả lời giả định rồi tìm bằng embedding của nó: dù sai nội dung, nó có văn phong gần tài liệu hơn câu hỏi. Mỗi kỹ thuật thêm một lần gọi model, chỉ bật khi câu hỏi mơ hồ hoặc phức tạp."
+      ],
+      "ky_nang": [
+        "Chọn kỹ thuật biến đổi phù hợp cho một câu hỏi cụ thể",
+        "Giải thích vì sao lọc metadata trước khi tìm tốt hơn lọc sau",
+        "Quyết định có bật biến đổi câu hỏi không, và giữ bước này dưới 1 giây"
+      ]
+    },
+    {
+      "ten": "Tìm kiếm và xếp hạng lại: dense, sparse, hybrid, re-ranking",
+      "kien_thuc": [
+        "Dense (Ngày 7) hiểu đồng nghĩa, chịu lỗi chính tả và đa ngôn ngữ, nhưng hụt mã lỗi, tên riêng, số hiệu. Sparse (BM25) khớp chính xác từng từ, ưu tiên từ hiếm, nhanh, không cần GPU, nhưng không hiểu đồng nghĩa.",
+        "Hybrid chạy hai cách song song rồi gộp. Không cộng thô điểm vì BM25 không có trần. RRF gộp theo thứ hạng, mỗi bảng cho 1/(k + hạng) với k thường là 60; alpha gộp điểm đã chuẩn hoá theo tỉ trọng dense và sparse.",
+        "Re-ranking hai giai đoạn: tìm rộng 50–100 đoạn, rồi cross-encoder chấm lại từng cặp câu hỏi–đoạn, giữ 3–5 đoạn. Nó chính xác nhưng chậm nên chỉ chạy trên danh sách nhỏ; kho nhỏ mà top-5 đã đủ thì bỏ bước này.",
+        "Kho thật nhiều đoạn gần trùng nên top-k dễ toàn bản lặp. MMR chọn đoạn vừa liên quan vừa khác đoạn đã chọn, hợp câu hỏi mở cần tổng hợp; cross-encoder hợp khi cần một đáp án chính xác."
+      ],
+      "ky_nang": [
+        "Chỉ ra với một câu hỏi cụ thể thì dense hay sparse sẽ thắng",
+        "Tính điểm RRF của một tài liệu và chọn hướng nghiêng alpha theo loại dữ liệu",
+        "Quyết định có cần re-ranking, và chọn MMR hay cross-encoder theo kiểu câu hỏi"
+      ]
+    },
+    {
+      "ten": "Đóng gói context: augmentation là một bước riêng",
+      "kien_thuc": [
+        "Bọc mỗi chunk trong thẻ có mã, nguồn, ngày, phòng ban; mã dài ánh xạ về [1], [2], [3]. Bốn khối theo thứ tự: system (ít đổi, cache được) → context → câu hỏi → ràng buộc ở cuối, nơi model tuân thủ tốt nhất.",
+        "Ngân sách khoảng 20% system, 60% context, 20% câu hỏi và đầu ra; không nhồi đầy context window. Lost in the middle (Ngày 1): đưa top-5 vào theo thứ tự 1, 3, 5, 4, 2 để đoạn tốt nhất nằm đầu và cuối.",
+        "Hai chunk mâu thuẫn (14 ngày và 17 ngày) mà không mang ngày thì model không biết bản nào mới. Viết luật ưu tiên vào prompt: bản mới nhất thắng, nguồn có thẩm quyền thắng, hoặc nêu cả hai để người dùng quyết.",
+        "Chỉ mục còn giữ bản chính sách cũ thì mọi điểm đo đều đẹp mà câu trả lời vẫn sai thực tế. Cách chặn: ghi đè theo mã tài liệu khi index lại, xoá thật tài liệu thu hồi, hiện ngày tài liệu lên giao diện."
+      ],
+      "ky_nang": [
+        "Viết prompt RAG bốn khối đúng thứ tự và giữ context trong ngân sách",
+        "Sắp xếp lại top-k trước khi đưa vào prompt",
+        "Chọn luật ưu tiên khi tài liệu mâu thuẫn cho một loại dữ liệu cụ thể"
+      ]
+    },
+    {
+      "ten": "Sinh câu trả lời có căn cứ",
+      "kien_thuc": [
+        "Prompt neo dữ kiện gồm vai trò, nhiệm vụ, context, ràng buộc cứng: chỉ dùng context, mọi khẳng định có trích dẫn. Không có đáp án thì trả “dữ liệu hiện tại không đủ để trả lời” và gợi ý hướng tiếp, không đoán.",
+        "Niềm tin đến từ thứ người dùng thấy: trích dẫn bấm tới đoạn gốc, trạng thái “đang tìm, đang đọc”, cảnh báo khi độ tự tin thấp. Model tự chấm mình là “vừa đá bóng vừa thổi còi”, nên tách module đánh giá riêng.",
+        "Ba kiểu lỗi generation: xung đột context (sửa bằng metadata và luật ưu tiên), suy diễn quá đà (cấm suy diễn, kiểm tra lại trước khi trả), bỏ qua ràng buộc (đặt ràng buộc cuối, temperature 0, model mạnh hơn).",
+        "Chẩn đoán bằng một bước: in context đã đóng gói ra xem. Có đáp án mà vẫn sai là lỗi generation, không có là lỗi retrieval, còn kho không có đáp án là lỗi dữ liệu."
+      ],
+      "ky_nang": [
+        "Viết prompt neo dữ kiện bắt buộc trích dẫn và từ chối khi thiếu chứng cứ",
+        "Thiết kế đầu ra có trích dẫn, cảnh báo độ tin cậy và trạng thái xử lý",
+        "Nhận diện kiểu lỗi generation và chỉ ra lỗi thuộc khâu nào bằng một bước kiểm tra"
+      ]
+    },
+    {
+      "ten": "Đo chất lượng RAG: ba trục cơ bản",
+      "kien_thuc": [
+        "Thử 3–5 câu thấy mượt chưa chứng minh gì: thay đổi tốt cho 10 câu có thể hỏng 100 câu khác. Retrieval hụt mà model bịa “15 ngày” trùng thực tế vẫn bị tính đúng, nên phải đo từng khâu bằng bộ câu hỏi cố định.",
+        "Context recall đo retrieval: đủ chứng cứ chưa (cần 3, lấy được 2 là 2/3). Faithfulness đo generation: mỗi ý có chứng cứ trong context không; bịa mà tình cờ đúng vẫn điểm thấp. Answer relevance đo trúng ý hỏi.",
+        "Mỗi trục thấp chỉ đúng chỗ sửa: recall thấp thì xem lại chunking, metadata, hybrid; faithfulness thấp thì siết prompt, ép trích dẫn, hạ temperature; relevance thấp thì sửa hướng dẫn và cách đóng gói.",
+        "Đổi một biến mỗi lần. Chuyển sang hybrid có thể đưa recall từ 60% lên 90% với ít công nhất; cross-encoder thêm 5% mà độ trễ từ 1 lên 4 giây thì chưa chắc đáng. Hybrid không hơn dense cũng là kết quả hợp lệ."
+      ],
+      "ky_nang": [
+        "Đọc bảng điểm ba trục và chỉ đúng khâu cần sửa mà không cần chạy lại hệ thống",
+        "Lập thử nghiệm đổi một biến, cân mức cải thiện với độ trễ trước khi thêm kỹ thuật",
+        "Viết bộ 15–20 câu hỏi cố định có ca khó: mã lỗi, nhiều bước, không có đáp án, tài liệu mâu thuẫn"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 8: nâng cấp pipeline Ngày 7 thành RAG service",
+    "tom_tat": "Thêm BM25 chạy song song dense và gộp bằng RRF, đóng gói context có mã và ngày, viết prompt bắt buộc trích dẫn và biết từ chối. Chạy bản dense-only (V1) và bản mới (V2) trên 15–20 ca kiểm tra có ca khó, chỉ ra mỗi ca hỏng thuộc khâu nào.",
+    "dau_ra": "RAG service có hybrid, trích dẫn và từ chối, kèm bảng điểm so sánh V1 với V2"
+  },
+  "lien_quan": [
+    {
+      "ngay": 7,
+      "ghi_chu": "pipeline truy xuất gốc: chunking, embedding, vector store"
+    },
+    {
+      "ngay": 9,
+      "ghi_chu": "tách hệ RAG này thành supervisor và nhiều worker"
+    },
+    {
+      "ngay": 14,
+      "ghi_chu": "golden set, LLM-as-judge và cổng đánh giá trong CI/CD"
+    }
+  ]
+}

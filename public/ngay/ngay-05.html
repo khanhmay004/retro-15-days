@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 5 · Thiết kế sản phẩm AI · Retro 15 ngày</title>
+<meta name="description" content="Vì sao AI sai không phải là một bug có thể fix dứt điểm?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 5 · Thiết kế sản phẩm AI · Retro 15 ngày">
+<meta property="og:description" content="Vì sao AI sai không phải là một bug có thể fix dứt điểm?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-05">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-2" data-prev="/ngay/ngay-04" data-next="/ngay/ngay-06">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2 on" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC" aria-current="page">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 05 · Cột mốc 2 · Product hoá</p>
+  <h1>Thiết kế sản phẩm AI</h1>
+  <blockquote class="q">Vì sao AI sai không phải là một bug có thể fix dứt điểm?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Test giả thuyết bằng bậc fidelity rẻ nhất trước khi build; viết PRD cho AI feature kèm mục spec riêng cho AI; hiệu chỉnh niềm tin bằng expectation, explainability, control; quyết định AI tự làm tới đâu, đỡ người dùng khi AI sai; phân biệt báo nhầm với bỏ sót.</p>
+  <p class="chips"><span class="chip">leap of faith</span><span class="chip">thang fidelity</span><span class="chip">MVP</span><span class="chip">AI PRD</span><span class="chip">hiệu chỉnh niềm tin</span><span class="chip">quyền tự chủ</span><span class="chip">báo nhầm / bỏ sót</span><span class="chip">SPEC nhẹ</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>AI luôn có lúc sai: thiết kế cho lúc sai — hỏi lại, sửa, undo, chuyển người</li><li>Augmentation không phải bản kém của automation; thường là điểm bắt đầu đúng</li><li>Lỗi nào đắt hơn (precision hay recall) quyết định UX và failure path</li><li>Thin SPEC trước khi build</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Từ giả thuyết đến MVP</a><a href="#m2"><span>2</span>Viết PRD cho một AI feature</a><a href="#m3"><span>3</span>Đặt đúng kỳ vọng và niềm tin</a><a href="#m4"><span>4</span>Quyền tự chủ, phục hồi, và sai kiểu nào tệ hơn</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Từ giả thuyết đến MVP</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Leap of faith là giả định quan trọng nhất mà ít bằng chứng nhất trong một ý tưởng: test nó trước. AI làm build rẻ đi, nên các khâu trước build (nghiên cứu, spec, thiết kế) cũng phải đổi theo.</li><li>Prototype, Pilot, MVP, POC khác nhau trên hai trục: mức hoàn thiện và phạm vi test (một phần hay toàn bộ sản phẩm). Thang fidelity Sketch → Wireframe → Mockup → Prototype đi từ rẻ đến đắt.</li><li>Mỗi bậc fidelity trả lời một loại câu hỏi: bậc thấp kiểm tra luồng và tính năng, bậc cao kiểm chứng cảm giác “như thật”. Làm bản hoàn thiện chỉ để hỏi về luồng là đặt công sức sai chỗ.</li><li>Hai đòn bẩy giữ MVP rẻ: làm nhiều biến thể (variations) để so trước khi chọn hướng, và làm lát cắt mỏng đầu-cuối (thin slice) thay vì xong từng tầng. MVP là sản phẩm nhỏ dùng được, không phải mảnh dở dang.</li><li>Test nhu cầu trước khi có AI thật: một dịch vụ giao đồ ăn ra mắt bằng trang tĩnh và số điện thoại của người sáng lập; một trợ lý ghi chú cuộc họp có “bot AI” thực chất là người gõ tay hơn 100 cuộc họp.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Xác định giả định leap of faith cần test trước trong một ý tưởng sản phẩm</li><li>Chọn bậc fidelity khớp với câu hỏi cần trả lời, giữ MVP rẻ bằng variations hoặc thin slice</li><li>Thiết kế cách test nhu cầu người dùng không cần AI thật, trước khi đầu tư build</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Viết PRD cho một AI feature</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Đừng cầm búa đi tìm đinh: hiểu người dùng trước, brainstorm từ năng lực thật của AI sau, chọn use case theo giá trị và lợi thế khó sao chép. Problem statement không nhắc chữ AI.</li><li>Goals viết dưới dạng kết quả (outcome), không phải giải pháp; non-goals chặn tính năng phình to. Metrics chia ba tầng: mức dùng, chất lượng, tác động. User flow vẽ trọn đầu-cuối, kể cả các bước không có AI.</li><li>PRD cho AI cần thêm bốn mục: dữ liệu đầu vào và context, đặc tả output của model, cơ chế phản hồi, ngưỡng chấp nhận chất lượng (cao hay thấp tuỳ mức rủi ro của tính năng).</li><li>AI có ba loại lỗi: dao động giữa các lần chạy, trôi theo thời gian, sai ở tầng lập luận; không chắc chắn là mặc định. Nên spec đổi “kết quả mong đợi” thành “tỉ lệ đạt”, “test case” thành “phân bố tình huống”.</li><li>Bề mặt rủi ro phụ thuộc cấu hình: trả lời càng rõ bộ câu hỏi cấu hình, danh sách kịch bản lỗi càng cụ thể. Chỉ đổi một dòng, như khung giờ hoạt động, đã làm ba kịch bản lỗi biến mất hoặc xuất hiện.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Viết problem statement không nhắc AI, cùng goals, non-goals và metrics ba tầng</li><li>Viết bốn mục spec riêng cho AI, đặt yêu cầu chất lượng bằng tỉ lệ thay vì đúng/sai</li><li>Liệt kê kịch bản lỗi cần test từ cấu hình tính năng thay vì đoán</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Đặt đúng kỳ vọng và niềm tin</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Phần mềm chạy theo luật: cùng input luôn ra cùng output, lỗi tìm ra là sửa dứt điểm. AI chạy theo xác suất: cùng input, model, cấu hình vẫn có thể ra kết quả khác; lỗi chỉ giảm được, khó hết hẳn.</li><li>Vì vậy kiểm thử AI không còn là đạt hay không đạt sau một lần chạy. Thiết kế xoay quanh 4 câu hỏi: kỳ vọng đúng chưa, người dùng biết AI làm được gì chưa, AI sai thì phản hồi ra sao, học từ phản hồi thế nào.</li><li>Niềm tin phải khớp năng lực thật: tin quá mức thì người dùng ngừng kiểm tra, tin quá thấp thì bỏ cả tính năng đang chạy tốt. Cả hai đều là thất bại sản phẩm.</li><li>Ba đòn bẩy hiệu chỉnh niềm tin: expectation (nói rõ AI làm được gì), explainability (vì sao ra kết quả này), control (sửa, hoàn tác, duyệt trước khi thực thi). Giao diện không được hứa nhiều hơn năng lực thật.</li><li>Làm rõ năng lực bằng giải thích trực tiếp, nút điều khiển tương ứng, ví dụ input trên giao diện; nói rõ AI làm tốt trong điều kiện nào, nên tránh điều kiện nào. Khi không chắc, AI nên hỏi lại thay vì cố làm.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Giải thích vì sao kiểm thử tính năng AI không thể chỉ là đạt/không đạt sau một lần chạy</li><li>Dùng expectation, explainability hoặc control để sửa một giao diện đang hứa quá năng lực</li><li>Thiết kế cách làm rõ năng lực AI trên giao diện, nhận ra lúc nên để AI hỏi lại</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Quyền tự chủ, phục hồi, và sai kiểu nào tệ hơn</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Quyền tự chủ (im, hỏi lại hay tự làm) tính theo hai yếu tố: AI chắc đến đâu và sai thì trả giá bao nhiêu. Sai đắt như chuyển nhầm tiền: thu hẹp vùng tự làm; sai rẻ, dễ sửa như gợi ý tự hoàn thành: nới rộng.</li><li>Hành động khó đảo ngược (đặt chỗ, thanh toán): AI chuẩn bị, người dùng duyệt rồi mới thực thi; bước duyệt là ma sát tốt. Giải thích tốt luôn gắn với một hành động tiếp theo của người dùng.</li><li>Ngưỡng chấp nhận là quyết định sản phẩm, dựa trên báo nhầm hay bỏ sót gây hại hơn; không có con số đúng cho mọi tính năng. Người dùng không cần thấy con số, chỉ cần thấy hệ thống cư xử khác theo mức tin cậy.</li><li>Báo nhầm và bỏ sót (Ngày 2) gây hại khác nhau: lọc thư rác báo nhầm làm mất email quan trọng, sàng lọc y tế bỏ sót làm lỡ ca cần điều trị. Ưu tiên giảm loại nào tuỳ vào ai gánh hậu quả.</li><li>Khi AI đã sai: còn dùng được thì cho sửa, làm hỏng thứ có giá trị thì cho hoàn tác, không xử lý nổi thì có lối thoát (chuyển người thật, gợi ý bước tiếp). Lúc lỗi cũng là lúc xin phản hồi tốt nhất.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn mức quyền tự chủ theo độ chắc chắn và cái giá khi sai, không mặc định tự động tối đa</li><li>Thiết kế bước duyệt cho hành động khó đảo ngược và một cơ chế phục hồi khi AI sai</li><li>Chọn loại sai (báo nhầm hay bỏ sót) cần ưu tiên giảm cho một tình huống, kèm lý do</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 5: viết SPEC nhẹ cho một AI feature</h2>
+  <p>Chọn một ý tưởng AI feature và viết SPEC nhẹ: problem statement không nhắc AI, goals, non-goals, metrics ba tầng, bốn mục spec riêng cho AI, ít nhất một quyết định quyền tự chủ và một cơ chế phục hồi khi AI sai.</p>
+  <p class="out"><span>Đầu ra</span>SPEC nhẹ đủ cụ thể để bắt đầu build, dùng làm điểm xuất phát cho hackathon Ngày 6</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Với feature của bạn, báo nhầm hay bỏ sót đắt hơn, và khi AI sai thì người dùng làm gì tiếp?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-1" href="/ngay/ngay-02"><strong>Ngày 2 · Đóng khung bài toán</strong><span>double diamond, báo nhầm/bỏ sót: nay áp vào quyết định sản phẩm</span></a><a class="rel cm-2" href="/ngay/ngay-06"><strong>Ngày 6 · Hackathon: build, test, show</strong><span>SPEC nhẹ là điểm xuất phát của hackathon</span></a><a class="rel cm-4" href="/ngay/ngay-14"><strong>Ngày 14 · Evaluation</strong><span>báo nhầm/bỏ sót là nền cho đánh giá AI có hệ thống</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-04" rel="prev"><span>← Ngày 4</span><strong>Prompt &amp; tool</strong></a><a class="pn-a next" href="/ngay/ngay-06" rel="next"><span>Ngày 6 →</span><strong>Hackathon: build, test, show</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

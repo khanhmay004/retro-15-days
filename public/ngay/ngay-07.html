@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngày 7 · Data Foundations — Embedding &amp; Vector Store · Retro 15 ngày</title>
+<meta name="description" content="Làm sao agent tìm được đúng thứ trong kho tài liệu của bạn?">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Ngày 7 · Data Foundations — Embedding &amp; Vector Store · Retro 15 ngày">
+<meta property="og:description" content="Làm sao agent tìm được đúng thứ trong kho tài liệu của bạn?">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ngay/ngay-07">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-3" data-prev="/ngay/ngay-06" data-next="/ngay/ngay-08">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3 on" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store" aria-current="page">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap day">
+<header class="dh">
+  <p class="pill">Ngày 07 · Cột mốc 3 · Tri thức &amp; kiến trúc</p>
+  <h1>Data Foundations — Embedding &amp; Vector Store</h1>
+  <blockquote class="q">Làm sao agent tìm được đúng thứ trong kho tài liệu của bạn?</blockquote>
+  <p class="goal"><span class="lbl">Mục tiêu</span>Phân biệt ba loại dữ liệu agent cần và cách đưa từng loại vào hệ thống; chia tài liệu thành chunk đúng cách; hiểu embedding và đọc đúng điểm cosine; biết vector store lưu gì, lọc bằng metadata ra sao; nối một nguồn dữ liệu riêng vào agent.</p>
+  <p class="chips"><span class="chip">RAG vs fine-tuning</span><span class="chip">chunking</span><span class="chip">overlap</span><span class="chip">embedding</span><span class="chip">cosine similarity</span><span class="chip">vector store</span><span class="chip">metadata</span><span class="chip">ingestion pipeline</span></p>
+</header>
+<section class="lessons" aria-labelledby="bh-h">
+  <h2 id="bh-h">Bài học của ngày</h2>
+  <ol><li>Agent sai thường vì thiếu đúng dữ liệu, không phải vì model yếu</li><li>Embedding so được nghĩa: “hoàn tiền” gần “refund policy” (cosine ~0,82)</li><li>Retrieval 2 pha: ingestion (chunk → embed → lưu) và retrieval (tìm → đưa vào prompt)</li><li>Chunk tốt hay xấu đổi hẳn kết quả: cosine 0,89 so với 0,61</li></ol>
+</section>
+<nav class="toc" aria-label="Các module"><a href="#m1"><span>1</span>Chiến lược dữ liệu cho agent</a><a href="#m2"><span>2</span>Chunking</a><a href="#m3"><span>3</span>Embeddings</a><a href="#m4"><span>4</span>Vector store</a><a href="#m5"><span>5</span>Đưa dữ liệu vào production</a></nav>
+<section class="mod" id="m1" aria-labelledby="m1-h">
+  <div class="mod-h"><span class="mod-n">01</span><h2 id="m1-h">Chiến lược dữ liệu cho agent</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Phần lớn lỗi của agent nằm ở dữ liệu nó được đọc, không ở model: model mạnh vẫn trả lời sai nếu tài liệu cũ, thiếu hoặc sai định dạng. Câu hỏi đã dời từ “dùng model nào” sang “agent được phép biết gì”.</li><li>Ba cách đưa dữ liệu vào model: dán vào context (tài liệu ngắn, ít đổi), RAG (kho lớn, cần trích nguồn, hay cập nhật), fine-tuning (giọng điệu, định dạng riêng). Fine-tuning dạy cách nói, RAG cấp điều cần nói.</li><li>Ba loại dữ liệu, ba đường: knowledge data (chính sách, FAQ) hợp tìm kiếm ngữ nghĩa; operational data (đơn hàng, giao dịch) cần truy vấn có kiểm soát; contextual data (lịch sử phiên, hồ sơ) đưa vào context.</li><li>Bốn tầng dữ liệu: raw → cleaned → structured (chia phần, gắn nguồn) → enriched (gắn nhãn chủ đề, mức truy cập, độ tin cậy). Lỗi tầng dưới lan vào câu trả lời; nâng tầng thường lợi hơn đổi thuật toán tìm kiếm.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Chọn giữa context trực tiếp, RAG và fine-tuning cho một tình huống cụ thể</li><li>Phân loại một nhu cầu dữ liệu vào knowledge, operational hay contextual và chọn đúng đường xử lý</li><li>Chỉ ra lỗi trong một mẫu dữ liệu xấu thuộc tầng nào của tháp chất lượng</li></ul></div>
+  </div>
+</section><section class="mod" id="m2" aria-labelledby="m2-h">
+  <div class="mod-h"><span class="mod-n">02</span><h2 id="m2-h">Chunking</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Chunking chia tài liệu thành đoạn nhỏ, mỗi đoạn một vector, vì: embedding model có giới hạn đầu vào; cả file một vector thì chỉ tìm ra cả file, không ra đúng đoạn; nội dung thừa làm câu trả lời kém đi.</li><li>Overlap lấy phần cuối đoạn trước làm phần đầu đoạn sau để không mất context tại điểm cắt; overlap càng nhiều càng tốn lưu trữ, mức phổ biến khoảng 10–15% độ dài đoạn.</li><li>Chunk quá to gộp nhiều chủ đề vào một vector: tìm vẫn trúng nhưng câu trả lời bị nhiễu. Chunk quá nhỏ tách câu hỏi khỏi câu trả lời: trúng câu nhưng thiếu context. Chunk tốt giữ trọn một ý trong một đoạn.</li><li>Ba nhóm chiến lược: nền tảng (độ dài cố định, đoạn/câu, heading); ngữ nghĩa (cắt khi chủ đề đổi; tốn hơn, hợp tài liệu dài ít cấu trúc); chuyên biệt (tìm đoạn nhỏ trả đoạn lớn, nhiều tầng, giữ bảng và code).</li><li>Chọn theo triệu chứng: có heading thì cắt theo heading; tìm trúng mà thiếu context thì tìm đoạn nhỏ, trả đoạn lớn chứa nó; trúng mà nhiễu thì chunk nhỏ lại. Bắt đầu đơn giản, đo bằng câu hỏi thật rồi nâng cấp.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Giải thích ba lý do phải chunk và vì sao overlap giữ được context tại điểm cắt</li><li>Nhận ra chunk quá to (nhiễu) hay quá nhỏ (thiếu context) khi so câu trả lời trên cùng câu hỏi</li><li>Chọn chiến lược chunking cho một tài liệu theo trình tự quyết định thay vì đoán</li></ul></div>
+  </div>
+</section><section class="mod" id="m3" aria-labelledby="m3-h">
+  <div class="mod-h"><span class="mod-n">03</span><h2 id="m3-h">Embeddings</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Embedding model biến văn bản, ảnh, âm thanh thành vector cùng số chiều trong một không gian chung; vector gần nhau là nghĩa gần nhau. “Chính sách hoàn tiền” và “refund policy” nằm gần nhau dù khác ngôn ngữ.</li><li>Cosine đo góc, bỏ qua độ dài: bằng 1 khi cùng hướng, 0 khi vuông góc. Nhờ vậy câu hỏi ngắn và trang tài liệu dài cùng chủ đề vẫn có cosine cao, nên cosine là mặc định cho tìm kiếm ngữ nghĩa.</li><li>Euclidean đo khoảng cách đường thẳng, tính cả độ dài lẫn hướng: hợp khi độ lớn vector mang thông tin thật (toạ độ, số đo cảm biến) hoặc khi gom nhóm dữ liệu cùng đơn vị đo.</li><li>Cosine đo chủ đề, không đo sắc thái: câu khen và câu chê cùng một sản phẩm vẫn thường có cosine dương, hiếm khi gần −1, vì embedding dồn trong một vùng hẹp của không gian.</li><li>Ngoài tìm kiếm, embedding dùng để gom nhóm, phát hiện nội dung trùng lặp, gợi ý nội dung liên quan. Đổi embedding model phải nhúng lại toàn bộ dữ liệu: hai model cùng số chiều vẫn không chung không gian.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Giải thích vì sao embedding so được nghĩa giữa hai ngôn ngữ hoặc hai định dạng</li><li>Dự đoán điểm cosine giữa hai câu, kể cả cặp trái sắc thái, và chọn cosine hay Euclidean</li><li>Chọn embedding model theo số chiều, chất lượng tìm kiếm và ngôn ngữ dữ liệu, rồi giữ ổn định</li></ul></div>
+  </div>
+</section><section class="mod" id="m4" aria-labelledby="m4-h">
+  <div class="mod-h"><span class="mod-n">04</span><h2 id="m4-h">Vector store</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Mỗi record gồm bốn phần: ID, đoạn văn bản gốc (đưa vào prompt), embedding vector (dùng để tìm), metadata dạng khoá-giá trị (dùng để lọc). Truy vấn trả về các record gần nhất, không phải chính vector.</li><li>Metadata thường dùng: nguồn, tên file để truy vết; danh mục để thu hẹp phạm vi; thời điểm cập nhật để tránh nội dung cũ; mức truy cập để giới hạn ai thấy gì. Xem nhẹ metadata lúc dữ liệu nhỏ thì sau khó lọc.</li><li>Ba tham số chạy theo thứ tự: lọc metadata thu hẹp phạm vi → tìm ngữ nghĩa lấy top-k đoạn gần nhất → ngưỡng điểm loại đoạn kém liên quan. Cùng một ngưỡng có thể quá chặt với chunk dài, quá lỏng với chunk ngắn.</li><li>Mã đơn hàng, mã hợp đồng là chuỗi vô nghĩa với embedding: dữ liệu cấu trúc chặt, cần chính xác tuyệt đối thì tra bằng khoá. Văn bản tự nhiên cần khớp theo nghĩa, như chính sách đổi trả, mới vào vector store.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Gọi tên bốn thành phần của một record, phân biệt vector để tìm với văn bản để trả lời</li><li>Phối hợp lọc metadata, top-k và ngưỡng điểm, chọn ngưỡng theo dữ liệu thật</li><li>Quyết định dữ liệu nào vào vector store, dữ liệu nào tra cứu trực tiếp bằng khoá</li></ul></div>
+  </div>
+</section><section class="mod" id="m5" aria-labelledby="m5-h">
+  <div class="mod-h"><span class="mod-n">05</span><h2 id="m5-h">Đưa dữ liệu vào production</h2></div>
+  <div class="mod-b">
+    <div class="kt"><p class="lbl">Kiến thức chính</p><ul><li>Hai pha: nạp (ingestion) chạy khi có tài liệu mới hoặc đổi: xử lý → chunk → embed → lưu; truy xuất chạy mỗi câu hỏi: embed câu hỏi bằng đúng model lúc nạp → tìm trong vector store → đưa kết quả vào context.</li><li>Khi câu trả lời sai, câu hỏi đầu tiên là lỗi thuộc pha nạp (dữ liệu không có, chunk sai) hay pha truy xuất (tìm sai, lọc sai). Tách rõ hai pha giúp gỡ lỗi nhanh hơn.</li><li>Pha nạp có ba khối: kiểm soát đầu vào (không tin đuôi file), xử lý (trích xuất, làm sạch, chuẩn hoá), lập chỉ mục (chunk, embed, lưu kèm metadata). Lỗi hay sinh ở hai khối đầu nhưng chỉ lộ ra khi truy vấn.</li><li>Retrieval tìm context cho câu hỏi hiện tại từ kho tri thức chung; memory lưu trạng thái, sở thích, lịch sử của riêng một người dùng. Context window chỉ giữ mạch ngắn hạn, không tự thành bộ nhớ dài hạn.</li></ul></div>
+    <div class="kn"><p class="lbl">Kỹ năng</p><ul><li>Vẽ pipeline từ tài liệu đến câu trả lời và xác định lỗi thuộc pha nạp hay pha truy xuất</li><li>Gỡ lỗi tìm kiếm kém bằng cách đi ngược qua ba khối của pha nạp</li><li>Phân biệt retrieval với memory theo mục đích và nguồn dữ liệu</li></ul></div>
+  </div>
+</section>
+
+<section class="lab" aria-labelledby="lab-h">
+  <p class="lbl">Lab</p>
+  <h2 id="lab-h">Lab 7: nối dữ liệu riêng vào agent</h2>
+  <p>Cài ba chiến lược chunking và phép đo cosine, dựng vector store có tìm, lọc, xoá rồi nối vào agent theo mẫu RAG. Theo nhóm, so các chiến lược chunking và metadata trên cùng 5 câu hỏi kiểm tra có đáp án chuẩn.</p>
+  <p class="out"><span>Đầu ra</span>Pipeline chạy được nối dữ liệu riêng vào agent, kèm kết quả so sánh các chiến lược chunking</p>
+</section>
+<section class="soi" aria-labelledby="soi-h">
+  <h2 class="lbl" id="soi-h">Tự soi</h2>
+  <p>Chiến lược chunking nào cho kết quả tốt nhất trong nhóm bạn, và vì sao?</p>
+</section>
+<section class="rels" aria-labelledby="lq-h"><h2 class="lbl" id="lq-h">Liên quan</h2><div class="rel-list"><a class="rel cm-3" href="/ngay/ngay-08"><strong>Ngày 8 · RAG</strong><span>nâng pipeline này thành RAG đầy đủ: hybrid search, re-ranking, đo</span></a></div></section>
+<nav class="pn" aria-label="Ngày trước và sau"><a class="pn-a prev" href="/ngay/ngay-06" rel="prev"><span>← Ngày 6</span><strong>Hackathon: build, test, show</strong></a><a class="pn-a next" href="/ngay/ngay-08" rel="next"><span>Ngày 8 →</span><strong>RAG</strong></a></nav>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

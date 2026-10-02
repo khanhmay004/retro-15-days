@@ -1,0 +1,128 @@
+{
+  "ngay": 9,
+  "ten": "Multi-agent và kết nối hệ thống",
+  "ten_ngan": "Multi-agent & MCP",
+  "cot_moc": 3,
+  "cau_hoi": "Một agent giỏi đến đâu cũng có lúc quá tải — chia việc và nối hệ thống thế nào để vẫn kiểm soát được?",
+  "muc_tieu": "Nhận biết lúc một agent quá tải và khi nào nên tách; chọn pattern multi-agent theo loại bài toán; thiết kế hệ supervisor-worker có phiếu giao việc và trạng thái chung; phân biệt MCP (nối tool) với A2A (giao việc cho agent khác); đọc trace để tìm agent đã sai.",
+  "tu_khoa": [
+    "multi-agent",
+    "supervisor-worker",
+    "phiếu giao việc",
+    "MCP",
+    "A2A",
+    "agent card",
+    "LangGraph",
+    "trace"
+  ],
+  "bai_hoc": [
+    "Chỉ dùng multi-agent khi một agent quá tải, không phải vì “ngầu”",
+    "Supervisor-worker là pattern thực dụng nhất để bắt đầu",
+    "MCP nối agent với tool; A2A nối agent với agent",
+    "Trace tốt là điều kiện tiên quyết để debug và cải thiện"
+  ],
+  "tu_soi": "Bài của bạn có thật sự cần multi-agent không, hay một agent là đủ?",
+  "module": [
+    {
+      "ten": "Khi một agent không còn đủ",
+      "kien_thuc": [
+        "Một agent ôm mọi vai trong một lượt suy luận gặp bốn giới hạn: context có hạn nên quên thông tin, nhiều vai nên prompt dài mà không vai nào giỏi, việc độc lập phải xếp hàng, hiểu sai từ đầu kéo lệch cả luồng.",
+        "Context window lớn hơn không giải quyết triệt để: không kích thước nào đủ cho mọi bài toán, vấn đề nằm ở cách tổ chức công việc. Dấu hiệu quá tải: thiếu thông tin ở giữa tài liệu, lặp lại bước đã làm.",
+        "Thêm agent là một đánh đổi, không phải nâng cấp miễn phí. Nên tách khi có nhiều vai khác hẳn nhau, có việc chạy độc lập được, cần khoanh vùng lỗi, cần mở rộng dần, hoặc context một agent không đủ.",
+        "Giữ một agent khi dữ liệu đơn giản, cùng context, hoặc quy trình tuyến tính. Đừng hỏi agent đủ thông minh chưa; hỏi: có mấy loại trách nhiệm, ai cần biết gì, lỗi khoanh vùng ở đâu, chỗ nào cần người duyệt."
+      ],
+      "ky_nang": [
+        "Nhận diện dấu hiệu quá tải context trong log chạy của một agent",
+        "Quyết định một tình huống nên tách nhiều agent hay giữ một agent, kèm lý do"
+      ]
+    },
+    {
+      "ten": "Bốn pattern chia hệ thống nhiều agent",
+      "kien_thuc": [
+        "Supervisor-worker: một agent điều phối chia việc cho các agent chuyên biệt, dễ kiểm soát và truy vết; 2–3 worker đã đủ thấy giá trị. Cảnh báo: supervisor ôm quá nhiều việc sẽ thành nút thắt.",
+        "Pipeline: agent này làm xong mới chuyển cho agent sau, ổn định và dễ kiểm tra từng bước, nhưng kém linh hoạt khi luồng xử lý cần đổi động.",
+        "Debate: nhiều agent cùng giải rồi tổng hợp hoặc bỏ phiếu để giảm điểm mù. Hierarchical: nhiều tầng supervisor lồng nhau để mở rộng quy mô lớn. Chọn pattern theo loại phức tạp, không theo tên nghe hay.",
+        "Agent chấm agent dễ thiên vị câu trả lời cùng phong cách với model sinh ra nó: dùng model khác nhau cho vai trả lời và vai chấm, kèm tiêu chí rõ. Rủi ro lớn nhất của debate nằm ở khâu tổng hợp kết luận."
+      ],
+      "ky_nang": [
+        "Chọn pattern cho một tình huống và giải thích vì sao ba pattern kia kém hợp hơn",
+        "Giảm thiên vị khi dùng một agent chấm điểm agent khác"
+      ]
+    },
+    {
+      "ten": "Supervisor-Worker sâu",
+      "kien_thuc": [
+        "Supervisor phân tích yêu cầu, chọn worker, theo dõi để thử lại, tổng hợp; không cần là model mạnh nhất, quá “thông minh” thì tự trả lời thay vì giao việc. Worker giữ một năng lực hẹp, test riêng được.",
+        "Bốn lỗi hay gặp: supervisor ôm việc của worker, worker liên tục hỏi ngược, truyền thông tin qua biến toàn cục, worker lỗi mà im lặng. Phần việc tách được chưa chắc đáng thành worker; có khi chỉ nên là tool.",
+        "Phiếu giao việc chỉ ghi “tìm chính sách liên quan” dễ khiến worker lấy nhầm dữ liệu cũ. Phiếu đủ rõ có nhiệm vụ, bối cảnh (diện áp dụng, quy định đang hiệu lực) và định dạng đầu ra, đúng phần worker cần.",
+        "Trạng thái chung tối thiểu có sáu trường: nhiệm vụ gốc, kế hoạch phân việc, kết quả từng worker, trạng thái xử lý, câu trả lời cuối, trace có mốc thời gian. Quy định rõ ai được đọc, ai được ghi để tránh ghi đè."
+      ],
+      "ky_nang": [
+        "Viết phiếu giao việc đủ nhiệm vụ, bối cảnh và định dạng đầu ra cho một worker",
+        "Nhận diện bốn lỗi thiết kế và quyết định một phần việc nên là worker hay tool",
+        "Thiết kế trạng thái chung sáu trường, có trace ghi nội dung vào ra thật"
+      ]
+    },
+    {
+      "ten": "MCP – chuẩn kết nối tool",
+      "kien_thuc": [
+        "Không có chuẩn chung, mỗi tool cần tích hợp riêng và phải viết lại khi tool đổi API. MCP là chuẩn giao tiếp chung: đổi phía cung cấp chỉ sửa ở MCP server, đổi phía agent không ảnh hưởng tool.",
+        "Agent nối tới MCP server qua MCP client. Server công bố ba loại năng lực: tool (thao tác thực thi được), resource (dữ liệu chỉ đọc như schema, giúp agent truy vấn chính xác hơn), prompt (cách gọi đã chuẩn hoá).",
+        "Agent khám phá tool lúc chạy: kết nối → lấy danh sách tool → đọc mô tả và schema → chọn tool → gọi đúng tham số → nhận kết quả. Schema khai báo rõ giúp server tự chặn tham số sai kiểu, kể cả khi agent có lỗi.",
+        "MCP server là chốt chặn bảo mật: chỉ công bố tool cần thiết, bắt người duyệt thao tác sửa dữ liệu nhạy cảm, chạy cô lập thao tác rủi ro cao, và chặn chỉ dẫn ẩn trong kết quả tool trước khi tới agent."
+      ],
+      "ky_nang": [
+        "Phân biệt tool, resource và prompt của một MCP server",
+        "Gọi một tool qua MCP và giải thích vì sao schema chặn lỗi từ sớm",
+        "Đặt lớp phòng thủ ở MCP server thay vì chỉ dựa vào prompt"
+      ]
+    },
+    {
+      "ten": "A2A – giao tiếp agent với agent",
+      "kien_thuc": [
+        "MCP trả lời “lấy năng lực từ đâu”: bên nhận là tool, chỉ thực thi đúng lệnh. A2A trả lời “giao việc cho ai”: bên nhận là agent khác, tự quyết cách làm, có thể từ chối, chạy lâu. A2A không phải một loại tool.",
+        "Agent công bố năng lực qua agent card (định danh, kỹ năng, điểm kết nối) để agent khác biết gọi ai. Phiếu giao việc ba phần như với worker: thiếu bối cảnh thì bên nhận phải hỏi lại, thừa thì chậm, khó bảo trì.",
+        "Đồng bộ: bên gọi dừng chờ kết quả, dễ hiểu, dễ debug nhưng kéo dài cả luồng. Không đồng bộ: bên gọi làm tiếp, bên nhận báo lại khi xong, chạy song song được nhưng phải quản trạng thái và thời hạn chờ chặt hơn.",
+        "A2A còn mới; phần lớn hệ multi-agent vẫn giao tiếp trong cùng một tiến trình. A2A cần khi các agent chạy ở môi trường, tổ chức hoặc công nghệ nền khác nhau."
+      ],
+      "ky_nang": [
+        "Phân biệt MCP với A2A: bên nhận có tự quyết, có từ chối được, có chạy lâu không",
+        "Xác định khi nào thật sự cần A2A, khi nào giao tiếp nội bộ trong hệ là đủ",
+        "Chọn cách chờ đồng bộ hay không đồng bộ cho một tình huống cụ thể"
+      ]
+    },
+    {
+      "ten": "Orchestration, trace và độ tin cậy",
+      "kien_thuc": [
+        "Không có framework, định tuyến nằm trong một prompt dài, thêm nhánh là sửa cả prompt. LangGraph biểu diễn luồng bằng node (một bước), edge (đường đi, có thể có điều kiện) và state (dữ liệu truyền qua các bước).",
+        "Một StateGraph gồm ba phần: khai báo state, hàm quyết định bước tiếp theo dựa trên state, và phần ghép node với edge có điều kiện. Đọc nó là biết định tuyến dựa vào trường dữ liệu nào.",
+        "Lỗi điển hình trong trace: worker trả kết quả rỗng nhưng ghi “thành công”, agent tổng hợp dựng câu trả lời nghe hợp lý từ đó. Worker không tìm thấy phải báo rõ “không tìm thấy”.",
+        "Mỗi agent tốn ít nhất một lượt gọi model, token có thể tăng nhiều lần; đổi lại dễ debug, dễ thêm worker. Hỏng có kiểm soát: có thời hạn chờ, giới hạn thử lại, thiếu tự tin thì trả phần đã có, báo rõ phần thiếu."
+      ],
+      "ky_nang": [
+        "Đọc một định nghĩa luồng LangGraph và chỉ ra chỗ quyết định bước tiếp theo",
+        "Đọc trace để xác định lỗi ở bước định tuyến, xử lý hay tổng hợp",
+        "Thiết kế hỏng có kiểm soát: thời hạn chờ, giới hạn thử lại, báo rõ phần thiếu"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 9: supervisor và nhiều worker có MCP và trace",
+    "tom_tat": "Tách hệ truy xuất và trả lời của Ngày 8 thành một supervisor và 2–3 worker (truy xuất, gọi tool, tổng hợp); thiết kế trạng thái chung, nối một worker với năng lực bên ngoài qua MCP, viết phiếu giao việc và ghi trace cho toàn luồng.",
+    "dau_ra": "Hệ supervisor-worker chạy được, có kết nối MCP, kèm một bản trace mẫu"
+  },
+  "lien_quan": [
+    {
+      "ngay": 8,
+      "ghi_chu": "hệ RAG của Lab 8 là điểm xuất phát của Lab 9"
+    },
+    {
+      "ngay": 11,
+      "ghi_chu": "chỉ dẫn ẩn trong kết quả tool: prompt injection và HITL đi sâu"
+    },
+    {
+      "ngay": 13,
+      "ghi_chu": "trace đi tiếp thành ba trụ metrics, logs, traces cho agent"
+    }
+  ]
+}

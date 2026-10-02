@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cả khoá trên một trang · Retro 15 ngày</title>
+<meta name="description" content="Câu hỏi, bài học và câu tự soi của 15 ngày Phase 1 AI Thực Chiến trên một trang.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Retro 15 ngày">
+<meta property="og:title" content="Cả khoá trên một trang · Retro 15 ngày">
+<meta property="og:description" content="Câu hỏi, bài học và câu tự soi của 15 ngày Phase 1 AI Thực Chiến trên một trang.">
+<meta property="og:url" content="https://retro-15-days.vercel.app/ca-khoa">
+<meta property="og:image" content="https://retro-15-days.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2747c8">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="cm-0">
+<a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">15</span><span class="brand-t">Retro 15 ngày</span></a>
+    <nav class="dots" aria-label="15 ngày"><a class="dot cm-1" href="/ngay/ngay-01" aria-label="Ngày 1: Gọi LLM API" title="Ngày 1 · Gọi LLM API">1</a><a class="dot cm-1" href="/ngay/ngay-02" aria-label="Ngày 2: Đóng khung bài toán" title="Ngày 2 · Đóng khung bài toán">2</a><a class="dot cm-1" href="/ngay/ngay-03" aria-label="Ngày 3: ReAct agent" title="Ngày 3 · ReAct agent">3</a><a class="dot cm-1" href="/ngay/ngay-04" aria-label="Ngày 4: Prompt &amp; tool" title="Ngày 4 · Prompt &amp; tool">4</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-2" href="/ngay/ngay-05" aria-label="Ngày 5: Uncertainty &amp; Thin SPEC" title="Ngày 5 · Uncertainty &amp; Thin SPEC">5</a><a class="dot cm-2" href="/ngay/ngay-06" aria-label="Ngày 6: Hackathon: build, test, show" title="Ngày 6 · Hackathon: build, test, show">6</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-3" href="/ngay/ngay-07" aria-label="Ngày 7: Embedding &amp; vector store" title="Ngày 7 · Embedding &amp; vector store">7</a><a class="dot cm-3" href="/ngay/ngay-08" aria-label="Ngày 8: RAG" title="Ngày 8 · RAG">8</a><a class="dot cm-3" href="/ngay/ngay-09" aria-label="Ngày 9: Multi-agent &amp; MCP" title="Ngày 9 · Multi-agent &amp; MCP">9</a><a class="dot cm-3" href="/ngay/ngay-10" aria-label="Ngày 10: Data pipeline" title="Ngày 10 · Data pipeline">10</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-4" href="/ngay/ngay-11" aria-label="Ngày 11: Guardrails" title="Ngày 11 · Guardrails">11</a><a class="dot cm-4" href="/ngay/ngay-12" aria-label="Ngày 12: Deploy" title="Ngày 12 · Deploy">12</a><a class="dot cm-4" href="/ngay/ngay-13" aria-label="Ngày 13: Monitoring" title="Ngày 13 · Monitoring">13</a><a class="dot cm-4" href="/ngay/ngay-14" aria-label="Ngày 14: Evaluation" title="Ngày 14 · Evaluation">14</a><span class="dot-gap" aria-hidden="true"></span><a class="dot cm-5" href="/ngay/ngay-15" aria-label="Ngày 15: Retro &amp; chọn track" title="Ngày 15 · Retro &amp; chọn track">15</a></nav>
+    <div class="bar-act">
+      <a class="bar-link" href="/ca-khoa">Cả khoá</a>
+      <button class="theme" id="theme" type="button" aria-label="Đổi giao diện sáng / tối" title="Sáng / tối"><span aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+<main id="noi-dung">
+<div class="wrap all">
+<header class="dh">
+  <p class="pill neutral">AI Thực Chiến · Phase 1</p>
+  <h1>Cả khoá trên một trang</h1>
+  <p class="goal">Câu hỏi, bài học và câu tự soi của 15 ngày. In ra làm handout, hoặc dùng Ctrl+F để tìm nhanh.</p>
+  <p class="cta"><button class="btn ghost" type="button" data-print>In trang này</button></p>
+</header>
+<section class="ak-g cm-1"><h2><span class="pill">Cột mốc 1 · Ngày 1–4</span>Nền móng</h2><article class="ak cm-1">
+  <a class="ak-h" href="/ngay/ngay-01"><span class="ak-n">01</span><span><strong>AI &amp; LLM Foundation</strong><em>Bạn dùng AI mỗi ngày — nhưng bên trong nó đang làm gì?</em></span></a>
+  <ul><li>LLM là Transformer dự đoán token tiếp theo từ context, nên có lúc bịa (hallucination)</li><li>Chọn model theo ba trục: chất lượng, độ trễ, chi phí</li><li>Output token đắt hơn input 3–5 lần; tiếng Việt tốn token hơn tiếng Anh</li><li>Vibe coding tốt = intent rõ + context đủ + review kỹ</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Một lượt chat trong app của bạn tốn bao nhiêu token, và bao nhiêu tiền?</p>
+</article><article class="ak cm-1">
+  <a class="ak-h" href="/ngay/ngay-02"><span class="ak-n">02</span><span><strong>Xác định bài toán cho AI</strong><em>Trước khi chọn Rule, Workflow hay Agent — bạn đã chắc mình đang giải đúng bài toán chưa?</em></span></a>
+  <ul><li>Brief mơ hồ không thay thế được Problem Statement</li><li>Pain point phải lượng hoá: baseline → target → cách đo</li><li>Rule, Workflow hay Agent? Phức tạp không đồng nghĩa hiệu quả</li><li>Go / Not Yet / No-Go quyết định bằng lập luận và số liệu kiểm thử</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Problem Statement của nhóm bạn có baseline bằng con số không?</p>
+</article><article class="ak cm-1">
+  <a class="ak-h" href="/ngay/ngay-03"><span class="ak-n">03</span><span><strong>Từ chatbot đến agentic agent</strong><em>Cái gì biến chatbot thành agent?</em></span></a>
+  <ul><li>Agent = LLM + reasoning + tools + memory, không phải “chatbot thông minh hơn”</li><li>ReAct: Thought → Action → Observation, debug bằng cách đọc trace</li><li>Chấm Agentic Fit: 0–5 điểm chatbot là đủ, từ 11 điểm mới đáng thử agent</li><li>Agent đắt hơn ~4,5× và chậm hơn ~4× chatbot cho cùng câu hỏi</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Lần gần nhất agent của bạn sai, bạn đọc trace hay chỉ nhìn câu trả lời cuối?</p>
+</article><article class="ak cm-1">
+  <a class="ak-h" href="/ngay/ngay-04"><span class="ak-n">04</span><span><strong>Prompt Engineering &amp; Tool Calling</strong><em>Cùng một model — vì sao prompt của người này cho kết quả xuất sắc, của người kia thì không dùng được, và agent lúc gọi đúng tool lúc gọi sai?</em></span></a>
+  <ul><li>System prompt 5 phần: Persona, Rules, Capabilities, Constraints, Output format</li><li>Tool description quyết định model chọn đúng tool và đúng tham số</li><li>Context có 5 “rổ” token; thông tin ở giữa dễ bị quên (Lost in the Middle)</li><li>Prompt safety là bắt buộc cho production, không phải “nice to have”</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Tool description nào của bạn từng khiến agent gọi sai tool?</p>
+</article></section><section class="ak-g cm-2"><h2><span class="pill">Cột mốc 2 · Ngày 5–6</span>Product hoá</h2><article class="ak cm-2">
+  <a class="ak-h" href="/ngay/ngay-05"><span class="ak-n">05</span><span><strong>Thiết kế sản phẩm AI</strong><em>Vì sao AI sai không phải là một bug có thể fix dứt điểm?</em></span></a>
+  <ul><li>AI luôn có lúc sai: thiết kế cho lúc sai — hỏi lại, sửa, undo, chuyển người</li><li>Augmentation không phải bản kém của automation; thường là điểm bắt đầu đúng</li><li>Lỗi nào đắt hơn (precision hay recall) quyết định UX và failure path</li><li>Thin SPEC trước khi build</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Với feature của bạn, báo nhầm hay bỏ sót đắt hơn, và khi AI sai thì người dùng làm gì tiếp?</p>
+</article><article class="ak cm-2">
+  <a class="ak-h" href="/ngay/ngay-06"><span class="ak-n">06</span><span><strong>AI Product Hackathon</strong><em>SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục — nhóm bạn chứng minh được đến đâu?</em></span></a>
+  <ul><li>SPEC là giả thuyết, prototype là bằng chứng, demo là thuyết phục</li><li>Bằng chứng gồm hai phần: golden set nhỏ có đáp án và phản hồi của người dùng thật</li><li>Demo phải có cả happy path lẫn error path</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Demo hackathon của nhóm bạn có cho thấy ít nhất 1 error path không?</p>
+</article></section><section class="ak-g cm-3"><h2><span class="pill">Cột mốc 3 · Ngày 7–10</span>Tri thức &amp; kiến trúc</h2><article class="ak cm-3">
+  <a class="ak-h" href="/ngay/ngay-07"><span class="ak-n">07</span><span><strong>Data Foundations — Embedding &amp; Vector Store</strong><em>Làm sao agent tìm được đúng thứ trong kho tài liệu của bạn?</em></span></a>
+  <ul><li>Agent sai thường vì thiếu đúng dữ liệu, không phải vì model yếu</li><li>Embedding so được nghĩa: “hoàn tiền” gần “refund policy” (cosine ~0,82)</li><li>Retrieval 2 pha: ingestion (chunk → embed → lưu) và retrieval (tìm → đưa vào prompt)</li><li>Chunk tốt hay xấu đổi hẳn kết quả: cosine 0,89 so với 0,61</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Chiến lược chunking nào cho kết quả tốt nhất trong nhóm bạn, và vì sao?</p>
+</article><article class="ak cm-3">
+  <a class="ak-h" href="/ngay/ngay-08"><span class="ak-n">08</span><span><strong>RAG Pipeline — Truy xuất và sinh câu trả lời</strong><em>Làm sao agent trả lời đúng từ tài liệu?</em></span></a>
+  <ul><li>80% lỗi RAG nằm ở Retrieval, chỉ 20% ở Generation</li><li>Hybrid (dense + BM25) và rerank là đòn bẩy khi dense-only hụt</li><li>Grounding chặt: ép trích dẫn, biết nói “tôi không biết”</li><li>Muốn tốt lên phải có test set + scorecard, không dựa cảm giác</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Scorecard trước và sau tuning của bạn chênh nhau bao nhiêu?</p>
+</article><article class="ak cm-3">
+  <a class="ak-h" href="/ngay/ngay-09"><span class="ak-n">09</span><span><strong>Multi-agent và kết nối hệ thống</strong><em>Một agent giỏi đến đâu cũng có lúc quá tải — chia việc và nối hệ thống thế nào để vẫn kiểm soát được?</em></span></a>
+  <ul><li>Chỉ dùng multi-agent khi một agent quá tải, không phải vì “ngầu”</li><li>Supervisor-worker là pattern thực dụng nhất để bắt đầu</li><li>MCP nối agent với tool; A2A nối agent với agent</li><li>Trace tốt là điều kiện tiên quyết để debug và cải thiện</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Bài của bạn có thật sự cần multi-agent không, hay một agent là đủ?</p>
+</article><article class="ak cm-3">
+  <a class="ak-h" href="/ngay/ngay-10"><span class="ak-n">10</span><span><strong>Data Pipeline &amp; Data Observability</strong><em>Garbage in, garbage out — sửa từ đâu, và bạn biết trước hay đợi người dùng báo?</em></span></a>
+  <ul><li>60–80% công sức thực tế nằm ở phần dữ liệu</li><li>Kiểm tra chất lượng chạy như code; dữ liệu hỏng thì dừng pipeline</li><li>5 pillars: freshness, distribution, volume, schema, lineage</li><li>Agent trả lời chính sách cũ? Soi tầng dữ liệu trước khi sửa prompt</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Nếu dữ liệu của bạn sai hôm nay, bạn biết trước hay sau người dùng?</p>
+</article></section><section class="ak-g cm-4"><h2><span class="pill">Cột mốc 4 · Ngày 11–14</span>Vận hành</h2><article class="ak cm-4">
+  <a class="ak-h" href="/ngay/ngay-11"><span class="ak-n">11</span><span><strong>Guardrails, Human-in-the-Loop và Responsible AI</strong><em>Agent của bạn làm được rất nhiều việc — nhưng ai đảm bảo nó không làm điều không được phép?</em></span></a>
+  <ul><li>Guardrails là dây an toàn: phòng thủ nhiều lớp ở input, LLM và output</li><li>Prompt injection chưa có lời giải triệt để; phòng thủ bền đến từ kiến trúc</li><li>Lethal trifecta: đừng để một agent có đủ dữ liệu riêng + nội dung lạ + kênh gửi ra ngoài</li><li>Red team trước khi deploy bắt ~80% vấn đề; HITL là tính năng</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Bạn đã tự tấn công agent của mình bằng ít nhất 5 prompt chưa?</p>
+</article><article class="ak cm-4">
+  <a class="ak-h" href="/ngay/ngay-12"><span class="ak-n">12</span><span><strong>Hạ tầng Cloud &amp; Deployment</strong><em>Agent ra khỏi laptop — deploy thế nào?</em></span></a>
+  <ul><li>Cùng cỗ máy, khác cái hộp: localhost không phải production</li><li>Container: multi-stage, slim, non-root; tránh Alpine cho ML</li><li>Chọn platform theo timeout, scale theo concurrency</li><li>Ngân sách không tự chặn: cần admission control và eval gate trong CI</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Nếu ai đó spam app của bạn đêm nay, ai trả tiền và cái gì chặn lại?</p>
+</article><article class="ak cm-4">
+  <a class="ak-h" href="/ngay/ngay-13"><span class="ak-n">13</span><span><strong>Monitoring, Logging, Observability &amp; LLMOps</strong><em>Agent bạn vừa triển khai đang chạy thế nào — làm sao biết được điều đó trước khi người dùng phàn nàn?</em></span></a>
+  <ul><li>Metrics, logs, traces chưa đủ cho AI: còn phải đo liên tục chi phí và chất lượng output</li><li>Cảnh báo theo triệu chứng và SLO, luôn kèm runbook</li><li>Structured log + correlation ID; không log thông tin cá nhân</li><li>Khi streaming, thời gian ra token đầu (TTFT) quan trọng hơn tổng thời gian</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Hoá đơn API tăng gấp 3 đêm nay — bạn mất bao lâu để tìm ra vì sao?</p>
+</article><article class="ak cm-4">
+  <a class="ak-h" href="/ngay/ngay-14"><span class="ak-n">14</span><span><strong>AI Evaluation &amp; Benchmarking</strong><em>Làm sao biết agent của bạn tốt lên hay tệ đi — bằng số, không phải bằng cảm giác?</em></span></a>
+  <ul><li>Evaluation là kỷ luật kỹ thuật, không phải cảm giác</li><li>Golden set 50–100 cặp, ≥2 người review; 20 case chỉ để sanity check</li><li>LLM-as-judge phải calibrate với người; RAGAS đo faithfulness, relevancy, recall, precision</li><li>5 Whys: lỗi “sai chính sách hoàn tiền” hoá ra gốc ở data pipeline</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Bạn có con số nào chứng minh bản mới tốt hơn bản cũ không?</p>
+</article></section><section class="ak-g cm-5"><h2><span class="pill">Điểm kết · Ngày 15</span>Nhìn lại &amp; chọn track</h2><article class="ak cm-5">
+  <a class="ak-h" href="/ngay/ngay-15"><span class="ak-n">15</span><span><strong>Retrospective &amp; Track Decision</strong><em>15 ngày trước bạn còn chưa biết LLM hoạt động thế nào — hôm nay bạn đã có một agent chạy được. Bạn học được gì thật, và giờ muốn đi sâu vào hướng nào?</em></span></a>
+  <ul><li>15 ngày là một hành trình khép kín: từ lần gọi API đầu tiên đến agent chạy được, có giám sát và đo lường</li><li>Bài học thật nằm ở kho bài học chung, không ở việc nhớ lại mọi chi tiết</li><li>Ba track đều đang thiếu người: không có lựa chọn đúng sai tuyệt đối, chỉ có lựa chọn hợp với bằng chứng đã thu thập</li><li>Quyết định track hôm nay không vĩnh viễn, có thể điều chỉnh khi bắt đầu đi sâu</li></ul>
+  <p class="ak-soi"><span>Tự soi</span>Dấu hiệu nào sau 6 tháng sẽ cho bạn biết lựa chọn track hôm nay chưa đúng?</p>
+</article></section>
+</div>
+</main>
+<footer class="foot"><div class="wrap">AI Thực Chiến · Phase 1 · Retro 15 ngày</div></footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

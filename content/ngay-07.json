@@ -1,0 +1,110 @@
+{
+  "ngay": 7,
+  "ten": "Data Foundations — Embedding & Vector Store",
+  "ten_ngan": "Embedding & vector store",
+  "cot_moc": 3,
+  "cau_hoi": "Làm sao agent tìm được đúng thứ trong kho tài liệu của bạn?",
+  "muc_tieu": "Phân biệt ba loại dữ liệu agent cần và cách đưa từng loại vào hệ thống; chia tài liệu thành chunk đúng cách; hiểu embedding và đọc đúng điểm cosine; biết vector store lưu gì, lọc bằng metadata ra sao; nối một nguồn dữ liệu riêng vào agent.",
+  "tu_khoa": [
+    "RAG vs fine-tuning",
+    "chunking",
+    "overlap",
+    "embedding",
+    "cosine similarity",
+    "vector store",
+    "metadata",
+    "ingestion pipeline"
+  ],
+  "bai_hoc": [
+    "Agent sai thường vì thiếu đúng dữ liệu, không phải vì model yếu",
+    "Embedding so được nghĩa: “hoàn tiền” gần “refund policy” (cosine ~0,82)",
+    "Retrieval 2 pha: ingestion (chunk → embed → lưu) và retrieval (tìm → đưa vào prompt)",
+    "Chunk tốt hay xấu đổi hẳn kết quả: cosine 0,89 so với 0,61"
+  ],
+  "tu_soi": "Chiến lược chunking nào cho kết quả tốt nhất trong nhóm bạn, và vì sao?",
+  "module": [
+    {
+      "ten": "Chiến lược dữ liệu cho agent",
+      "kien_thuc": [
+        "Phần lớn lỗi của agent nằm ở dữ liệu nó được đọc, không ở model: model mạnh vẫn trả lời sai nếu tài liệu cũ, thiếu hoặc sai định dạng. Câu hỏi đã dời từ “dùng model nào” sang “agent được phép biết gì”.",
+        "Ba cách đưa dữ liệu vào model: dán vào context (tài liệu ngắn, ít đổi), RAG (kho lớn, cần trích nguồn, hay cập nhật), fine-tuning (giọng điệu, định dạng riêng). Fine-tuning dạy cách nói, RAG cấp điều cần nói.",
+        "Ba loại dữ liệu, ba đường: knowledge data (chính sách, FAQ) hợp tìm kiếm ngữ nghĩa; operational data (đơn hàng, giao dịch) cần truy vấn có kiểm soát; contextual data (lịch sử phiên, hồ sơ) đưa vào context.",
+        "Bốn tầng dữ liệu: raw → cleaned → structured (chia phần, gắn nguồn) → enriched (gắn nhãn chủ đề, mức truy cập, độ tin cậy). Lỗi tầng dưới lan vào câu trả lời; nâng tầng thường lợi hơn đổi thuật toán tìm kiếm."
+      ],
+      "ky_nang": [
+        "Chọn giữa context trực tiếp, RAG và fine-tuning cho một tình huống cụ thể",
+        "Phân loại một nhu cầu dữ liệu vào knowledge, operational hay contextual và chọn đúng đường xử lý",
+        "Chỉ ra lỗi trong một mẫu dữ liệu xấu thuộc tầng nào của tháp chất lượng"
+      ]
+    },
+    {
+      "ten": "Chunking",
+      "kien_thuc": [
+        "Chunking chia tài liệu thành đoạn nhỏ, mỗi đoạn một vector, vì: embedding model có giới hạn đầu vào; cả file một vector thì chỉ tìm ra cả file, không ra đúng đoạn; nội dung thừa làm câu trả lời kém đi.",
+        "Overlap lấy phần cuối đoạn trước làm phần đầu đoạn sau để không mất context tại điểm cắt; overlap càng nhiều càng tốn lưu trữ, mức phổ biến khoảng 10–15% độ dài đoạn.",
+        "Chunk quá to gộp nhiều chủ đề vào một vector: tìm vẫn trúng nhưng câu trả lời bị nhiễu. Chunk quá nhỏ tách câu hỏi khỏi câu trả lời: trúng câu nhưng thiếu context. Chunk tốt giữ trọn một ý trong một đoạn.",
+        "Ba nhóm chiến lược: nền tảng (độ dài cố định, đoạn/câu, heading); ngữ nghĩa (cắt khi chủ đề đổi; tốn hơn, hợp tài liệu dài ít cấu trúc); chuyên biệt (tìm đoạn nhỏ trả đoạn lớn, nhiều tầng, giữ bảng và code).",
+        "Chọn theo triệu chứng: có heading thì cắt theo heading; tìm trúng mà thiếu context thì tìm đoạn nhỏ, trả đoạn lớn chứa nó; trúng mà nhiễu thì chunk nhỏ lại. Bắt đầu đơn giản, đo bằng câu hỏi thật rồi nâng cấp."
+      ],
+      "ky_nang": [
+        "Giải thích ba lý do phải chunk và vì sao overlap giữ được context tại điểm cắt",
+        "Nhận ra chunk quá to (nhiễu) hay quá nhỏ (thiếu context) khi so câu trả lời trên cùng câu hỏi",
+        "Chọn chiến lược chunking cho một tài liệu theo trình tự quyết định thay vì đoán"
+      ]
+    },
+    {
+      "ten": "Embeddings",
+      "kien_thuc": [
+        "Embedding model biến văn bản, ảnh, âm thanh thành vector cùng số chiều trong một không gian chung; vector gần nhau là nghĩa gần nhau. “Chính sách hoàn tiền” và “refund policy” nằm gần nhau dù khác ngôn ngữ.",
+        "Cosine đo góc, bỏ qua độ dài: bằng 1 khi cùng hướng, 0 khi vuông góc. Nhờ vậy câu hỏi ngắn và trang tài liệu dài cùng chủ đề vẫn có cosine cao, nên cosine là mặc định cho tìm kiếm ngữ nghĩa.",
+        "Euclidean đo khoảng cách đường thẳng, tính cả độ dài lẫn hướng: hợp khi độ lớn vector mang thông tin thật (toạ độ, số đo cảm biến) hoặc khi gom nhóm dữ liệu cùng đơn vị đo.",
+        "Cosine đo chủ đề, không đo sắc thái: câu khen và câu chê cùng một sản phẩm vẫn thường có cosine dương, hiếm khi gần −1, vì embedding dồn trong một vùng hẹp của không gian.",
+        "Ngoài tìm kiếm, embedding dùng để gom nhóm, phát hiện nội dung trùng lặp, gợi ý nội dung liên quan. Đổi embedding model phải nhúng lại toàn bộ dữ liệu: hai model cùng số chiều vẫn không chung không gian."
+      ],
+      "ky_nang": [
+        "Giải thích vì sao embedding so được nghĩa giữa hai ngôn ngữ hoặc hai định dạng",
+        "Dự đoán điểm cosine giữa hai câu, kể cả cặp trái sắc thái, và chọn cosine hay Euclidean",
+        "Chọn embedding model theo số chiều, chất lượng tìm kiếm và ngôn ngữ dữ liệu, rồi giữ ổn định"
+      ]
+    },
+    {
+      "ten": "Vector store",
+      "kien_thuc": [
+        "Mỗi record gồm bốn phần: ID, đoạn văn bản gốc (đưa vào prompt), embedding vector (dùng để tìm), metadata dạng khoá-giá trị (dùng để lọc). Truy vấn trả về các record gần nhất, không phải chính vector.",
+        "Metadata thường dùng: nguồn, tên file để truy vết; danh mục để thu hẹp phạm vi; thời điểm cập nhật để tránh nội dung cũ; mức truy cập để giới hạn ai thấy gì. Xem nhẹ metadata lúc dữ liệu nhỏ thì sau khó lọc.",
+        "Ba tham số chạy theo thứ tự: lọc metadata thu hẹp phạm vi → tìm ngữ nghĩa lấy top-k đoạn gần nhất → ngưỡng điểm loại đoạn kém liên quan. Cùng một ngưỡng có thể quá chặt với chunk dài, quá lỏng với chunk ngắn.",
+        "Mã đơn hàng, mã hợp đồng là chuỗi vô nghĩa với embedding: dữ liệu cấu trúc chặt, cần chính xác tuyệt đối thì tra bằng khoá. Văn bản tự nhiên cần khớp theo nghĩa, như chính sách đổi trả, mới vào vector store."
+      ],
+      "ky_nang": [
+        "Gọi tên bốn thành phần của một record, phân biệt vector để tìm với văn bản để trả lời",
+        "Phối hợp lọc metadata, top-k và ngưỡng điểm, chọn ngưỡng theo dữ liệu thật",
+        "Quyết định dữ liệu nào vào vector store, dữ liệu nào tra cứu trực tiếp bằng khoá"
+      ]
+    },
+    {
+      "ten": "Đưa dữ liệu vào production",
+      "kien_thuc": [
+        "Hai pha: nạp (ingestion) chạy khi có tài liệu mới hoặc đổi: xử lý → chunk → embed → lưu; truy xuất chạy mỗi câu hỏi: embed câu hỏi bằng đúng model lúc nạp → tìm trong vector store → đưa kết quả vào context.",
+        "Khi câu trả lời sai, câu hỏi đầu tiên là lỗi thuộc pha nạp (dữ liệu không có, chunk sai) hay pha truy xuất (tìm sai, lọc sai). Tách rõ hai pha giúp gỡ lỗi nhanh hơn.",
+        "Pha nạp có ba khối: kiểm soát đầu vào (không tin đuôi file), xử lý (trích xuất, làm sạch, chuẩn hoá), lập chỉ mục (chunk, embed, lưu kèm metadata). Lỗi hay sinh ở hai khối đầu nhưng chỉ lộ ra khi truy vấn.",
+        "Retrieval tìm context cho câu hỏi hiện tại từ kho tri thức chung; memory lưu trạng thái, sở thích, lịch sử của riêng một người dùng. Context window chỉ giữ mạch ngắn hạn, không tự thành bộ nhớ dài hạn."
+      ],
+      "ky_nang": [
+        "Vẽ pipeline từ tài liệu đến câu trả lời và xác định lỗi thuộc pha nạp hay pha truy xuất",
+        "Gỡ lỗi tìm kiếm kém bằng cách đi ngược qua ba khối của pha nạp",
+        "Phân biệt retrieval với memory theo mục đích và nguồn dữ liệu"
+      ]
+    }
+  ],
+  "lab": {
+    "ten": "Lab 7: nối dữ liệu riêng vào agent",
+    "tom_tat": "Cài ba chiến lược chunking và phép đo cosine, dựng vector store có tìm, lọc, xoá rồi nối vào agent theo mẫu RAG. Theo nhóm, so các chiến lược chunking và metadata trên cùng 5 câu hỏi kiểm tra có đáp án chuẩn.",
+    "dau_ra": "Pipeline chạy được nối dữ liệu riêng vào agent, kèm kết quả so sánh các chiến lược chunking"
+  },
+  "lien_quan": [
+    {
+      "ngay": 8,
+      "ghi_chu": "nâng pipeline này thành RAG đầy đủ: hybrid search, re-ranking, đo"
+    }
+  ]
+}
