@@ -8,7 +8,9 @@ KHOA = ['ngay', 'ten', 'ten_ngan', 'cot_moc', 'cau_hoi', 'muc_tieu', 'tu_khoa', 
 CAM = ['Nhà → Lớp', 'Phương án thay thế', 'học viên', 'giảng viên', '●', 'quiz', 'kiwi', 'slide', 'mô phỏng:', 'thực hành:',
        'mô hình ngôn ngữ', 'nhiệt độ', 'tác tử', 'máy chủ mcp', 'bộ test vàng', 'câu lệnh', 'mã thông báo', 'phần trăm']
 NHAC = ['video', 'phút', 'mô hình', 'ngữ cảnh']
-HTML_CAM = ['github.com', 'vinuni-vlearn', 'e-learning-production', 'ai20k', '.md"', ".md'", 'slide']
+HTML_CAM = ['github.com', '.md"', ".md'", 'slide']
+_THEM = os.path.join(ROOT, '_nguon', 'chuoi-cam.txt')  # tên repo/kho nguồn riêng, không commit
+if os.path.exists(_THEM): HTML_CAM += [l.strip().lower() for l in open(_THEM, encoding='utf-8') if l.strip()]
 loi, nhac = [], []
 
 def kiem_chuoi(ngay, cho, s, toi_da):
